@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:47:06 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/11/30 13:22:40 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:31:17 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ int	is_point(t_tuple *tuple)
 int	is_vector(t_tuple *tuple)
 {
 	return (tuple->w == 0);
+}
+
+int	tuples_equal(t_tuple *t1, t_tuple *t2)
+{
+	if ((!f_equal(t1->x, t2->x)) || (!f_equal(t1->y, t2->y)) || \
+		(!f_equal(t1->z, t2->z)) || (!f_equal(t1->w, t2->w)))
+		return (0);
+	return (1);
 }
