@@ -1,5 +1,6 @@
 SRCS	= main.c\
 		  tuples_utils.c\
+		  tuples_utils2.c\
 		  f_equal.c\
 
 SRCS_B	= 
@@ -10,7 +11,7 @@ HDR_DIR = includes/
 SRC_DIR = src/
 OBJ_DIR = obj/
 
-OBJS	= $(addprefix $(SRC_DIR), $(SRCS:.c=.o))
+OBJS	= $(addprefix $(OBJ_DIR), $(notdir $(SRCS:.c=.o)))
 OBJS_B	= $(SRCS_B:.c=.o)
 
 PROG_NAME= miniRT
@@ -33,8 +34,9 @@ $(NAME): $(OBJS) $(HDR_DIR)$(HDR)
 #	clang -fsanitize=thread $(NAME) -o $(PROG_NAME)
 	gcc $(NAME) -o $(PROG_NAME)
 
-%.o: %.c $(HDR_DIR)$(HDR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HDR_DIR)$(HDR)
 #	clang $(CFLAGS) -c $< -o $@
+	mkdir -p $(OBJ_DIR)
 	gcc -I $(HDR_DIR) $(CFLAGS) -c $< -o $@
 
 $(NAME_B): $(OBJS_B) $(HDR_DIR)$(HDR)
@@ -46,6 +48,7 @@ $(NAME_B): $(OBJS_B) $(HDR_DIR)$(HDR)
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_B)
+	rmdir $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
