@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/01 14:41:22 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/01 16:00:19 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,27 @@
 void	generate_sample_img(t_mlx_data *mlx_data)
 {
 	int	i, j;
+	t_color	*my_color1;
+	t_color	*my_color2;
+	t_color	*aux;
 
+	my_color1 = create_color(0, 127, 63.5);
+	my_color2 = create_color(255, 31.75, 160);
+	aux = multiply_color_by_scalar(my_color1, 0.95);
 	i = -1;
 	j = WINDOW_HEIGHT;
 	while (++i < WINDOW_WIDTH)
 	{
 		while (--j >= 0)
-			mlx_data->image.data[WINDOW_WIDTH * j + i] = get_trgb_int(0, j % 255, 127, i % 255);
+			//mlx_data->image.data[WINDOW_WIDTH * j + i] = get_trgb_int(0, j % 255, 127, i % 255);
+			mlx_data->image.data[WINDOW_WIDTH * j + i] = get_trgb_from_color(aux);
 		j = WINDOW_HEIGHT;
 	}
 	mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, \
 	mlx_data->image.img_ptr, 0, 0);
+	free(my_color1);
+	free(my_color2);
+	free(aux);
 }
 
 int	main()

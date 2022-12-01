@@ -8,6 +8,8 @@ SRCS	= main.c\
 		  minilibx_color_utils.c\
 		  hook.c\
 		  keypress.c\
+		  tuples_colors_ops.c\
+		  get_trgb_from_color.c\
 
 SRCS_B	= 
 
