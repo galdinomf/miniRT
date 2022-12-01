@@ -3,12 +3,16 @@ SRCS	= main.c\
 		  tuples_utils2.c\
 		  tuples_utils3.c\
 		  f_equal.c\
+		  minilibx_initialize.c\
+		  minilibx_end.c\
+		  hook.c\
+		  keypress.c\
 
 SRCS_B	= 
 
 CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=thread
 
-LIBS 	= -lm
+LIBS 	= -lmlx -lX11 -lm -lXext
 
 HDR_DIR = includes/
 SRC_DIR = src/

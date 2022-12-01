@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/11/30 17:56:14 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/01 11:11:01 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,11 @@ int	main()
 	free(t1);
 	free(t2);
 	free(t3);
+
+	t_mlx_data mlx_data;
+	minilibx_initialize(&mlx_data);
+	hook(&mlx_data);
+	minilibx_end(&mlx_data);
+	
 	return (0);
 }

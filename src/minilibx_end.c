@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   minilibx_end.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/01 11:14:46 by mgaldino         ###   ########.fr       */
+/*   Created: 2022/12/01 10:37:41 by mgaldino          #+#    #+#             */
+/*   Updated: 2022/12/01 10:46:16 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include <minilibx.h>
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <tuples.h>
-# include <minilibx.h>
-
-void	hook(t_mlx_data *mlx_data);
-int	keypress(int keysym, t_mlx_data *mlx_data);
-
-
-#endif
+void	minilibx_end(t_mlx_data *mlx_data)
+{
+	mlx_destroy_image(mlx_data->mlx_ptr, mlx_data->image.img_ptr);
+	mlx_destroy_window(mlx_data->mlx_ptr, mlx_data->win_ptr);
+	mlx_data->win_ptr = NULL;
+	mlx_destroy_display(mlx_data->mlx_ptr);
+	free(mlx_data->mlx_ptr);
+}

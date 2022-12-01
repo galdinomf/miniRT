@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   keypress.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/01 11:14:46 by mgaldino         ###   ########.fr       */
+/*   Created: 2022/12/01 10:58:50 by mgaldino          #+#    #+#             */
+/*   Updated: 2022/12/01 11:21:19 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include <miniRT.h>
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <tuples.h>
-# include <minilibx.h>
-
-void	hook(t_mlx_data *mlx_data);
-int	keypress(int keysym, t_mlx_data *mlx_data);
-
-
-#endif
+int	keypress(int keysym, t_mlx_data *mlx_data)
+{
+	if (keysym == XK_Escape)
+		mlx_loop_end (mlx_data->mlx_ptr);
+	return (0);
+}
