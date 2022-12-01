@@ -1,11 +1,14 @@
 SRCS	= main.c\
 		  tuples_utils.c\
 		  tuples_utils2.c\
+		  tuples_utils3.c\
 		  f_equal.c\
 
 SRCS_B	= 
 
 CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=thread
+
+LIBS 	= -lm
 
 HDR_DIR = includes/
 SRC_DIR = src/
@@ -32,7 +35,7 @@ $(NAME): $(OBJS) $(HDR_DIR)$(HDR)
 	ar -crs $(NAME) $(OBJS)
 	$(RM) $(PROG_NAME)
 #	clang -fsanitize=thread $(NAME) -o $(PROG_NAME)
-	gcc $(NAME) -o $(PROG_NAME)
+	gcc $(NAME) $(LIBS) -o $(PROG_NAME)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HDR_DIR)$(HDR)
 #	clang $(CFLAGS) -c $< -o $@

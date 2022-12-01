@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:29:11 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/11/30 16:49:12 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:55:03 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define TUPLES_H
 
 # include <stdlib.h>
+# include <math.h>
+
 
 typedef struct s_tuple
 {
@@ -33,6 +35,10 @@ t_tuple	*subtract_tuples(t_tuple *t1, t_tuple *t2);
 t_tuple	*neg_tuple(t_tuple *t1);
 t_tuple	*multiply_tuple_by_scalar(t_tuple *t1, float k);
 t_tuple	*divide_tuple_by_scalar(t_tuple *t1, float k);
+float	tuple_magnitude(t_tuple *tuple);
+t_tuple	*normalize_tuple(t_tuple *tuple);
+float	dot_product(t_tuple *t1, t_tuple *t2);
+t_tuple	*cross_product(t_tuple *t1, t_tuple *t2);
 
 int	f_equal(float f1, float f2);
 #endif
