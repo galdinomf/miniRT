@@ -6,15 +6,16 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 11:06:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/01 11:15:10 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:42:12 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
+//int	do_nothing(t_mlx_data *mlx_data)
 int	do_nothing()
 {
-	printf("doing nothing\n");
+	//printf("doing nothing %p\n", mlx_data);
 	return (0);
 }
 

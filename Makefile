@@ -5,6 +5,7 @@ SRCS	= main.c\
 		  f_equal.c\
 		  minilibx_initialize.c\
 		  minilibx_end.c\
+		  minilibx_color_utils.c\
 		  hook.c\
 		  keypress.c\
 

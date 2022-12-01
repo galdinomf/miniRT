@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:16:29 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/01 11:12:41 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:12:23 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ typedef struct s_mlx_data
 
 int		minilibx_initialize(t_mlx_data *mlx_data);
 void	minilibx_end(t_mlx_data *mlx_data);
+int		get_trgb_int(int t, int r, int g, int b);
 
 #endif
