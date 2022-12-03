@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:57:51 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 14:21:13 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:39:36 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void		destroy_matrix(t_matrix *matrix);
 void		display_matrix(t_matrix *matrix); //APAGAR
 int			matrices_are_equal(t_matrix *m1, t_matrix *m2);
 t_matrix	*multiply_matrices(t_matrix *m1, t_matrix *m2);
+t_matrix	*get_transposed_matrix(t_matrix *matrix);
+t_matrix	*get_identity_matrix(int n);
 
 int			f_equal(float f1, float f2);
 #endif

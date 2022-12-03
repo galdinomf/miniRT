@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:59:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 13:19:01 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:39:54 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ void	display_matrix(t_matrix *matrix) //APAGAR!
 	int	i;
 	int	j;
 
+	if (!matrix)
+	{
+		printf("%p\n", matrix);
+		return ;
+	}
 	i = -1;
 	printf("\n");
 	while (++i < matrix->n_rows)
