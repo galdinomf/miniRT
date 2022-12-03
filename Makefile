@@ -10,6 +10,7 @@ SRCS	= main.c\
 		  keypress.c\
 		  tuples_colors_ops.c\
 		  get_trgb_from_color.c\
+		  matrices_utils.c\
 
 SRCS_B	= 
 

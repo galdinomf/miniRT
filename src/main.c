@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/01 16:00:19 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/03 12:43:08 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	generate_sample_img(t_mlx_data *mlx_data)
 	while (++i < WINDOW_WIDTH)
 	{
 		while (--j >= 0)
-			//mlx_data->image.data[WINDOW_WIDTH * j + i] = get_trgb_int(0, j % 255, 127, i % 255);
-			mlx_data->image.data[WINDOW_WIDTH * j + i] = get_trgb_from_color(aux);
+			mlx_data->image.data[WINDOW_WIDTH * j + i] = get_trgb_int(0, j % 255, 0, i % 255);
+			//mlx_data->image.data[WINDOW_WIDTH * j + i] = get_trgb_from_color(aux);
 		j = WINDOW_HEIGHT;
 	}
 	mlx_put_image_to_window(mlx_data->mlx_ptr, mlx_data->win_ptr, \
@@ -51,8 +51,11 @@ int	main()
 	t_mlx_data mlx_data;
 	minilibx_initialize(&mlx_data);
 
-
 	generate_sample_img(&mlx_data);
+	
+	t_matrix *my_matrix = create_matrix(4, 4);
+	display_matrix(my_matrix);
+	destroy_matrix(my_matrix);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);
