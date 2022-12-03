@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 15:41:59 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/03 19:20:10 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,35 @@ int	main()
 
 	generate_sample_img(&mlx_data);
 	
-	t_matrix *my_matrix = create_matrix(2, 2);
-	my_matrix->values[0][0] = 10;
-	my_matrix->values[0][1] = 6;
-	//my_matrix->values[0][2] = 4;
-	//my_matrix->values[0][3] = 11;
-	my_matrix->values[1][0] = 2;
-	my_matrix->values[1][1] = -7;
+	t_matrix *my_matrix = create_matrix(4, 4);
+	my_matrix->values[0][0] = -2;
+	my_matrix->values[0][1] = -8;
+	my_matrix->values[0][2] = 3;
+	my_matrix->values[0][3] = 5;
+	my_matrix->values[1][0] = -3;
+	my_matrix->values[1][1] = 1;
+	my_matrix->values[1][2] = 7;
+	my_matrix->values[1][3] = 3;
+	my_matrix->values[2][0] = 1;
+	my_matrix->values[2][1] = 2;
+	my_matrix->values[2][2] = -9;
+	my_matrix->values[2][3] = 6;
+	my_matrix->values[3][0] = -6;
+	my_matrix->values[3][1] = 7;
+	my_matrix->values[3][2] = 7;
+	my_matrix->values[3][3] = -9;
+	printf("det of matrix = %f\n", determinant_nd_square_matrix(my_matrix));
 	//my_matrix->values[1][2] = 8;
 	//my_matrix->values[1][3] = -20;
-	t_matrix *my_matrix3 = get_transposed_matrix(my_matrix);
-//	display_matrix(my_matrix3);
+	t_matrix *my_matrix3 = get_submatrix(my_matrix, 2, 1);
+	display_matrix(my_matrix3);
 	t_matrix *my_matrix2 = create_matrix(1, 2);
 	my_matrix2->values[0][0] = -1;
 	my_matrix2->values[0][1] = 5;
-	//my_matrix2->values[1][0] = -3;
-	//my_matrix2->values[1][1] = 13;
-	//my_matrix2->values[2][0] = -8;
-	//my_matrix2->values[2][1] = -4;
-	//t_matrix *my_matrix3 = multiply_matrices(my_matrix, my_matrix2);
-	//my_matrix->values[0][0] = 0.0001;
-	//printf("aqui\n");
-//	display_matrix(my_matrix3);
 	printf("matrix are equal = %d\n", matrices_are_equal(my_matrix, my_matrix2));
 
 	t_matrix *matrix4 = get_identity_matrix(4);
-	display_matrix(matrix4);
+	//display_matrix(matrix4);
 
 	t_tuple	*tuple = create_point(1, 2, 3);
 
