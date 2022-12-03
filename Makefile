@@ -11,6 +11,7 @@ SRCS	= main.c\
 		  tuples_colors_ops.c\
 		  get_trgb_from_color.c\
 		  matrices_utils.c\
+		  matrices_utils2.c\
 
 SRCS_B	= 
 

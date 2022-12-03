@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 12:43:08 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/03 14:25:09 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,22 @@ int	main()
 
 	generate_sample_img(&mlx_data);
 	
-	t_matrix *my_matrix = create_matrix(4, 4);
-	display_matrix(my_matrix);
+	t_matrix *my_matrix = create_matrix(2, 2);
+	my_matrix->values[0][0] = 10;
+	my_matrix->values[0][1] = 6;
+	my_matrix->values[1][0] = 2;
+	my_matrix->values[1][1] = -7;
+	t_matrix *my_matrix2 = create_matrix(2, 2);
+	my_matrix2->values[0][0] = -1;
+	my_matrix2->values[0][1] = 5;
+	my_matrix2->values[1][0] = -3;
+	my_matrix2->values[1][1] = 13;
+	t_matrix *my_matrix3 = multiply_matrices(my_matrix, my_matrix2);
+	//my_matrix->values[0][0] = 0.0001;
+	display_matrix(my_matrix3);
+	printf("matrix are equal = %d\n", matrices_are_equal(my_matrix, my_matrix2));
 	destroy_matrix(my_matrix);
+	destroy_matrix(my_matrix2);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);

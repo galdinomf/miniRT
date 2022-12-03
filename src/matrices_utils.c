@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:59:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 12:49:04 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/03 13:19:01 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	initiate_matrix_values(t_matrix *matrix)
 
 	values = (float **) malloc(matrix->n_rows * sizeof(float *));
 	if (!values)
-	return ;
+		return ;
 	i = -1;
 	while (++i < matrix->n_rows)
 	{
@@ -80,4 +80,24 @@ void	display_matrix(t_matrix *matrix) //APAGAR!
 		}
 		printf("| \n");
 	}
+}
+
+int	matrices_are_equal(t_matrix *m1, t_matrix *m2)
+{
+	int	i;
+	int	j;
+
+	if ((m1->n_rows != m2->n_rows) || (m1->n_columns != m2->n_columns))
+		return (0);
+	i = -1;
+	while (++i < m1->n_rows)
+	{
+		j = -1;
+		while (++j < m1->n_columns)
+		{
+			if (!f_equal(m1->values[i][j], m2->values[i][j]))
+				return (0);
+		}
+	}
+	return (1);
 }
