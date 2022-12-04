@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:59:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 14:39:54 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:35:34 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	display_matrix(t_matrix *matrix) //APAGAR!
 		printf("| ");
 		while (++j < matrix->n_columns)
 		{
-			printf("%f ", matrix->values[i][j]);
+			printf("%.5f ", matrix->values[i][j]);
 		}
 		printf("| \n");
 	}

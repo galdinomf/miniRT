@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 19:20:10 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/03 21:34:35 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,31 @@ int	main()
 	generate_sample_img(&mlx_data);
 	
 	t_matrix *my_matrix = create_matrix(4, 4);
-	my_matrix->values[0][0] = -2;
-	my_matrix->values[0][1] = -8;
-	my_matrix->values[0][2] = 3;
-	my_matrix->values[0][3] = 5;
-	my_matrix->values[1][0] = -3;
-	my_matrix->values[1][1] = 1;
-	my_matrix->values[1][2] = 7;
-	my_matrix->values[1][3] = 3;
-	my_matrix->values[2][0] = 1;
-	my_matrix->values[2][1] = 2;
-	my_matrix->values[2][2] = -9;
+	my_matrix->values[0][0] = 8;
+	my_matrix->values[0][1] = -5;
+	my_matrix->values[0][2] = 9;
+	my_matrix->values[0][3] = 2;
+	my_matrix->values[1][0] = 7;
+	my_matrix->values[1][1] = 5;
+	my_matrix->values[1][2] = 6;
+	my_matrix->values[1][3] = 1;
+	my_matrix->values[2][0] = -6;
+	my_matrix->values[2][1] = 0;
+	my_matrix->values[2][2] = 9;
 	my_matrix->values[2][3] = 6;
-	my_matrix->values[3][0] = -6;
-	my_matrix->values[3][1] = 7;
-	my_matrix->values[3][2] = 7;
-	my_matrix->values[3][3] = -9;
-	printf("det of matrix = %f\n", determinant_nd_square_matrix(my_matrix));
+	my_matrix->values[3][0] = -3;
+	my_matrix->values[3][1] = 0;
+	my_matrix->values[3][2] = -9;
+	my_matrix->values[3][3] = -4;
+	printf("matrix is invertible = %d\n", matrix_is_invertible(my_matrix));
 	//my_matrix->values[1][2] = 8;
 	//my_matrix->values[1][3] = -20;
-	t_matrix *my_matrix3 = get_submatrix(my_matrix, 2, 1);
+	t_matrix *my_matrix3 = get_inverse_matrix(my_matrix);
 	display_matrix(my_matrix3);
+
+	t_matrix *my_matrix4 = multiply_matrices(my_matrix, my_matrix3);
+	display_matrix(my_matrix4);
+	destroy_matrix(my_matrix4);
 	t_matrix *my_matrix2 = create_matrix(1, 2);
 	my_matrix2->values[0][0] = -1;
 	my_matrix2->values[0][1] = 5;
