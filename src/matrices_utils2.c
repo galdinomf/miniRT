@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 13:15:05 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 21:25:52 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:53:50 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,6 @@ t_matrix	*get_identity_matrix(int n)
 	return (new_matrix);
 }
 
-// A PARTIR DAQUI, TUDO NECESSÁRIO PARA INVERTER MATRIZES
-
-float	determinant_2d_matrix(t_matrix *matrix)
-{
-	return (matrix->values[0][0] * matrix->values[1][1] - \
-	matrix->values[0][1] * matrix->values[1][0]);
-}
-
 t_matrix	*get_submatrix(t_matrix *matrix, int rmved_row, int rmved_column)
 {
 	t_matrix	*new_matrix;
@@ -103,88 +95,4 @@ t_matrix	*get_submatrix(t_matrix *matrix, int rmved_row, int rmved_column)
 		}
 	}
 	return (new_matrix);
-}
-/*
-float	minor_of_3d_square_matrix(t_matrix *matrix, int row, int col)
-{
-	t_matrix	*submatrix;
-	float		minor;
-
-	submatrix = get_submatrix(matrix, row, col);
-	minor = determinant_2d_matrix(submatrix);
-	destroy_matrix(submatrix);
-	return (minor);
-}
-*/
-float	cofactor(t_matrix *matrix, int row, int col)
-{
-	float	minor;
-	t_matrix	*aux;
-
-	//minor = minor_of_3d_square_matrix(matrix, row, col);
-		aux = get_submatrix(matrix, row, col);
-	minor = determinant_nd_matrix(aux);
-		destroy_matrix(aux);
-	return (pow(-1, (row + col)) * minor);
-}
-/*
-float	determinant_3d_square_matrix(t_matrix *matrix)
-{
-	float	cof1;
-	float	cof2;
-	float	cof3;
-
-	cof1 = matrix->values[0][0] * cofactor(matrix, 0, 0);
-	cof2 = matrix->values[0][1] * cofactor(matrix, 0, 1);
-	cof3 = matrix->values[0][2] * cofactor(matrix, 0, 2);
-	return (cof1 + cof2 + cof3);
-}
-*/
-float	determinant_nd_matrix(t_matrix *matrix)
-{
-	float	det;
-	int		j;
-//	t_matrix	*aux;
-
-	if (matrix->n_columns == 2)
-		return (determinant_2d_matrix(matrix));
-	det = 0;
-	j = -1;
-	while (++j < matrix->n_columns)
-	{
-		//aux = get_submatrix(matrix, 0, j);
-		det += matrix->values[0][j] * cofactor(matrix, 0, j);
-		//destroy_matrix(aux);
-	}
-	return (det);
-}
-
-int	matrix_is_invertible(t_matrix *matrix)
-{
-	return (!f_equal(determinant_nd_matrix(matrix), 0));
-}
-
-t_matrix	*get_inverse_matrix(t_matrix *matrix)
-{
-	t_matrix	*inverse_matrix;
-	int			i;
-	int			j;
-	float		c;
-
-	if (!matrix_is_invertible(matrix))
-		return (NULL);
-	inverse_matrix = create_matrix(matrix->n_rows, matrix->n_columns);
-	if (!inverse_matrix)
-		return (NULL);
-	i = -1;
-	while (++i < matrix->n_rows)
-	{
-		j = -1;
-		while (++j < matrix->n_columns)
-		{
-			c = cofactor(matrix, i, j);
-			inverse_matrix->values[j][i] = c / determinant_nd_matrix(matrix);
-		}
-	}
-	return (inverse_matrix);
 }

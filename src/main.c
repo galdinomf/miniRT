@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 21:34:35 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:41:59 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,13 @@ void	generate_sample_img(t_mlx_data *mlx_data)
 
 int	main()
 {
-	t_tuple	*t1 = create_vector(1, 2, 3);
-	t_tuple	*t2 = create_vector(4.5, 3.4, -0.5);
-	printf("t1 dot t2 = %f\n", dot_product(t1, t2));
-	t_tuple *t3 = cross_product(t1, t2);
-	printf("t1 cross t2 = (%f, %f, %f)\n", t3->x, t3->y, t3->z);
-	free(t1);
-	free(t2);
-	free(t3);
 	t_mlx_data mlx_data;
 	minilibx_initialize(&mlx_data);
 
 	generate_sample_img(&mlx_data);
 	
 	t_matrix *my_matrix = create_matrix(4, 4);
+	/*
 	my_matrix->values[0][0] = 8;
 	my_matrix->values[0][1] = -5;
 	my_matrix->values[0][2] = 9;
@@ -70,33 +63,25 @@ int	main()
 	my_matrix->values[3][1] = 0;
 	my_matrix->values[3][2] = -9;
 	my_matrix->values[3][3] = -4;
-	printf("matrix is invertible = %d\n", matrix_is_invertible(my_matrix));
-	//my_matrix->values[1][2] = 8;
-	//my_matrix->values[1][3] = -20;
-	t_matrix *my_matrix3 = get_inverse_matrix(my_matrix);
-	display_matrix(my_matrix3);
+	*/
 
-	t_matrix *my_matrix4 = multiply_matrices(my_matrix, my_matrix3);
-	display_matrix(my_matrix4);
-	destroy_matrix(my_matrix4);
-	t_matrix *my_matrix2 = create_matrix(1, 2);
-	my_matrix2->values[0][0] = -1;
-	my_matrix2->values[0][1] = 5;
-	printf("matrix are equal = %d\n", matrices_are_equal(my_matrix, my_matrix2));
-
-	t_matrix *matrix4 = get_identity_matrix(4);
-	//display_matrix(matrix4);
-
-	t_tuple	*tuple = create_point(1, 2, 3);
-
+	t_matrix *my_matrix2 = get_x_rotation_matrix(PI / 2);
+	t_matrix *my_matrix3 = get_scaling_matrix(5, 5, 5);
+	t_matrix *my_matrix4 = get_translation_matrix(10, 5, 7);
+	t_matrix *my_matrix5 = multiply_matrices(my_matrix4, my_matrix3);
+	t_matrix *my_matrix6 = multiply_matrices(my_matrix5, my_matrix2);
 	
-
 	
-	free(tuple);
+	t_tuple	*tuple = create_point(1, 0, 1);
+	t_matrix *my_matrix7 = multiply_matrix_by_tuple(my_matrix6, tuple);
+	display_matrix(my_matrix7);
+	
 	destroy_matrix(my_matrix);
 	destroy_matrix(my_matrix2);
 	destroy_matrix(my_matrix3);
-	destroy_matrix(matrix4);
+	destroy_matrix(my_matrix4);
+	destroy_matrix(my_matrix5);
+	destroy_matrix(my_matrix6);
 
 	
 	
