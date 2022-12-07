@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/06 19:50:29 by daeidi-h         ###   ########.fr       */
+/*   Created: 2022/04/21 15:57:53 by mgaldino          #+#    #+#             */
+/*   Updated: 2022/04/25 21:40:19 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <miniRT.h>
+#include <stddef.h>
 
-int	main(int argc, char **argv)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	if (argc !=2)
-		error_exit("Error\nArgs invalid\n", 1);
-	check_file(argv[1]);
-	printf("OK!\n");
+	unsigned int	i;
+
+	if ((dest == NULL) && (src == NULL))
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		*(char *)(dest + i) = *(char *)(src + i);
+		i++;
+	}
+	return (dest);
 }

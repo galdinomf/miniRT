@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/06 19:50:29 by daeidi-h         ###   ########.fr       */
+/*   Created: 2022/04/21 16:34:25 by mgaldino          #+#    #+#             */
+/*   Updated: 2022/04/26 14:32:06 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <miniRT.h>
+#include <stddef.h>
 
-int	main(int argc, char **argv)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	if (argc !=2)
-		error_exit("Error\nArgs invalid\n", 1);
-	check_file(argv[1]);
-	printf("OK!\n");
+	int	i;
+
+	if (s == NULL)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		(*f)(i, (s + i));
+		i++;
+	}
 }

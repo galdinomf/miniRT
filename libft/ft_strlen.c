@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/06 19:50:29 by daeidi-h         ###   ########.fr       */
+/*   Created: 2022/04/21 16:37:41 by mgaldino          #+#    #+#             */
+/*   Updated: 2022/04/21 16:37:49 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <miniRT.h>
+#include <stddef.h>
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(char *str)
 {
-	if (argc !=2)
-		error_exit("Error\nArgs invalid\n", 1);
-	check_file(argv[1]);
-	printf("OK!\n");
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }

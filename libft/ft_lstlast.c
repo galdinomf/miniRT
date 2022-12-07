@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/06 19:50:29 by daeidi-h         ###   ########.fr       */
+/*   Created: 2022/04/21 16:54:40 by mgaldino          #+#    #+#             */
+/*   Updated: 2022/04/27 03:13:45 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <miniRT.h>
+#include "libft.h"
 
-int	main(int argc, char **argv)
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (argc !=2)
-		error_exit("Error\nArgs invalid\n", 1);
-	check_file(argv[1]);
-	printf("OK!\n");
+	t_list	*node_ptr;
+
+	if (!lst)
+		return (0);
+	node_ptr = lst;
+	while (node_ptr->next)
+	{
+		node_ptr = node_ptr->next;
+	}
+	return (node_ptr);
 }

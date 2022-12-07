@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/06 19:50:29 by daeidi-h         ###   ########.fr       */
+/*   Created: 2022/12/06 00:55:19 by daeidi-h          #+#    #+#             */
+/*   Updated: 2022/12/06 20:12:41 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-int	main(int argc, char **argv)
+void	error_exit(const char *s, int i)
 {
-	if (argc !=2)
-		error_exit("Error\nArgs invalid\n", 1);
-	check_file(argv[1]);
-	printf("OK!\n");
+	write(2, s, ft_strlen((char *)s));
+	// free every thing
+	if (i)
+		exit(i);
+	exit(0);
 }
