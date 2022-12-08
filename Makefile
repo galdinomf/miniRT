@@ -15,6 +15,8 @@ SRCS	= main.c\
 		  matrices_utils3.c\
 		  matrices_utils4.c\
 		  multiply_matrix_by_tuple.c\
+		  ray_utils.c\
+		  intersection_utils.c\
 
 SRCS_B	= 
 
