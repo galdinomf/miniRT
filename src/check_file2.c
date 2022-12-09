@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:59:57 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/07 00:32:24 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:44:47 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void check_amb_light(char **str)
 {
-	printf("float? %d\n", ft_isfloat_range(str[1], 0, 1));
-	printf("rgb? %d\n", ft_isrgb(str[2]));
 	if (!(ft_isfloat_range(str[1], 0, 1) && ft_isrgb(str[2]) && !str[3]))
 		error_exit("Error\nWrong data for Ambient Light\n", 1);
 }

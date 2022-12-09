@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:16:28 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/07 00:32:34 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:01:56 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ float	ft_atof(char *str)
 	split = ft_split(str, '.');
 	nb = ft_atoi(split[0]);
 	i = -1;
-	while (split[1][++i])
+	while (split[1] && split[1][++i])
 		nb += ((split[1][i] - '0') * pow(10, (i + 1) * -1)); 
 	return (nb);
 }

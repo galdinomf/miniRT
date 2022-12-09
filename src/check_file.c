@@ -27,8 +27,10 @@ void	check_file(char *file_name)
 static void	check_line(char *line)
 {
 	char **split;
+	int	len;
 
-
+	len = ft_strlen(line);
+	line[len - 1] = '\0';
 	printf("%s\n", line);
 	split = ft_split(line, ' ');
 	if (!ft_strcmp(split[0], "A"))
@@ -60,7 +62,6 @@ int	ft_isrgb(char *str)
 		j = -1;
 		while (split[i][++j] && split[i][j] != '\0')
 		{
-		printf("%d\n", split[i][j]);
 			if (!ft_isdigit(split[i][j]))
 				return (0);
 		}
@@ -83,7 +84,7 @@ int	ft_iscoords(char *str)
 		if(!ft_isfloat(split[i]))
 			return (0);
 	}
-	if (i != 2)
+	if (i != 3)
 		return (0);
 	return (1);
 }
@@ -97,10 +98,12 @@ int	ft_isndvector(char *str)
 	i = -1;
 	while (split[++i])
 	{
-		if(!ft_isfloat(split[i]) || ft_atof(split[i]) > 1 || ft_atof(split[i]) < -1)
+		if(!(ft_isfloat(split[i]) || ft_atof(split[i]) < 1 || ft_atof(split[i]) > -1))
 			return (0);
 	}
-	if (i != 2)
+	if (i != 3)
+		return (0);
+	if (!isnormalized(ft_atof(split[0]), ft_atof(split[1]), ft_atof(split[2])))
 		return (0);
 	return (1);
 }

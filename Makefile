@@ -18,6 +18,7 @@ SRCS	= main.c\
 		  ft_atof.c\
 		  check_file.c\
 		  check_file2.c\
+		  check_file3.c\
 		  error_exit.c\
 
 SRCS_B	= 

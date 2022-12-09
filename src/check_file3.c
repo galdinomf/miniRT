@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_equal.c                                          :+:      :+:    :+:   */
+/*   check_file3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 13:28:34 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/07 16:50:27 by daeidi-h         ###   ########.fr       */
+/*   Created: 2022/12/07 19:34:42 by daeidi-h          #+#    #+#             */
+/*   Updated: 2022/12/07 19:37:19 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 
-#define EPSILON 0.001
+#include <miniRT.h>
 
-int	f_equal(float f1, float f2)
+static float	magnitude(float x, float y, float z)
 {
-	if (fabs(f1 - f2) < EPSILON)
-		return (1);
-	return (0);
+	float	mag_sqr;
+
+	mag_sqr = pow(x, 2) + pow(y, 2) + pow(z, 2) ;
+	return (sqrtf(mag_sqr));
+}
+
+int isnormalized(float x, float y, float z)
+{
+	float	mag;
+
+	mag = magnitude(x, y, z);
+	printf("mag = %.2f\n", mag);
+	if (mag != 1)
+		return (0);
+	return (1);
 }
