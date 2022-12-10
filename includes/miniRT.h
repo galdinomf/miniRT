@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 13:00:35 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:50:56 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_elements
 	float		*prop1;
 	float		*prop2;
 	t_color		*color;
+	t_matrix	*transformation;
 }	t_elements;
 
 typedef struct s_amb_lightning

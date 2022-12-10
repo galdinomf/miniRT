@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:16:29 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/01 14:12:23 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 20:02:35 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINILIBX_H
 
 # define MLX_ERROR 		1
-# define WINDOW_WIDTH 	800
-# define WINDOW_HEIGHT 	600
+# define WINDOW_WIDTH 	100
+# define WINDOW_HEIGHT 	100
 
 # include <stddef.h>
 # include <stdlib.h>

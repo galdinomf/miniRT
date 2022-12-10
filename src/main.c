@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 13:12:15 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:57:00 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,37 @@ int	main()
 	generate_sample_img(&mlx_data);
 	
 
-	t_tuple *origin = create_point(1, 2, 3);
-	t_tuple *direction = create_vector(0, 1, 0);	
+	t_tuple *origin = create_point(0, 0, -5);
+	t_tuple *direction = create_vector(0, 0, 1);	
 	t_ray *ray = create_ray(origin, direction);
 	
 	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
 	sphere->point = create_point(0,0,0);
+	sphere->transformation = get_identity_matrix(4);
+	
+	destroy_matrix(sphere->transformation);
 
-	intersect_sphere(ray, sphere);
-	free(sphere->point);
-	free(sphere);
-	printf("ray->intersections = %p\n", ray->intersections);
-	if (ray->intersections)
-	{
-		printf("intersections = (%f, %f)\n", ((t_intersection *) ray->intersections->content)->t, ((t_intersection *) ray->intersections->next->content)->t);
-
-		printf("hit = (%f)\n", get_hit(ray)->t);
-	printf("intersections->count = %d\n", ft_lstsize(ray->intersections));
-	}
-
-	t_matrix *transf_matrix = get_scaling_matrix(2,3,4);
-	t_ray *transf_ray = transform_ray(ray, transf_matrix);
+	sphere->transformation = get_translation_matrix(5,0,0);
+	t_matrix *inv_transf_matrix = get_inverse_matrix(sphere->transformation);
+	t_ray *transf_ray = transform_ray(ray, inv_transf_matrix);
 	printf("transf_ray->origin = (%f, %f, %f)\n", transf_ray->origin->x, transf_ray->origin->y, transf_ray->origin->z);
 	printf("transf_ray->direction = (%f, %f, %f)\n", transf_ray->direction->x, transf_ray->direction->y, transf_ray->direction->z);
 	
+	intersect_sphere(transf_ray, sphere);
+	free(sphere->point);
+	destroy_matrix(sphere->transformation);
+	free(sphere);
+	printf("ray->intersections = %p\n", transf_ray->intersections);
+	if (transf_ray->intersections)
+	{
+		printf("intersections = (%f, %f)\n", ((t_intersection *) transf_ray->intersections->content)->t, ((t_intersection *) transf_ray->intersections->next->content)->t);
+
+		printf("hit = (%f)\n", get_hit(transf_ray)->t);
+	printf("intersections->count = %d\n", ft_lstsize(transf_ray->intersections));
+	}
 	destroy_ray(ray);
 	destroy_ray(transf_ray);
-	destroy_matrix(transf_matrix);
+	destroy_matrix(inv_transf_matrix);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);
