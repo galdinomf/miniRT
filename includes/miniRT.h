@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 11:26:00 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:00:35 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,12 @@ t_ray	*create_ray(t_tuple *origin, t_tuple *direction);
 void	destroy_ray(t_ray *ray);
 t_tuple	*ray_position(t_ray *ray, float t);
 
-void	intersect_sphere(t_ray *ray, t_elements *sphere); // MUDAR SEGUNDO ARGUMENTO PARA ENDEREÇO DA ESFERA!!!
-void	destroy_intersection(t_intersection *intersecion);
+void	intersect_sphere(t_ray *ray, t_elements *sphere); 
+t_intersection	*get_hit(t_ray *ray);
+
+t_tuple	*convert_matrix_to_tuple(t_matrix *matrix);
+t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix);
+
 //////////////////// CHECK FILE RT ////////////////////
 void		check_file(char *file_name);
 void		check_amb_light(char **str);

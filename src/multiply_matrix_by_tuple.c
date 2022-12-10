@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutiply_matrix_by_tuple.c                          :+:      :+:    :+:   */
+/*   multiply_matrix_by_tuple.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:56:12 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 15:05:37 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:06:20 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ t_matrix	*multiply_matrix_by_tuple(t_matrix *matrix, t_tuple *tuple)
 	tuple_converted->values[2][0] = tuple->z;
 	tuple_converted->values[3][0] = tuple->w;
 	result = multiply_matrices(matrix, tuple_converted);
+	destroy_matrix(tuple_converted);
 	return (result);
 }

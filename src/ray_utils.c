@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:28:42 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 11:30:57 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:08:55 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,19 @@ t_tuple	*ray_position(t_ray *ray, float t)
 	result = sum_tuples(ray->origin, aux_tuple);
 	free(aux_tuple);
 	return (result);
+}
+
+t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix)
+{
+	t_ray	*resulting_ray;
+	t_matrix	*aux1;
+	t_matrix	*aux2;
+
+	aux1 = multiply_matrix_by_tuple(transf_matrix, ray->origin);
+	aux2 = multiply_matrix_by_tuple(transf_matrix, ray->direction);
+	resulting_ray = create_ray(convert_matrix_to_tuple(aux1), \
+								convert_matrix_to_tuple(aux2));
+	destroy_matrix(aux1);
+	destroy_matrix(aux2);
+	return (resulting_ray);
 }

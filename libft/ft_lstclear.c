@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:52:53 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/04/27 03:13:31 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 12:08:30 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*node_ptr;
 	t_list	*aux;
 
+	if (!*lst)
+		return ;
 	node_ptr = *lst;
 	while (node_ptr->next)
 	{

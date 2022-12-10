@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 11:30:22 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:12:15 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	main()
 	generate_sample_img(&mlx_data);
 	
 
-	t_tuple *origin = create_point(0, 0, 5);
-	t_tuple *direction = create_vector(0, 0, 1);	
+	t_tuple *origin = create_point(1, 2, 3);
+	t_tuple *direction = create_vector(0, 1, 0);	
 	t_ray *ray = create_ray(origin, direction);
 	
 	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
@@ -63,14 +63,24 @@ int	main()
 
 	intersect_sphere(ray, sphere);
 	free(sphere->point);
-	free(sphere);	
-	
+	free(sphere);
+	printf("ray->intersections = %p\n", ray->intersections);
 	if (ray->intersections)
+	{
 		printf("intersections = (%f, %f)\n", ((t_intersection *) ray->intersections->content)->t, ((t_intersection *) ray->intersections->next->content)->t);
-	printf("intersections = (%p, %p)\n", ((t_intersection *) ray->intersections->content)->elem, ((t_intersection *) ray->intersections->next->content)->elem);
-	printf("intersections->count = %d\n", ft_lstsize(ray->intersections));
 
+		printf("hit = (%f)\n", get_hit(ray)->t);
+	printf("intersections->count = %d\n", ft_lstsize(ray->intersections));
+	}
+
+	t_matrix *transf_matrix = get_scaling_matrix(2,3,4);
+	t_ray *transf_ray = transform_ray(ray, transf_matrix);
+	printf("transf_ray->origin = (%f, %f, %f)\n", transf_ray->origin->x, transf_ray->origin->y, transf_ray->origin->z);
+	printf("transf_ray->direction = (%f, %f, %f)\n", transf_ray->direction->x, transf_ray->direction->y, transf_ray->direction->z);
+	
 	destroy_ray(ray);
+	destroy_ray(transf_ray);
+	destroy_matrix(transf_matrix);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);

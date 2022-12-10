@@ -22,6 +22,7 @@ SRCS	= main.c\
 		  check_file2.c\
 		  check_file3.c\
 		  error_exit.c\
+		  convert_matrix_to_tuple.c\
 
 SRCS_B	= 
 

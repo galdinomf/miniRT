@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 11:32:04 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/10 13:11:36 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ t_list	*get_intersections(float a, float b, float c, t_elements *sphere)
 	float			discriminant;
 
 	discriminant = pow(b, 2) - 4 * a * c;
+	if (discriminant < 0)
+		return (NULL);
 	new_intersection1 = (t_intersection *) malloc(sizeof(t_intersection));
-	if ((!new_intersection1) || (discriminant < 0))
+	if (!new_intersection1)
 		return (NULL);
 	new_intersection2 = (t_intersection *) malloc(sizeof(t_intersection));
 	if (!new_intersection2)
@@ -50,4 +52,33 @@ void	intersect_sphere(t_ray *ray, t_elements *sphere) // MUDAR SEGUNDO ARGUMENTO
 	intersections = get_intersections(a, b, c, sphere);
 	ray->intersections = intersections;
 	free(sphere_to_ray);
+}
+
+t_intersection	*get_hit(t_ray *ray)
+{
+	t_list	*aux;
+	float	smallest_t;
+	t_intersection	*result;
+
+	result = NULL;
+	aux = ray->intersections;
+	while ((aux) && (((t_intersection *) aux->content)->t < 0))
+		aux = aux->next;
+	if (aux)
+	{
+		smallest_t = ((t_intersection *) aux->content)->t;
+		result = ((t_intersection *) aux->content);
+		aux = aux->next;
+	}
+	while (aux)
+	{
+		if ((((t_intersection *) aux->content)->t >= 0) && \
+			(((t_intersection *) aux->content)->t < smallest_t))
+			{
+				smallest_t = ((t_intersection *) aux->content)->t;
+				result = ((t_intersection *) aux->content);
+			}
+		aux = aux->next;
+	}
+	return (result);
 }
