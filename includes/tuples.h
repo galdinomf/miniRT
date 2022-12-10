@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:29:11 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 13:09:37 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/06 19:31:43 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ t_color	*sum_colors(t_color *c1, t_color *c2);
 t_color	*subtract_colors(t_color *c1, t_color *c2);
 t_color	*multiply_colors(t_color *c1, t_color *c2);
 t_color	*multiply_color_by_scalar(t_color *c1, float k);
-int	get_trgb_from_color(t_color *color);
+int		get_trgb_from_color(t_color *color);
 
 #endif

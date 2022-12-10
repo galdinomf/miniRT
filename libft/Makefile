@@ -39,6 +39,11 @@ SRCS	= ft_putnbr_fd.c\
 	  ft_strlen.c\
 	  ft_swap.c\
 	  ft_get_next_line.c\
+	  ft_lstnew.c\
+	  ft_lstsize.c\
+	  ft_lstclear.c\
+	  ft_lstadd_back.c\
+	  ft_lstlast.c\
 
 CFLAGS	= -Wall -Wextra -Werror
 
