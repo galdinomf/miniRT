@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:59:10 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/12 14:29:47 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/12 19:17:18 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_data	*init_file_data (void)
 	return (file_data);
 }
 
-static void	create_elements(char *line, t_data data)
+static void	create_elements(char *line, t_data *data)
 {
 	char **split;
 	int	len;
@@ -50,6 +50,7 @@ t_data	*file_to_data(char *file_name)
 {
 	t_data	*data;
 	int		fd;
+	char	*line;
 
 
 	fd = open(file_name, O_RDONLY, 0);
@@ -66,28 +67,28 @@ t_data	*file_to_data(char *file_name)
 	}
 	close(fd);
 	free(line);
+	return (data);
 }
 
-void	amb_light_to_data(char **str, t_data data)
+void	amb_light_to_data(char **str, t_data *data)
 {
 	t_amb_lightning	*amb_light;
-	t_color			*rgb;
 	char			**split;
 
-	amb_light = malloc(size_of(t_amb_lightning));
-	amb_light->ratio = str[1];
-	split = ft_split(str[2]);
+	amb_light = (t_amb_lightning *)malloc(sizeof(t_amb_lightning));
+	amb_light->ratio = ft_atof(str[1]);
+	split = ft_split(str[2], ' ');
 	amb_light->color = create_color(ft_atof(split[0])/255, \
 ft_atof(split[1])/255, ft_atof(split[2])/255);
-	free_split(split);
+	free_split((void *)split);
 	data->amb_light = amb_light;
 }
 
-void	printt_data(t_data data)
+void	print_data(t_data *data)
 {
 	printf("A	%.2f	%.3f, %.3f, %.3f\n",\
 	data->amb_light->ratio,\
-	data->amb_light->ratio->color->r\
-	data->amb_light->ratio->color->g\
-	data->amb_light->ratio->color->b)
+	data->amb_light->color->red, \
+	data->amb_light->color->green, \
+	data->amb_light->color->blue);
 }

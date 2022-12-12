@@ -6,11 +6,11 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:13:29 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/12 12:19:23 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/12 18:16:58 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#	include<minishell.h>
+#	include<miniRT.h>
 
 void	free_ptr(void **ptr)
 {
