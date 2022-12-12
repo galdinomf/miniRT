@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/12 12:10:03 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/12 14:29:14 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ int			ft_iscoords(char *str);
 int			ft_isndvector(char *str);
 int 		isnormalized(float x, float y, float z);
 
+/////////////FILE TO DATA ////////////////////////
+
+t_data		*file_to_data(char *file_name);
+void		amb_light_to_data(char **str, t_data data);
+void		printt_data(t_data data);
+void		camera_to_data(char **str, t_data data);
+void		ligth_to_data(char **str, t_data data);
+void		sphere_to_data(char **str, t_data data);
+void		plane_to_data(char **str, t_data data);
+void		cylinder_to_data(char **str, t_data data);
 
 ///////FREE////
 void		free_split(void **ptr);

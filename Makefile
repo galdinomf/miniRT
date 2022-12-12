@@ -21,6 +21,8 @@ SRCS	= main.c\
 		  check_file3.c\
 		  error_exit.c\
 		  free.c\
+		  file_to_data.c\
+		  file_to_data2.c\
 
 SRCS_B	= 
 
