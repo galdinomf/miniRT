@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:28:42 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 13:08:55 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:41:28 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_tuple	*ray_position(t_ray *ray, float t)
 
 t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix)
 {
-	t_ray	*resulting_ray;
+	t_ray		*resulting_ray;
 	t_matrix	*aux1;
 	t_matrix	*aux2;
 

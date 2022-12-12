@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 19:57:00 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/12 09:50:15 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,20 @@ int	main()
 	sphere->transformation = get_identity_matrix(4);
 	
 	destroy_matrix(sphere->transformation);
-
-	sphere->transformation = get_translation_matrix(5,0,0);
-	t_matrix *inv_transf_matrix = get_inverse_matrix(sphere->transformation);
-	t_ray *transf_ray = transform_ray(ray, inv_transf_matrix);
-	printf("transf_ray->origin = (%f, %f, %f)\n", transf_ray->origin->x, transf_ray->origin->y, transf_ray->origin->z);
-	printf("transf_ray->direction = (%f, %f, %f)\n", transf_ray->direction->x, transf_ray->direction->y, transf_ray->direction->z);
-	
-	intersect_sphere(transf_ray, sphere);
+	sphere->transformation = get_scaling_matrix(2,2,2);
+	intersect_sphere(ray, sphere);
 	free(sphere->point);
 	destroy_matrix(sphere->transformation);
 	free(sphere);
-	printf("ray->intersections = %p\n", transf_ray->intersections);
-	if (transf_ray->intersections)
+	printf("ray->intersections = %p\n", ray->intersections);
+	if (ray->intersections)
 	{
-		printf("intersections = (%f, %f)\n", ((t_intersection *) transf_ray->intersections->content)->t, ((t_intersection *) transf_ray->intersections->next->content)->t);
+		printf("intersections = (%f, %f)\n", ((t_intersection *) ray->intersections->content)->t, ((t_intersection *) ray->intersections->next->content)->t);
 
-		printf("hit = (%f)\n", get_hit(transf_ray)->t);
-	printf("intersections->count = %d\n", ft_lstsize(transf_ray->intersections));
+		printf("hit = (%f)\n", get_hit(ray)->t);
+	printf("intersections->count = %d\n", ft_lstsize(ray->intersections));
 	}
 	destroy_ray(ray);
-	destroy_ray(transf_ray);
-	destroy_matrix(inv_transf_matrix);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);
