@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/07 21:39:43 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/12 12:10:03 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ int			ft_isndvector(char *str);
 int 		isnormalized(float x, float y, float z);
 
 
+///////FREE////
+void		free_split(void **ptr);
+void		free_ptr(void **ptr);
+
 //------MACROS
 
 #define AMB_LIGHTNING 1
@@ -74,8 +78,9 @@ typedef struct s_amb_lightning
 
 typedef struct s_data
 {
+	int				n_elem;
 	t_amb_lightning	*amb_light;
-	t_elements		*elem;
+	t_elements		**elem;
 }	t_data;
 
 

@@ -20,6 +20,7 @@ SRCS	= main.c\
 		  check_file2.c\
 		  check_file3.c\
 		  error_exit.c\
+		  free.c\
 
 SRCS_B	= 
 
