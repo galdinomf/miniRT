@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/10 19:50:56 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/12 10:25:31 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ int			ft_iscoords(char *str);
 int			ft_isndvector(char *str);
 int 		isnormalized(float x, float y, float z);
 
-
+int	round_float(float f);
 #endif

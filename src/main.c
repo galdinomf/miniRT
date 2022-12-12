@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/12 09:50:15 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:22:38 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,59 @@ int	main()
 	t_mlx_data mlx_data;
 	minilibx_initialize(&mlx_data);
 
-	generate_sample_img(&mlx_data);
-	
+	//generate_sample_img(&mlx_data);
 
-	t_tuple *origin = create_point(0, 0, -5);
-	t_tuple *direction = create_vector(0, 0, 1);	
-	t_ray *ray = create_ray(origin, direction);
 	
 	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
 	sphere->point = create_point(0,0,0);
-	sphere->transformation = get_identity_matrix(4);
-	
-	destroy_matrix(sphere->transformation);
-	sphere->transformation = get_scaling_matrix(2,2,2);
-	intersect_sphere(ray, sphere);
+	t_matrix *translation = get_translation_matrix(100, 100, 100);
+	t_matrix *scaling = get_scaling_matrix(100,100,100);
+	sphere->transformation = multiply_matrices(translation, scaling);
+	destroy_matrix(translation);
+	destroy_matrix(scaling);
+
+//	int	c = 0;
+	int	i = -1;
+	int	j = -1;
+	while (++i < WINDOW_WIDTH)
+	{
+		while (++j < WINDOW_HEIGHT)
+		{
+			t_tuple *origin = create_point(100, 100, -50);
+			t_tuple	*pixel_point = create_point(i, j, 0);
+			t_tuple	*unnormalized_direction = subtract_tuples(pixel_point, origin);
+			t_tuple *direction = normalize_tuple(unnormalized_direction);
+			
+			t_ray *ray = create_ray(origin, direction);
+			intersect_sphere(ray, sphere);
+				if (i == 80)
+					printf("%d\n", ray->intersections != NULL);
+			//	printf("#%d ", ++c);
+			if (ray->intersections)
+			{
+				float t = get_hit(ray)->t;
+				//	printf("#%d t = %f\n", ++c, t);
+				t_tuple *painted_direction = multiply_tuple_by_scalar(direction, t);
+				t_tuple	*painted_point = sum_tuples(origin, painted_direction);
+				//float	x = painted_point->x;
+				//float	y = painted_point->y;
+				mlx_data.image.data[WINDOW_WIDTH * j + i] = get_trgb_int(0, 255, 0, 0);
+
+				free(painted_direction);
+				free(painted_point);
+			}
+			destroy_ray(ray);
+			free(pixel_point);
+			free(unnormalized_direction);
+		}
+		j = -1;
+	}				
+				mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, \
+				mlx_data.image.img_ptr, 0, 0);
 	free(sphere->point);
 	destroy_matrix(sphere->transformation);
 	free(sphere);
+	/*
 	printf("ray->intersections = %p\n", ray->intersections);
 	if (ray->intersections)
 	{
@@ -76,8 +112,7 @@ int	main()
 		printf("hit = (%f)\n", get_hit(ray)->t);
 	printf("intersections->count = %d\n", ft_lstsize(ray->intersections));
 	}
-	destroy_ray(ray);
-	
+	*/
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);
 	

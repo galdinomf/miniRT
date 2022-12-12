@@ -23,6 +23,7 @@ SRCS	= main.c\
 		  check_file3.c\
 		  error_exit.c\
 		  convert_matrix_to_tuple.c\
+		  round_float.c\
 
 SRCS_B	= 
 
@@ -80,6 +81,7 @@ clean:
 	@printf "\n$(YE)Cleaning all object files from libft...$(RC)\n"
 	@make clean -C $(LFT_PATH)
 	@printf "$(GR)Libft objects removed!$(RC)\n\n"
+	$(RM) libft/libft.a
 	$(RM) $(OBJS)
 	$(RM) $(OBJS_B)
 	rmdir $(OBJ_DIR)
