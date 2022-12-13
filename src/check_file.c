@@ -15,7 +15,7 @@ void	check_file(char *file_name)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (*line)
+		if (ft_strncmp(line, "\n", 2))
 			check_line(line);
 		free(line);
 		line = get_next_line(fd);
@@ -54,22 +54,24 @@ int	ft_isrgb(char *str)
 	char	**split;
 	int		i;
 	int		j;
+	int		ok;
 
 	split = ft_split(str, ',');
 	i = -1;
-	while (split[++i])
+	ok = 1;
+	while (split[++i] && ok == 1)
 	{
 		j = -1;
 		while (split[i][++j] && split[i][j] != '\0')
 		{
 			if (!ft_isdigit(split[i][j]))
-				return (0);
+				ok = 0;
 		}
 		if (ft_atoi(split[i]) > 255 || i > 2)
-			return (0);
-
+			ok = 0;
 	}
-	return (1);
+	//free_split((void *)split);
+	return (ok);
 }
 
 int	ft_iscoords(char *str)
@@ -82,8 +84,12 @@ int	ft_iscoords(char *str)
 	while (split[++i])
 	{
 		if(!ft_isfloat(split[i]))
+		{
+			free_split((void *)split);
 			return (0);
+		}
 	}
+	free_split((void *)split);
 	if (i != 3)
 		return (0);
 	return (1);
@@ -99,12 +105,17 @@ int	ft_isndvector(char *str)
 	while (split[++i])
 	{
 		if(!(ft_isfloat(split[i]) || ft_atof(split[i]) < 1 || ft_atof(split[i]) > -1))
+		{
+			free_split((void *)split);
+			return (0);
+		}
+	}
+	if (i != 3 || !isnormalized(ft_atof(split[0]), ft_atof(split[1]), ft_atof(split[2])))
+	{
+			free_split((void *)split);
 			return (0);
 	}
-	if (i != 3)
-		return (0);
-	if (!isnormalized(ft_atof(split[0]), ft_atof(split[1]), ft_atof(split[2])))
-		return (0);
+	free_split((void *)split);
 	return (1);
 }
 
@@ -118,8 +129,12 @@ int	ft_isfov(char *str)
 	while (split[++i])
 	{
 		if(!ft_isfloat(split[i]) || ft_atof(split[i]) > 1 || ft_atof(split[i]) < -1)
+		{
+			free_split((void *)split);
 			return (0);
+		}
 	}
+	free_split((void *)split);
 	if (i != 2)
 		return (0);
 	return (1);

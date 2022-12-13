@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/12 18:59:30 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:30:06 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		cylinder_to_data(char **str, t_data *data);
 ///////FREE////
 void		free_split(void **ptr);
 void		free_ptr(void **ptr);
-
+void		free_data(t_data *data);
 //------MACROS
 
 #define AMB_LIGHTNING 1

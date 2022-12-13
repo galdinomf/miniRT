@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/12 18:22:26 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:28:52 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@ int	main(int argc, char **argv)
 		error_exit("Error\nArgs invalid\n", 1);
 	check_file(argv[1]);
 	data = file_to_data(argv[1]);
+	print_data(data);
+	free_data(data);
 	printf("OK!\n");
 }

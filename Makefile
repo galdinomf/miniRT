@@ -23,6 +23,7 @@ SRCS	= main.c\
 		  free.c\
 		  file_to_data.c\
 		  file_to_data2.c\
+		  free_data.c\
 
 SRCS_B	= 
 
