@@ -1,4 +1,4 @@
-SRCS	= main_rendering_sphere.c\
+SRCS	= main.c\
 		  tuples_utils.c\
 		  tuples_utils2.c\
 		  tuples_utils3.c\
@@ -23,6 +23,7 @@ SRCS	= main_rendering_sphere.c\
 		  check_file3.c\
 		  error_exit.c\
 		  round_float.c\
+		  get_normal_at_sphere.c\
 
 SRCS_B	= 
 

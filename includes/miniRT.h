@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 10:49:44 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/14 11:16:26 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ t_intersection	*get_hit(t_ray *ray);
 
 //t_tuple	*convert_matrix_to_tuple(t_matrix *matrix);
 t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix);
+
+t_tuple	*get_normal_at_sphere(t_elements *sphere, t_tuple *world_point);
 
 //////////////////// CHECK FILE RT ////////////////////
 void		check_file(char *file_name);
