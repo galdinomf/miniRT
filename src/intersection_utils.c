@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/12 12:56:24 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/13 20:12:06 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ t_list	*get_intersections(float a, float b, float c, t_elements *sphere)
 	t_intersection	*new_intersection1;
 	t_intersection	*new_intersection2;
 	t_list			*intersections;
-	double			discriminant;
+	float			discriminant;
+	float			sqrt_discriminant;
 
 	discriminant = pow(b, 2) - 4 * a * c;
-	//if (discriminant > 0)
-	//	printf("discriminant = %f\n", discriminant);
+	//printf("discriminant = %f\n", discriminant);
 	if (discriminant < 0)
 		return (NULL);
 	new_intersection1 = (t_intersection *) malloc(sizeof(t_intersection));
@@ -41,9 +41,10 @@ t_list	*get_intersections(float a, float b, float c, t_elements *sphere)
 	new_intersection2 = (t_intersection *) malloc(sizeof(t_intersection));
 	if (!new_intersection2)
 		return (NULL);
-	new_intersection1->t = ((-1) * b - sqrt(discriminant)) / (2 * a);
+	sqrt_discriminant = sqrt(discriminant);
+	new_intersection1->t = ((-1) * b - sqrt_discriminant) / (2 * a);
 	new_intersection1->elem = sphere;
-	new_intersection2->t = ((-1) * b + sqrt(discriminant)) / (2 * a);
+	new_intersection2->t = ((-1) * b + sqrt_discriminant) / (2 * a);
 	new_intersection2->elem = sphere;
 	intersections = ft_lstnew(new_intersection1);
 	ft_lstadd_back(&intersections, ft_lstnew(new_intersection2));

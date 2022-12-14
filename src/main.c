@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/12 13:22:38 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/13 20:13:23 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,11 @@ int	main()
 	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
 	sphere->point = create_point(0,0,0);
 	t_matrix *translation = get_translation_matrix(100, 100, 100);
-	t_matrix *scaling = get_scaling_matrix(100,100,100);
+	t_matrix *scaling = get_scaling_matrix(50,100,100);
 	sphere->transformation = multiply_matrices(translation, scaling);
 	destroy_matrix(translation);
 	destroy_matrix(scaling);
-
-//	int	c = 0;
+	int	c = 0;
 	int	i = -1;
 	int	j = -1;
 	while (++i < WINDOW_WIDTH)
@@ -76,21 +75,24 @@ int	main()
 			
 			t_ray *ray = create_ray(origin, direction);
 			intersect_sphere(ray, sphere);
-				if (i == 80)
-					printf("%d\n", ray->intersections != NULL);
-			//	printf("#%d ", ++c);
+				printf("#%d ", ++c);
 			if (ray->intersections)
 			{
-				float t = get_hit(ray)->t;
-				//	printf("#%d t = %f\n", ++c, t);
+				//printf("i = %d, j = %d\n", i, j);
+				t_intersection *aux = get_hit(ray);
+				if (aux)
+				{
+					float t = aux->t;
 				t_tuple *painted_direction = multiply_tuple_by_scalar(direction, t);
 				t_tuple	*painted_point = sum_tuples(origin, painted_direction);
 				//float	x = painted_point->x;
 				//float	y = painted_point->y;
-				mlx_data.image.data[WINDOW_WIDTH * j + i] = get_trgb_int(0, 255, 0, 0);
+				if ((i < WINDOW_WIDTH) && (j < WINDOW_HEIGHT))
+					mlx_data.image.data[WINDOW_WIDTH * j + i] = get_trgb_int(0, 255, 0, 0);
 
 				free(painted_direction);
 				free(painted_point);
+				}
 			}
 			destroy_ray(ray);
 			free(pixel_point);
