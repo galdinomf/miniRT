@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/12 10:25:31 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/14 10:49:44 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_intersection
 
 void			hook(t_mlx_data *mlx_data);
 int				keypress(int keysym, t_mlx_data *mlx_data);
-t_matrix	*multiply_matrix_by_tuple(t_matrix *matrix, t_tuple *tuple);
+t_tuple	*multiply_matrix_by_tuple(t_matrix *matrix, t_tuple *tuple);
 
 
 t_ray	*create_ray(t_tuple *origin, t_tuple *direction);
@@ -83,7 +83,7 @@ t_tuple	*ray_position(t_ray *ray, float t);
 void	intersect_sphere(t_ray *ray, t_elements *sphere); 
 t_intersection	*get_hit(t_ray *ray);
 
-t_tuple	*convert_matrix_to_tuple(t_matrix *matrix);
+//t_tuple	*convert_matrix_to_tuple(t_matrix *matrix);
 t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix);
 
 //////////////////// CHECK FILE RT ////////////////////

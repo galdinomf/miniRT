@@ -1,4 +1,4 @@
-SRCS	= main.c\
+SRCS	= main_rendering_sphere.c\
 		  tuples_utils.c\
 		  tuples_utils2.c\
 		  tuples_utils3.c\
@@ -22,7 +22,6 @@ SRCS	= main.c\
 		  check_file2.c\
 		  check_file3.c\
 		  error_exit.c\
-		  convert_matrix_to_tuple.c\
 		  round_float.c\
 
 SRCS_B	= 
