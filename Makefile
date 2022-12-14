@@ -24,6 +24,7 @@ SRCS	= main.c\
 		  error_exit.c\
 		  round_float.c\
 		  get_normal_at_sphere.c\
+		  get_reflected_vector.c\
 
 SRCS_B	= 
 

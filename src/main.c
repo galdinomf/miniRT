@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 11:59:04 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/14 12:52:48 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,14 @@ int	main()
 
 	generate_sample_img(&mlx_data);
 		
-	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
-	sphere->point = create_point(0,0,0);
-	t_matrix *rotation = get_z_rotation_matrix(PI / 5);
-	t_matrix *scaling = get_scaling_matrix(1, 0.5, 1);
-	sphere->transformation = multiply_matrices(scaling, rotation);
-	destroy_matrix(scaling);
-	destroy_matrix(rotation);
-	t_tuple *point = create_point(0, 0.70711, -0.70711);
-	t_tuple *normal = get_normal_at_sphere(sphere, point);
-	t_tuple *normal2 = normalize_tuple(normal);
-	printf("normal = (%f, %f, %f, %f)\n", normal->x, normal->y, normal->z, normal->w);
-	printf("tuples_equal = %d\n", tuples_equal(normal, normal2));
-	free(sphere->point);
-	destroy_matrix(sphere->transformation);
-	free(sphere);
-	free(point);
+	t_tuple *vector = create_vector(0, -1, 0);
+	t_tuple *normal = create_vector(0.70711, 0.70711, 0);
+	t_tuple *r = get_reflected_vector(vector, normal);
+	printf("r = (%f, %f, %f, %f)\n", r->x, r->y, r->z, r->w);
+
+	free(vector);
+	free(normal);
+	free(r);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);

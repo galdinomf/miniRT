@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 14:56:12 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 10:49:13 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/14 12:48:20 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ t_tuple	*multiply_matrix_by_tuple(t_matrix *matrix, t_tuple *tuple)
 	result = multiply_matrices(matrix, tuple_converted);
 	destroy_matrix(tuple_converted);
 	resulting_tuple = convert_matrix_to_tuple(result);
+	destroy_matrix(result);
 	return (resulting_tuple);
 }
