@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:59:10 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/13 19:30:43 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/14 23:04:50 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static t_data	*init_file_data (int qtt_elem)
 	file_data = (t_data *) malloc(sizeof(t_data));
 	if (!file_data)
 		return (NULL);
-	file_data->elem = malloc(sizeof(t_elements) * qtt_elem);
+	file_data->elem = malloc(sizeof(t_elements) * (qtt_elem + 1));
+	file_data->elem[qtt_elem] = NULL;
 	file_data->n_elem = 0;
 	return (file_data);
 }
@@ -70,6 +71,7 @@ static void	create_elements(char *line, t_data *data)
 		cylinder_to_data(split, data);
 	else
 		error_exit("Error\nWrong data in rt file\n", 1);
+	free_split((void *)split);
 }
 
 t_data	*file_to_data(char *file_name)
@@ -80,7 +82,6 @@ t_data	*file_to_data(char *file_name)
 	int		qtt_elem;
 
 	qtt_elem = count_elem(file_name);
-	printf("n elem = %d\n", qtt_elem);
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
 		error_exit("Error\nCould not open .rt file\n", 1);

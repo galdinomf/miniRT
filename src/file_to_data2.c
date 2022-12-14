@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:24:46 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/13 15:36:58 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/14 22:57:39 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	camera_to_data(char **str, t_data *data)
 	t_elements	*element;
 	char			**split;
 
+	//element = data->elem[data->n_elem];
 	element = (t_elements *) malloc(sizeof(t_elements));
 	element->type = 2;
 	split = ft_split(str[1], ',');
@@ -40,6 +41,7 @@ void	light_to_data(char **str, t_data *data)
 	t_elements	*element;
 	char			**split;
 
+	//element = data->elem[data->n_elem];
 	element = (t_elements *) malloc(sizeof(t_elements));
 	element->type = 3;
 	split = ft_split(str[1], ',');
@@ -64,6 +66,7 @@ void	sphere_to_data(char **str, t_data *data)
 	t_elements	*element;
 	char			**split;
 
+	//element = data->elem[data->n_elem];
 	element = (t_elements *) malloc(sizeof(t_elements));
 	element->type = 4;
 	split = ft_split(str[1], ',');
@@ -87,6 +90,7 @@ void	plane_to_data(char **str, t_data *data)
 	t_elements	*element;
 	char			**split;
 
+	//element = data->elem[data->n_elem];
 	element = (t_elements *) malloc(sizeof(t_elements));
 	element->type = 5;
 	split = ft_split(str[1], ',');

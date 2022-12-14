@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:16:28 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/13 17:42:23 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/14 22:30:50 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ int ft_isfloat(char *str)
 		return (0);
 	i++;
 	while (str[i] && ft_isdigit(str[i]))
-	{
 		i++;
-	}
-	if (str[i] && str[i] != '.')
-		return (0);
+	if (!str[i])
+		return (1);
+	if (str[i] != '.')
+		return (0);	
 	while (str[++i])
 	{
 		if (!ft_isdigit(str[i]))

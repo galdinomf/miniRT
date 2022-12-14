@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/13 17:30:06 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:41:39 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ t_matrix	*multiply_matrix_by_tuple(t_matrix *matrix, t_tuple *tuple);
 
 //////////////////// CHECK FILE RT ////////////////////
 void		check_file(char *file_name);
-void		check_amb_light(char **str);
-void 		check_camera(char **str);
-void 		check_light(char **str);
-void 		check_sphere(char **str);
-void 		check_plane(char **str);
-void 		check_cylinder(char **str);
+int			check_amb_light(char **str);
+int 		check_camera(char **str);
+int 		check_light(char **str);
+int 		check_sphere(char **str);
+int 		check_plane(char **str);
+int 		check_cylinder(char **str);
 void		error_exit(const char *s, int i);
 float		ft_atof(char *str);
 int 		ft_isfloat(char *str);

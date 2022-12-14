@@ -1,11 +1,12 @@
 #include <miniRT.h>
 
-static void	check_line(char *line);
+static int	check_line(char *line);
 
 void	check_file(char *file_name)
 {
 	char	*line;
 	int		fd;
+	int error;
 
 	if (ft_strnrcmp(file_name, ".rt", 3))
 		error_exit("Error\nWrong file type\n", 1);
@@ -16,37 +17,44 @@ void	check_file(char *file_name)
 	while (line)
 	{
 		if (ft_strncmp(line, "\n", 2))
-			check_line(line);
+			error = check_line(line);
+		//printf("error = %d\n", error);
 		free(line);
+		if (error)
+			error_exit("Error\nWrong structure in file\n", error);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	free(line);
 }
 
-static void	check_line(char *line)
+static int	check_line(char *line)
 {
-	char **split;
-	int	len;
+	char 	**split;
+	int		len;
+	int		result;
 
 	len = ft_strlen(line);
 	line[len - 1] = '\0';
 	printf("%s\n", line);
+	result = 0;
 	split = ft_split(line, ' ');
 	if (!ft_strcmp(split[0], "A"))
-		check_amb_light(split);
+		result = check_amb_light(split);
 	else if(!ft_strcmp(split[0], "C"))
-		check_camera(split);
+		result = check_camera(split);
 	else if(!ft_strcmp(split[0], "L"))
-		check_light(split);
+		result = check_light(split);
 	else if(!ft_strcmp(split[0], "sp"))
-		check_sphere(split);
+		result = check_sphere(split);
 	else if(!ft_strcmp(split[0], "pl"))
-		check_plane(split);
+		result = check_plane(split);
 	else if(!ft_strcmp(split[0], "cy"))
-		check_cylinder(split);
+		result = check_cylinder(split);
 	else
-		error_exit("Error\nWrong data in rt file\n", 1);
+		result = 7;
+	free_split((void *)split);
+	return (result);
 }
 
 int	ft_isrgb(char *str)
@@ -70,7 +78,7 @@ int	ft_isrgb(char *str)
 		if (ft_atoi(split[i]) > 255 || i > 2)
 			ok = 0;
 	}
-	//free_split((void *)split);
+	free_split((void *)split);
 	return (ok);
 }
 
@@ -140,8 +148,9 @@ int	ft_isfov(char *str)
 	return (1);
 }
 
-void check_cylinder(char **str)
+int check_cylinder(char **str)
 {
 	if (!(ft_iscoords(str[1]) && ft_isndvector(str[2]) && ft_isfloat(str[3]) && ft_isfloat(str[4]) &&ft_isrgb(str[5]) &&!str[6]))
-		error_exit("Error\nWrong data for sphere\n", 1);
+		return (6);
+	return (0);
 }

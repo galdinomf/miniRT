@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:12:04 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/13 19:32:05 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/14 23:07:25 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	free_elem(t_elements *elem)
 		free_ptr((void *)&elem->prop2);
 	if (elem->color)	
 		free_ptr((void *)&elem->color);
+	free_ptr((void *) &elem);
 }
 
 void	free_data(t_data *data)
@@ -37,5 +38,6 @@ void	free_data(t_data *data)
 	i = -1;
 	while (data->elem && data->elem[++i])
 		free_elem(data->elem[i]);
+	free_ptr((void *)&data->elem);
 	free_ptr((void *)&data);
 }
