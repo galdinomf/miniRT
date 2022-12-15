@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 12:44:03 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:26:44 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@
 
 //-----STRUCTURES
 
+typedef struct s_material
+{
+	t_color	*color;
+	float	ambient;
+	float	diffuse;
+	float	specular;
+	float	shininess;
+}	t_material;
 
 typedef struct s_elements
 {
@@ -44,7 +52,17 @@ typedef struct s_elements
 	float		*prop2;
 	t_color		*color;
 	t_matrix	*transformation;
+	t_material	*material;
 }	t_elements;
+
+typedef struct s_phong_args
+{
+	t_material	*material;
+	t_elements	*light;
+	t_tuple		*ilum_point;
+	t_tuple		*eyev;
+	t_tuple		*normalv;
+}	t_phong_args;
 
 typedef struct s_amb_lightning
 {

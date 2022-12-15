@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 10:57:46 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:38:11 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main()
 	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
 	sphere->point = create_point(0,0,0);
 	t_matrix *translation = get_translation_matrix(100, 100, 100);
-	t_matrix *scaling = get_scaling_matrix(50,100,100);
+	t_matrix *scaling = get_scaling_matrix(100,100,100);
 	sphere->transformation = multiply_matrices(translation, scaling);
 	destroy_matrix(translation);
 	destroy_matrix(scaling);

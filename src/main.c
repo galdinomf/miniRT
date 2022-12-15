@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 12:52:48 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/15 10:47:27 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,27 @@ int	main()
 	minilibx_initialize(&mlx_data);
 
 	generate_sample_img(&mlx_data);
-		
-	t_tuple *vector = create_vector(0, -1, 0);
-	t_tuple *normal = create_vector(0.70711, 0.70711, 0);
-	t_tuple *r = get_reflected_vector(vector, normal);
-	printf("r = (%f, %f, %f, %f)\n", r->x, r->y, r->z, r->w);
 
-	free(vector);
-	free(normal);
-	free(r);
+	t_material *m = (t_material *) malloc(sizeof(t_material));
+	m->color = create_color(1, 1, 1);
+	m->ambient = 0.1;
+	m->diffuse = 0.9;
+	m->specular = 0.9;
+	m->shininess = 200;
+	
+	t_elements	*sphere = (t_elements *) malloc(sizeof(t_elements));
+	sphere->material = my_material;
+	
+
+
+
+	free(m->color);
+	free(m->ambient);
+	free(m->diffuse);
+	free(m->specular);
+	free(m->shininess);
+	free(m);
+	free(sphere);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);
