@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/15 10:47:27 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:45:23 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,36 @@ int	main()
 	m->specular = 0.9;
 	m->shininess = 200;
 	
-	t_elements	*sphere = (t_elements *) malloc(sizeof(t_elements));
-	sphere->material = my_material;
+	t_tuple	*position = create_point(0,0,0);
+	t_tuple	*eyev = create_vector(0,0,-1);
+	t_tuple	*normalv = create_vector(0,0,-1);
 	
+	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
+	light->point = create_point(0, 0, 10);
+	light->color = create_color(1, 1, 1);
 
+	t_phong_args *args = (t_phong_args *) malloc(sizeof(t_phong_args));
+	args->material = m;
+	args->light = light;
+	args->ilum_point = position;
+	args->eyev = eyev;
+	args->normalv = normalv;
+	t_color *result = get_lighting_color(args);
 
+	printf("result = (%f, %f, %f)\n", result->red, result->green, result->blue);
 
 	free(m->color);
-	free(m->ambient);
-	free(m->diffuse);
-	free(m->specular);
-	free(m->shininess);
 	free(m);
-	free(sphere);
+	free(position);
+	free(eyev);
+	free(normalv);
+
+	free(light->point);
+	free(light->color);
+	free(light);
+
+	free(args);
+	free(result);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);
