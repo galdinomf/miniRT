@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 09:38:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/15 14:40:46 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/15 20:31:39 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_color	*get_specular_contribution(t_tuple *lightv, t_phong_args *args)
 	{
 		factor = pow(reflect_dot_eye, args->material->shininess);
 		specular = multiply_color_by_scalar(args->light->color, (args->material->specular * factor));
+	//printf("specular = (%f, %f, %f)\n", specular->red, specular->green, specular->blue);
 	}
 	free(neg_lightv);
 	free(reflectv);
@@ -58,7 +59,6 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	free(contributions[0]);
 	free(contributions[1]);
 	free(contributions[2]);
-	printf("aqui\n");
 	return (result);
 }
 
@@ -82,7 +82,6 @@ t_color	*get_lighting_color(t_phong_args *args)
 	{
 		contributions[1] = multiply_color_by_scalar(effective_color, (args->material->diffuse * light_dot_normal));
 		contributions[2] = get_specular_contribution(lightv, args);
-
 	}
 	free(effective_color);
 	free(lightv);

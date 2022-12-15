@@ -1,4 +1,4 @@
-SRCS	= main.c\
+SRCS	= main_rendering_sphere.c\
 		  tuples_utils.c\
 		  tuples_utils2.c\
 		  tuples_utils3.c\
