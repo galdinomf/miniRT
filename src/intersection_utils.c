@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 11:03:59 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:02:45 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	intersect_sphere(t_ray *ray, t_elements *sphere) // MUDAR SEGUNDO ARGUMENTO
 	free(sphere_to_ray);
 }
 
-t_intersection	*get_hit(t_ray *ray)
+t_intersection	*find_hit(t_ray *ray)
 {
 	t_list	*aux;
 	float	smallest_t;

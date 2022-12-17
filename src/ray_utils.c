@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:28:42 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 11:03:43 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/16 21:35:17 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ t_ray	*create_ray(t_tuple *origin, t_tuple *direction)
 void	destroy_ray(t_ray *ray)
 {
 	free(ray->origin);
+	free(ray->direction);
+	ft_lstclear(&ray->intersections, free);
+	free(ray);
+	ray = NULL;
+}
+
+void	destroy_ray_keeping_origin(t_ray *ray)
+{
 	free(ray->direction);
 	ft_lstclear(&ray->intersections, free);
 	free(ray);

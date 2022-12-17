@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/15 14:18:17 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/16 21:35:46 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_elements
 typedef struct s_phong_args
 {
 	t_material	*material;
-	t_elements	*light;
+	//t_elements	*light;
 	t_tuple		*ilum_point;
 	t_tuple		*eyev;
 	t_tuple		*normalv;
@@ -96,10 +96,11 @@ t_tuple	*multiply_matrix_by_tuple(t_matrix *matrix, t_tuple *tuple);
 
 t_ray	*create_ray(t_tuple *origin, t_tuple *direction);
 void	destroy_ray(t_ray *ray);
+void	destroy_ray_keeping_origin(t_ray *ray);
 t_tuple	*ray_position(t_ray *ray, float t);
 
 void	intersect_sphere(t_ray *ray, t_elements *sphere); 
-t_intersection	*get_hit(t_ray *ray);
+t_intersection	*find_hit(t_ray *ray);
 
 //t_tuple	*convert_matrix_to_tuple(t_matrix *matrix);
 t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix);
@@ -107,7 +108,11 @@ t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix);
 t_tuple	*get_normal_at_sphere(t_elements *sphere, t_tuple *world_point);
 t_tuple	*get_reflected_vector(t_tuple *vector, t_tuple *normal);
 
-t_color	*get_lighting_color(t_phong_args *args);
+t_color	*get_lighting_color(t_elements	*light, t_phong_args *args);
+void	render_sphere(t_elements *sphere, t_elements *light, \
+						t_tuple *origin, t_mlx_data mlx_data);
+
+
 //////////////////// CHECK FILE RT ////////////////////
 void		check_file(char *file_name);
 void		check_amb_light(char **str);
