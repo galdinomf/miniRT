@@ -27,6 +27,7 @@ SRCS	= main_rendering_sphere.c\
 		  get_reflected_vector.c\
 		  get_lighting_color.c\
 		  render_sphere.c\
+		  intersect_elements.c\
 
 SRCS_B	= 
 

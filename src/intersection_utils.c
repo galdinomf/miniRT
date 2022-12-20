@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 17:02:45 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:50:55 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	intersect_sphere(t_ray *ray, t_elements *sphere) // MUDAR SEGUNDO ARGUMENTO
 	a = dot_product(transf_ray->direction, transf_ray->direction);
 	b = 2 * dot_product(transf_ray->direction, sphere_to_ray);
 	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
-	ray->intersections = get_intersections(a, b, c, sphere);
+	//ray->intersections = get_intersections(a, b, c, sphere);
+	ft_lstadd_back(&ray->intersections, get_intersections(a, b, c, sphere));
 	destroy_ray(transf_ray);
 	free(sphere_to_ray);
 }

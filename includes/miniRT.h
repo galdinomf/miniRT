@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 21:35:46 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:13:00 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,11 @@ t_color	*get_lighting_color(t_elements	*light, t_phong_args *args);
 void	render_sphere(t_elements *sphere, t_elements *light, \
 						t_tuple *origin, t_mlx_data mlx_data);
 
+void	render_elements(t_elements **elem, t_elements *light, \
+						t_tuple *origin, t_mlx_data mlx_data);
+
+void	intersect_elements(t_ray *ray, t_elements **elem);
+t_ray	*transform_element(t_ray *ray, t_elements *element);
 
 //////////////////// CHECK FILE RT ////////////////////
 void		check_file(char *file_name);

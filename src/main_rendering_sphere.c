@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_rendering_sphere.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 21:45:24 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:25:11 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ int	main()
 {
 	t_mlx_data mlx_data;
 	minilibx_initialize(&mlx_data);
-
+	
 	//generate_sample_img(&mlx_data);
 
-	
+	t_elements **elem =	malloc(sizeof(t_elements)*5);
+	elem[4] = NULL;
 	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
 	sphere->point = create_point(0,0,0);
-	t_matrix *translation = get_translation_matrix(100, 100, 100);
-	t_matrix *scaling = get_scaling_matrix(100,100,100);
+	t_matrix *translation = get_translation_matrix(100, 70, 0);
+	t_matrix *scaling = get_scaling_matrix(20,20,20);
 	sphere->transformation = multiply_matrices(translation, scaling);
 	destroy_matrix(translation);
 	destroy_matrix(scaling);
@@ -70,14 +71,65 @@ int	main()
 	m->shininess = 20;
 	
 	sphere->material = m;
+	sphere->type = 4;
+	elem[0] = sphere;
+
+	t_elements *plane = (t_elements *) malloc(sizeof(t_elements));
+	plane->point = create_point(0,0,0);
+	translation = get_translation_matrix(100, 90,10);
+	t_matrix *rotation = get_x_rotation_matrix(30);
+	plane->transformation = multiply_matrices(translation, rotation);
+	destroy_matrix(translation);
+	//destroy_matrix(scaling);
+	destroy_matrix(rotation);
+
+	t_material *m1 = (t_material *) malloc(sizeof(t_material));
+	m1->color = create_color(1, 1, 1);
+	m1->ambient = 0.1;
+	m1->diffuse = 0.9;
+	m1->specular = 0.9;
+	m1->shininess = 20;
 	
+	plane->type = 5;
+	plane->material = m1;
+
+	elem[1] = plane;
+
+	t_elements *plane2 = (t_elements *) malloc(sizeof(t_elements));
+	plane2->point = create_point(0,0,0);
+	translation = get_translation_matrix(100, 90,10);
+	rotation = get_x_rotation_matrix(60);
+	plane2->transformation = multiply_matrices(translation, rotation);
+	destroy_matrix(translation);
+	//destroy_matrix(scaling);
+	destroy_matrix(rotation);
+	
+	plane2->type = 5;
+	plane2->material = m1;
+
+	elem[2] = plane2;
+
+	t_elements *plane3 = (t_elements *) malloc(sizeof(t_elements));
+	plane3->point = create_point(0,0,0);
+	translation = get_translation_matrix(100, 90,10);
+	rotation = get_x_rotation_matrix(2);
+	plane3->transformation = multiply_matrices(translation, rotation);
+	destroy_matrix(translation);
+	//destroy_matrix(scaling);
+	destroy_matrix(rotation);
+	
+	plane3->type = 5;
+	plane3->material = m1;
+
+	elem[3] = plane3;
+
 	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
-	light->point = create_point(50, 50, -100);
+	light->point = create_point(50, 0, -100);
 	light->color = create_color(1, 1, 1);
 
-	t_tuple *origin = create_point(100, 100, -50);
+	t_tuple *origin = create_point(100, 70, -90);
 	
-	render_sphere(sphere, light, origin, mlx_data);
+	render_elements(elem, light, origin, mlx_data);
 
 	free(origin);
 	free(light->point);

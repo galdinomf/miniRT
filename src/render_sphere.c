@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sphere.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:20:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 21:44:11 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:19:26 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,39 @@ void	render_sphere(t_elements *sphere, t_elements *light, \
 				if (aux)
 						mlx_data.image.data[WINDOW_WIDTH * j + i] = \
 						compute_pixel_color(sphere, ray, light, aux->t);
+			}
+			destroy_ray_keeping_origin(ray);
+		}
+	}
+	mlx_put_image_to_window(mlx_data.mlx_ptr, mlx_data.win_ptr, \
+							mlx_data.image.img_ptr, 0, 0);
+}
+
+void	render_elements(t_elements **elem, t_elements *light, \
+						t_tuple *origin, t_mlx_data mlx_data)
+{
+	t_ray *ray;
+	int	i;
+	int	j;
+	t_intersection *aux;
+
+ 	i = -1;
+	while (++i < WINDOW_WIDTH)
+	{
+		j = -1;
+		while (++j < WINDOW_HEIGHT)
+		{
+			ray = get_pixel_ray(origin, i, j);
+			intersect_elements(ray, elem);
+			if (ray->intersections)
+			{
+				aux = find_hit(ray);
+				if (aux)
+				{
+						mlx_data.image.data[WINDOW_WIDTH * j + i] = \
+						compute_pixel_color(aux->elem, ray, light, aux->t);
+						printf("aux->elem->type =%d\n", aux->elem->type);
+				}
 			}
 			destroy_ray_keeping_origin(ray);
 		}
