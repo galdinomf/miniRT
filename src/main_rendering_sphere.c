@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/20 16:25:11 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/21 06:23:31 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,15 @@ int	main()
 {
 	t_mlx_data mlx_data;
 	minilibx_initialize(&mlx_data);
+	float r;
 	
 	//generate_sample_img(&mlx_data);
 
-	t_elements **elem =	malloc(sizeof(t_elements)*5);
-	elem[4] = NULL;
+	t_elements **elem =	malloc(sizeof(t_elements)*4);
+	elem[3] = NULL;
 	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
 	sphere->point = create_point(0,0,0);
-	t_matrix *translation = get_translation_matrix(100, 70, 0);
+	t_matrix *translation = get_translation_matrix(100, 80, 0);
 	t_matrix *scaling = get_scaling_matrix(20,20,20);
 	sphere->transformation = multiply_matrices(translation, scaling);
 	destroy_matrix(translation);
@@ -76,19 +77,23 @@ int	main()
 
 	t_elements *plane = (t_elements *) malloc(sizeof(t_elements));
 	plane->point = create_point(0,0,0);
-	translation = get_translation_matrix(100, 90,10);
-	t_matrix *rotation = get_x_rotation_matrix(30);
-	plane->transformation = multiply_matrices(translation, rotation);
+	translation = get_translation_matrix(180, 90,10);
+	r = 3.14/2;
+	printf("r = %f\n", r);
+	t_matrix *rotation = get_z_rotation_matrix(1.6);
+	t_matrix *rotation_x = get_x_rotation_matrix(1);
+	plane->transformation =  multiply_matrices(multiply_matrices(translation, rotation_x), rotation);
 	destroy_matrix(translation);
 	//destroy_matrix(scaling);
 	destroy_matrix(rotation);
+	destroy_matrix(rotation_x);
 
 	t_material *m1 = (t_material *) malloc(sizeof(t_material));
 	m1->color = create_color(1, 1, 1);
-	m1->ambient = 0.1;
+	m1->ambient = 0.8;
 	m1->diffuse = 0.9;
 	m1->specular = 0.9;
-	m1->shininess = 20;
+	m1->shininess = 0;
 	
 	plane->type = 5;
 	plane->material = m1;
@@ -105,23 +110,36 @@ int	main()
 	destroy_matrix(rotation);
 	
 	plane2->type = 5;
-	plane2->material = m1;
+	t_material *m2 = (t_material *) malloc(sizeof(t_material));
+	m2->color = create_color(0, 0, 1);
+	m2->ambient = 0.8;
+	m2->diffuse = 0.9;
+	m2->specular = 0.9;
+	m2->shininess = 0;
+	plane2->material = m2;
 
 	elem[2] = plane2;
 
-	t_elements *plane3 = (t_elements *) malloc(sizeof(t_elements));
-	plane3->point = create_point(0,0,0);
-	translation = get_translation_matrix(100, 90,10);
-	rotation = get_x_rotation_matrix(2);
-	plane3->transformation = multiply_matrices(translation, rotation);
-	destroy_matrix(translation);
-	//destroy_matrix(scaling);
-	destroy_matrix(rotation);
+	// t_elements *plane3 = (t_elements *) malloc(sizeof(t_elements));
+	// plane3->point = create_point(0,0,0);
+	// translation = get_translation_matrix(100, 90,10);
+	// t_matrix *rotation_z = get_z_rotation_matrix(1.6);
+	// rotation = get_y_rotation_matrix(.8);
+	// plane3->transformation = multiply_matrices(multiply_matrices(translation, rotation_z), rotation);
+	// destroy_matrix(translation);
+	// //destroy_matrix(scaling);
+	// destroy_matrix(rotation);
 	
-	plane3->type = 5;
-	plane3->material = m1;
+	// plane3->type = 5;
+	// t_material *m3 = (t_material *) malloc(sizeof(t_material));
+	// m3->color = create_color(0 ,1 , 0);
+	// m3->ambient = 0.8;
+	// m3->diffuse = 0.9;
+	// m3->specular = 0.9;
+	// m3->shininess = 0;
+	// plane3->material = m3;
 
-	elem[3] = plane3;
+	// elem[3] = plane3;
 
 	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
 	light->point = create_point(50, 0, -100);

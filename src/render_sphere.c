@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:20:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/20 14:19:26 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:53:46 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	render_elements(t_elements **elem, t_elements *light, \
 				{
 						mlx_data.image.data[WINDOW_WIDTH * j + i] = \
 						compute_pixel_color(aux->elem, ray, light, aux->t);
-						printf("aux->elem->type =%d\n", aux->elem->type);
+						//printf("aux->elem->type =%d\n", aux->elem->type);
 				}
 			}
 			destroy_ray_keeping_origin(ray);
