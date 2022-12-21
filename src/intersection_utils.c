@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 17:02:45 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/21 09:31:24 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_list	*get_intersections(float a, float b, float c, t_elements *sphere)
 	return (intersections);
 }
 
-void	intersect_sphere(t_ray *ray, t_elements *sphere) // MUDAR SEGUNDO ARGUMENTO PARA ENDEREÇO DA ESFERA!!!
+void	intersect_sphere(t_ray *ray, t_elements *sphere)
 {
 	float		a;
 	float		b;
@@ -64,7 +64,8 @@ void	intersect_sphere(t_ray *ray, t_elements *sphere) // MUDAR SEGUNDO ARGUMENTO
 	a = dot_product(transf_ray->direction, transf_ray->direction);
 	b = 2 * dot_product(transf_ray->direction, sphere_to_ray);
 	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
-	ray->intersections = get_intersections(a, b, c, sphere);
+	ft_lstadd_back(&ray->intersections, get_intersections(a, b, c, sphere));
+	//ray->intersections = get_intersections(a, b, c, sphere);
 	destroy_ray(transf_ray);
 	free(sphere_to_ray);
 }
@@ -96,4 +97,10 @@ t_intersection	*find_hit(t_ray *ray)
 		aux = aux->next;
 	}
 	return (result);
+}
+
+void	intersect_object(t_ray *ray, t_elements *object)
+{
+	if (object->type == 4)
+		intersect_sphere(ray, object);
 }

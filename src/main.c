@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/21 09:03:16 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:22:05 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int	main()
 	///////////// create material //////////////	
 	t_material *m = (t_material *) malloc(sizeof(t_material));
 	m->color = create_color(0.8, 1, 0.6);
-	m->ambient = 0.1;
+	m->ambient = 1;
 	m->diffuse = 0.7;
 	m->specular = 0.2;
-	m->shininess = 20;
+	m->shininess = 200;
 	///////////// create spheres //////////////
 	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
 	s1->type = SPHERE;
@@ -78,10 +78,26 @@ int	main()
 	elements[2] = light;
 	world->elem = elements;
 	
+	t_tuple *ray_origin = create_point(0, 0, 0.75);
+	t_tuple *ray_direction = create_vector(0, 0, -1);
+	t_ray	*ray = create_ray(ray_origin, ray_direction);
 
+	t_color *my_color = color_at(world, ray);
+	printf("my_color = %p\n", my_color);
+	printf("my_color = (%f, %f, %f)\n", my_color->red, my_color->green, my_color->blue);
 
+	free(my_color);
 
-
+	/*
+	intersect_world(world, ray);
+	t_list *aux = ray->intersections;
+	while (aux)
+	{
+		printf("aux->content = %f\n", *((float *) aux->content));
+		aux = aux->next;
+	}
+	*/
+	destroy_ray(ray);
 	free(m->color);
 	free(m);
 	free(s1->point);

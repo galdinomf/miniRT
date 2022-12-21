@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 09:38:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 15:46:44 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:49:05 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 /*computes the resulting color from the Phong reflection model*/
 
 t_color	*get_specular_contribution(t_elements *light, t_tuple *lightv, \
-									t_phong_args *args)
+									t_comps *args)
 {
 	t_tuple	*neg_lightv;
 	t_tuple	*reflectv;
@@ -29,8 +29,8 @@ t_color	*get_specular_contribution(t_elements *light, t_tuple *lightv, \
 		specular = create_color(0, 0, 0);
 	else
 	{
-		factor = pow(reflect_dot_eye, args->material->shininess);
-		specular = multiply_color_by_scalar(light->color, (args->material->specular * factor));
+		factor = pow(reflect_dot_eye, args->object->material->shininess);
+		specular = multiply_color_by_scalar(light->color, (args->object->material->specular * factor));
 	//printf("specular = (%f, %f, %f)\n", specular->red, specular->green, specular->blue);
 	}
 	free(neg_lightv);
@@ -38,7 +38,7 @@ t_color	*get_specular_contribution(t_elements *light, t_tuple *lightv, \
 	return(specular);
 }
 
-t_tuple	*get_direction_to_light_source(t_elements *light, t_phong_args *args)
+t_tuple	*get_direction_to_light_source(t_elements *light, t_comps *args)
 {
 	t_tuple	*unnorm_lightv;
 	t_tuple	*lightv;
@@ -58,7 +58,7 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	result = sum_colors(aux, contributions[2]);
 	free(aux);
 	aux = result;
-	result = multiply_color_by_scalar(aux, 255);
+	result = multiply_color_by_scalar(aux, 1); //MULTIPLICAR POR 255!!!
 	free(aux);
 	free(contributions[0]);
 	free(contributions[1]);
@@ -66,16 +66,17 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	return (result);
 }
 
-t_color	*get_lighting_color(t_elements *light, t_phong_args *args)
+t_color	*get_lighting_color(t_elements *light, t_comps *args)
 {
 	t_color	*effective_color;
 	t_tuple	*lightv;
 	float	light_dot_normal;
 	t_color	*contributions[3]; // 0 - ambient; 1 - diffuse; 2 - specular; 3 - aux
 
-	effective_color = multiply_colors(args->material->color, light->color);
+	effective_color = multiply_colors(args->object->material->color, light->color);
+	printf("aqui\n");
 	lightv = get_direction_to_light_source(light, args);
-	contributions[0] = multiply_color_by_scalar(effective_color, args->material->ambient);
+	contributions[0] = multiply_color_by_scalar(effective_color, args->object->material->ambient);
 	light_dot_normal = dot_product(lightv, args->normalv);
 	if (light_dot_normal < 0)
 	{
@@ -84,7 +85,7 @@ t_color	*get_lighting_color(t_elements *light, t_phong_args *args)
 	}
 	else
 	{
-		contributions[1] = multiply_color_by_scalar(effective_color, (args->material->diffuse * light_dot_normal));
+		contributions[1] = multiply_color_by_scalar(effective_color, (args->object->material->diffuse * light_dot_normal));
 		contributions[2] = get_specular_contribution(light, lightv, args);
 	}
 	free(effective_color);

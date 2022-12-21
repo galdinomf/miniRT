@@ -31,6 +31,7 @@ SRCS	= main.c\
 		  file_to_data.c\
 		  file_to_data2.c\
 		  free_data.c\
+		  intersect_world.c\
 
 SRCS_B	= 
 

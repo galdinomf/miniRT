@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 21:45:24 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:27:58 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main()
 
 	
 	t_elements *sphere = (t_elements *) malloc(sizeof(t_elements));
+	sphere->type = SPHERE;
 	sphere->point = create_point(0,0,0);
 	t_matrix *translation = get_translation_matrix(100, 100, 100);
 	t_matrix *scaling = get_scaling_matrix(100,100,100);
@@ -77,7 +78,9 @@ int	main()
 
 	t_tuple *origin = create_point(100, 100, -50);
 	
+	printf("Rendering...\n");
 	render_sphere(sphere, light, origin, mlx_data);
+	printf("Done!\n");
 
 	free(origin);
 	free(light->point);

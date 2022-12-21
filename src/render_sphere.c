@@ -6,34 +6,43 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 15:20:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 21:44:11 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:22:29 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-t_phong_args	*get_phong_args(t_elements *sphere, t_ray *ray, float t_value)
+t_comps	*get_phong_args(t_elements *sphere, t_ray *ray, float t_value)
 {
 	t_tuple *painted_direction;
 	t_tuple	*painted_point;
 	t_tuple	*normal;
 	t_tuple	*eye_vec;
-	t_phong_args *args;
+	t_comps *args;
 	
 	painted_direction = multiply_tuple_by_scalar(ray->direction, t_value);
 	painted_point = sum_tuples(ray->origin, painted_direction);
 	normal = get_normal_at_sphere(sphere, painted_point);
 	eye_vec = neg_tuple(ray->direction);
-	args = (t_phong_args *) malloc(sizeof(t_phong_args));
+	args = (t_comps *) malloc(sizeof(t_comps));
+	args->t = t_value;
+	args->object = sphere;
 	args->material = sphere->material;
 	args->ilum_point = painted_point;
 	args->eyev = eye_vec;
 	args->normalv = normal;
+	args->inside = 0;
+	if (dot_product(args->normalv, args->eyev) < 0)
+	{
+		args->inside = 1;
+		args->normalv = neg_tuple(normal);
+		free(normal);
+	}
 	free(painted_direction);
 	return (args);
 }
 
-void	free_phong_args(t_phong_args *args)
+void	free_phong_args(t_comps *args)
 {
 	free(args->ilum_point);
 	free(args->normalv);
@@ -61,7 +70,7 @@ int	compute_pixel_color(t_elements *sphere, t_ray *ray, t_elements *light, \
 						float t_value)
 {
 	int				trgb;
-	t_phong_args	*args;
+	t_comps	*args;
 	t_color			*pixel_color;
 
 	args = get_phong_args(sphere, ray, t_value);
@@ -93,7 +102,7 @@ void	render_sphere(t_elements *sphere, t_elements *light, \
 		while (++j < WINDOW_HEIGHT)
 		{
 			ray = get_pixel_ray(origin, i, j);
-			intersect_sphere(ray, sphere);
+			intersect_object(ray, sphere);
 			if (ray->intersections)
 			{
 				aux = find_hit(ray);
