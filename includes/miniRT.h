@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/16 21:35:46 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/19 10:50:41 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include "../libft/libft.h"
 
 
-//------MACROS
+//-----STRUCTURES
+
 
 #define AMB_LIGHTNING 1
 #define CAMERA 2
@@ -32,7 +33,6 @@
 #define PLANE 5
 #define CYLINDER 6
 
-//-----STRUCTURES
 
 typedef struct s_material
 {
@@ -64,18 +64,6 @@ typedef struct s_phong_args
 	t_tuple		*normalv;
 }	t_phong_args;
 
-typedef struct s_amb_lightning
-{
-	float		ratio;
-	t_color		*color;
-}	t_amb_lightning;
-
-typedef struct s_data
-{
-	t_amb_lightning	*amb_light;
-	t_elements		*elem;
-}	t_data;
-
 typedef struct s_ray
 {
 	t_tuple	*origin;
@@ -89,10 +77,56 @@ typedef struct s_intersection
 	t_elements	*elem;
 }	t_intersection;
 
-void			hook(t_mlx_data *mlx_data);
-int				keypress(int keysym, t_mlx_data *mlx_data);
-t_tuple	*multiply_matrix_by_tuple(t_matrix *matrix, t_tuple *tuple);
+typedef struct s_amb_lightning
+{
+	float		ratio;
+	t_color		*color;
+}	t_amb_lightning;
 
+typedef struct s_data
+{
+	int				n_elem;
+	t_amb_lightning	*amb_light;
+	t_elements		**elem;
+}	t_data;
+
+//////////////////// CHECK FILE RT ////////////////////
+void		check_file(char *file_name);
+int			check_amb_light(char **str);
+int 		check_camera(char **str);
+int 		check_light(char **str);
+int 		check_sphere(char **str);
+int 		check_plane(char **str);
+int 		check_cylinder(char **str);
+void		error_exit(const char *s, int i);
+float		ft_atof(char *str);
+int 		ft_isfloat(char *str);
+int 		ft_isfloat_range(char *str, float min, float max);
+int			ft_isrgb(char *str);
+int			ft_iscoords(char *str);
+int			ft_isndvector(char *str);
+int 		isnormalized(float x, float y, float z);
+
+/////////////FILE TO DATA ////////////////////////
+
+t_data		*file_to_data(char *file_name);
+void		amb_light_to_data(char **str, t_data *data);
+void		print_data(t_data *data);
+void		camera_to_data(char **str, t_data *data);
+void		light_to_data(char **str, t_data *data);
+void		sphere_to_data(char **str, t_data *data);
+void		plane_to_data(char **str, t_data *data);
+void		cylinder_to_data(char **str, t_data *data);
+
+///////FREE////
+void		free_split(void **ptr);
+void		free_ptr(void **ptr);
+void		free_data(t_data *data);
+//------MACROS
+
+void		hook(t_mlx_data *mlx_data);
+int			keypress(int keysym, t_mlx_data *mlx_data);
+t_tuple		*multiply_matrix_by_tuple(t_matrix *matrix, t_tuple *tuple);
 
 t_ray	*create_ray(t_tuple *origin, t_tuple *direction);
 void	destroy_ray(t_ray *ray);
@@ -111,24 +145,6 @@ t_tuple	*get_reflected_vector(t_tuple *vector, t_tuple *normal);
 t_color	*get_lighting_color(t_elements	*light, t_phong_args *args);
 void	render_sphere(t_elements *sphere, t_elements *light, \
 						t_tuple *origin, t_mlx_data mlx_data);
-
-
-//////////////////// CHECK FILE RT ////////////////////
-void		check_file(char *file_name);
-void		check_amb_light(char **str);
-void 		check_camera(char **str);
-void 		check_light(char **str);
-void 		check_sphere(char **str);
-void 		check_plane(char **str);
-void 		check_cylinder(char **str);
-void		error_exit(const char *s, int i);
-float		ft_atof(char *str);
-int 		ft_isfloat(char *str);
-int 		ft_isfloat_range(char *str, float min, float max);
-int			ft_isrgb(char *str);
-int			ft_iscoords(char *str);
-int			ft_isndvector(char *str);
-int 		isnormalized(float x, float y, float z);
 
 int	round_float(float f);
 #endif

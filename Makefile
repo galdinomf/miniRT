@@ -1,4 +1,4 @@
-SRCS	= main_rendering_sphere.c\
+SRCS	= main.c\
 		  tuples_utils.c\
 		  tuples_utils2.c\
 		  tuples_utils3.c\
@@ -27,6 +27,10 @@ SRCS	= main_rendering_sphere.c\
 		  get_reflected_vector.c\
 		  get_lighting_color.c\
 		  render_sphere.c\
+		  free.c\
+		  file_to_data.c\
+		  file_to_data2.c\
+		  free_data.c\
 
 SRCS_B	= 
 

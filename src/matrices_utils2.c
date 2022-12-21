@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 13:15:05 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/05 13:53:50 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:11:22 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ t_matrix	*get_identity_matrix(int n)
 	new_matrix = create_matrix(n, n);
 	if (!new_matrix)
 		return (NULL);
-	printf("new_matrix->values = %p\n", new_matrix->values);
 	i = -1;
 	while (++i < n)
 		new_matrix->values[i][i] = 1;

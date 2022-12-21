@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/15 14:45:23 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/21 09:03:16 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,43 +45,56 @@ int	main()
 
 	generate_sample_img(&mlx_data);
 
-	t_material *m = (t_material *) malloc(sizeof(t_material));
-	m->color = create_color(1, 1, 1);
-	m->ambient = 0.1;
-	m->diffuse = 0.9;
-	m->specular = 0.9;
-	m->shininess = 200;
-	
-	t_tuple	*position = create_point(0,0,0);
-	t_tuple	*eyev = create_vector(0,0,-1);
-	t_tuple	*normalv = create_vector(0,0,-1);
-	
+
+	///////////// create light //////////////
 	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
-	light->point = create_point(0, 0, 10);
+	light->type = LIGHT;
+	light->point = create_point(-10, 10, -10);
 	light->color = create_color(1, 1, 1);
+	///////////// create material //////////////	
+	t_material *m = (t_material *) malloc(sizeof(t_material));
+	m->color = create_color(0.8, 1, 0.6);
+	m->ambient = 0.1;
+	m->diffuse = 0.7;
+	m->specular = 0.2;
+	m->shininess = 20;
+	///////////// create spheres //////////////
+	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
+	s1->type = SPHERE;
+	s1->point = create_point(0,0,0);
+	s1->material = m;
+	s1->transformation = get_identity_matrix(4);
+	t_elements *s2 = (t_elements *) malloc(sizeof(t_elements));
+	s2->type = SPHERE;
+	s2->point = create_point(0,0,0);
+	s2->material = m;
+	s2->transformation = get_scaling_matrix(0.5,0.5,0.5);
+	///////////// create data //////////////
+	t_data	*world = (t_data *) malloc(sizeof(t_data));
+	world->n_elem = 3;
+	t_elements **elements = (t_elements **) malloc(3 * sizeof(t_elements *));
+	elements[0] = s1;
+	elements[1] = s2;
+	elements[2] = light;
+	world->elem = elements;
+	
 
-	t_phong_args *args = (t_phong_args *) malloc(sizeof(t_phong_args));
-	args->material = m;
-	args->light = light;
-	args->ilum_point = position;
-	args->eyev = eyev;
-	args->normalv = normalv;
-	t_color *result = get_lighting_color(args);
 
-	printf("result = (%f, %f, %f)\n", result->red, result->green, result->blue);
+
 
 	free(m->color);
 	free(m);
-	free(position);
-	free(eyev);
-	free(normalv);
-
+	free(s1->point);
+	destroy_matrix(s1->transformation);
+	free(s1);
+	free(s2->point);
+	destroy_matrix(s2->transformation);
+	free(s2);
 	free(light->point);
 	free(light->color);
 	free(light);
-
-	free(args);
-	free(result);
+	free(elements);
+	free(world);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);
