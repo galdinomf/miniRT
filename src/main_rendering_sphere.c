@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/21 06:23:31 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/21 11:06:07 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ int	main()
 	destroy_matrix(rotation_x);
 
 	t_material *m1 = (t_material *) malloc(sizeof(t_material));
-	m1->color = create_color(1, 1, 1);
+	m1->color = create_color(1,1, 1);
 	m1->ambient = 0.8;
 	m1->diffuse = 0.9;
 	m1->specular = 0.9;
-	m1->shininess = 0;
+	m1->shininess = 20;
 	
 	plane->type = 5;
 	plane->material = m1;
@@ -115,7 +115,7 @@ int	main()
 	m2->ambient = 0.8;
 	m2->diffuse = 0.9;
 	m2->specular = 0.9;
-	m2->shininess = 0;
+	m2->shininess = 20;
 	plane2->material = m2;
 
 	elem[2] = plane2;

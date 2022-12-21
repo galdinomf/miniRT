@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_normal_at_sphere.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:37:08 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 11:51:51 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/21 10:58:33 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ t_tuple	*get_normal_at_sphere(t_elements *sphere, t_tuple *world_point)
 	inverse_matrix = get_inverse_matrix(sphere->transformation);
 	object_point = multiply_matrix_by_tuple(inverse_matrix, world_point);
 	origin_coord = create_point(0, 0, 0);
-	object_normal = subtract_tuples(object_point, origin_coord);
+	if(sphere->type == 4)
+		object_normal = subtract_tuples(object_point, origin_coord);
+	else
+		object_normal = create_point(0, 1, 0);
 	normal = get_normalized_world_normal(inverse_matrix, object_normal);
 	free(object_point);
 	free(origin_coord);
