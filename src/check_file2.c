@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:59:57 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/14 22:33:55 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:12:05 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int check_amb_light(char **str)
 
 int check_camera(char **str)
 {
-	//printf("iscoord = %d e isndv = %d isfloat = %d", ft_iscoords(str[1]) , ft_isndvector(str[2]), ft_isfloat_range(str[3], 0, 180));
 	if (!(ft_iscoords(str[1]) && ft_isndvector(str[2]) && ft_isfloat_range(str[3], 0, 180) && !str[4]))
 		return (2);
 	return (0);

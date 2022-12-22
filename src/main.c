@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/21 13:22:05 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:13:34 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,32 @@ int	main()
 	///////////// create light //////////////
 	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
 	light->type = LIGHT;
-	light->point = create_point(-10, 10, -10);
+	light->point = create_point(0, 0.25, 0);
 	light->color = create_color(1, 1, 1);
 	///////////// create material //////////////	
-	t_material *m = (t_material *) malloc(sizeof(t_material));
-	m->color = create_color(0.8, 1, 0.6);
-	m->ambient = 1;
-	m->diffuse = 0.7;
-	m->specular = 0.2;
-	m->shininess = 200;
+	t_material *m1 = (t_material *) malloc(sizeof(t_material));
+	m1->color = create_color(0.8, 1, 0.6);
+	m1->ambient = 0.1;
+	m1->diffuse = 0.7;
+	m1->specular = 0.2;
+	m1->shininess = 200;
+	
+	t_material *m2 = (t_material *) malloc(sizeof(t_material));
+	m2->color = create_color(1, 1, 1);
+	m2->ambient = 0.1;
+	m2->diffuse = 0.9;
+	m2->specular = 0.9;
+	m2->shininess = 200;
 	///////////// create spheres //////////////
 	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
 	s1->type = SPHERE;
 	s1->point = create_point(0,0,0);
-	s1->material = m;
+	s1->material = m1;
 	s1->transformation = get_identity_matrix(4);
 	t_elements *s2 = (t_elements *) malloc(sizeof(t_elements));
 	s2->type = SPHERE;
 	s2->point = create_point(0,0,0);
-	s2->material = m;
+	s2->material = m2;
 	s2->transformation = get_scaling_matrix(0.5,0.5,0.5);
 	///////////// create data //////////////
 	t_data	*world = (t_data *) malloc(sizeof(t_data));
@@ -78,8 +85,8 @@ int	main()
 	elements[2] = light;
 	world->elem = elements;
 	
-	t_tuple *ray_origin = create_point(0, 0, 0.75);
-	t_tuple *ray_direction = create_vector(0, 0, -1);
+	t_tuple *ray_origin = create_point(0, 0, 0);
+	t_tuple *ray_direction = create_vector(0, 0, 1);
 	t_ray	*ray = create_ray(ray_origin, ray_direction);
 
 	t_color *my_color = color_at(world, ray);
@@ -88,18 +95,11 @@ int	main()
 
 	free(my_color);
 
-	/*
-	intersect_world(world, ray);
-	t_list *aux = ray->intersections;
-	while (aux)
-	{
-		printf("aux->content = %f\n", *((float *) aux->content));
-		aux = aux->next;
-	}
-	*/
 	destroy_ray(ray);
-	free(m->color);
-	free(m);
+	free(m1->color);
+	free(m1);
+	free(m2->color);
+	free(m2);
 	free(s1->point);
 	destroy_matrix(s1->transformation);
 	free(s1);

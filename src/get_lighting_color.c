@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 09:38:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/21 11:49:05 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:12:32 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_color	*get_specular_contribution(t_elements *light, t_tuple *lightv, \
 	{
 		factor = pow(reflect_dot_eye, args->object->material->shininess);
 		specular = multiply_color_by_scalar(light->color, (args->object->material->specular * factor));
-	//printf("specular = (%f, %f, %f)\n", specular->red, specular->green, specular->blue);
 	}
 	free(neg_lightv);
 	free(reflectv);
@@ -60,6 +59,7 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	aux = result;
 	result = multiply_color_by_scalar(aux, 1); //MULTIPLICAR POR 255!!!
 	free(aux);
+
 	free(contributions[0]);
 	free(contributions[1]);
 	free(contributions[2]);
@@ -74,7 +74,6 @@ t_color	*get_lighting_color(t_elements *light, t_comps *args)
 	t_color	*contributions[3]; // 0 - ambient; 1 - diffuse; 2 - specular; 3 - aux
 
 	effective_color = multiply_colors(args->object->material->color, light->color);
-	printf("aqui\n");
 	lightv = get_direction_to_light_source(light, args);
 	contributions[0] = multiply_color_by_scalar(effective_color, args->object->material->ambient);
 	light_dot_normal = dot_product(lightv, args->normalv);

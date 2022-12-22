@@ -18,7 +18,6 @@ void	check_file(char *file_name)
 	{
 		if (ft_strncmp(line, "\n", 2))
 			error = check_line(line);
-		//printf("error = %d\n", error);
 		free(line);
 		if (error)
 			error_exit("Error\nWrong structure in file\n", error);

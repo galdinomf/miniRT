@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/21 13:05:46 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:24:08 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ void	intersect_world(t_data *world, t_ray *ray)
 	i = -1;
 	while ((++i < world->n_elem) && (world->elem[i]))
 			intersect_object(ray, world->elem[i]);
-
-	
-	t_list *aux = ray->intersections;
-	while (aux)
-	{
-		printf("aux->content = %f\n", *((float *) aux->content));
-		aux = aux->next;
-	}
 }
 
 t_comps	*prepare_computations(t_intersection *i, t_ray *r)
@@ -66,12 +58,6 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 		if ((world->elem[i]) && (world->elem[i]->type == LIGHT))
 			light = world->elem[i];
 	}
-	printf("comps->ilum_point = (%f, %f, %f)\n", comps->ilum_point->x, comps->ilum_point->y, comps->ilum_point->z);
-	
-	printf("comps->eyev = (%f, %f, %f)\n", comps->eyev->x, comps->eyev->y, comps->eyev->z);
-	printf("comps->normalv = (%f, %f, %f)\n", comps->normalv->x, comps->normalv->y, comps->normalv->z);
-	printf("light->point = (%f, %f, %f)\n", light->point->x, light->point->y, light->point->z);
-	printf("light->color = (%f, %f, %f)\n", light->color->red, light->color->green, light->color->blue);
 	return (get_lighting_color(light, comps));
 }
 
@@ -79,12 +65,17 @@ t_color	*color_at(t_data *world, t_ray *ray)
 {
 	t_intersection	*hit;
 	t_comps			*comps;
+	t_color			*result;
 
 	intersect_world(world, ray);
 	hit = find_hit(ray);
 	if (!hit)
 		return (create_color(0, 0, 0));
-	printf("hit->t = %f\n", hit->t);
 	comps = prepare_computations(hit, ray);
-	return (shade_hit(world, comps));
+	result = shade_hit(world, comps);
+	free(comps->ilum_point);
+	free(comps->eyev);
+	free(comps->normalv);
+	free(comps);
+	return (result);
 }
