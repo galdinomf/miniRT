@@ -32,6 +32,8 @@ SRCS	= main.c\
 		  file_to_data2.c\
 		  free_data.c\
 		  intersect_world.c\
+		  view_transform.c\
+		  camera_utils.c\
 
 SRCS_B	= 
 

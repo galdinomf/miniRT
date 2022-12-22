@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:45:49 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/05 15:08:35 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:15:34 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_matrix	*get_y_rotation_matrix(float radians)
 	if (!new_matrix)
 		return (NULL);
 	new_matrix->values[0][0] = cos(radians);
-	new_matrix->values[0][3] = sin(radians);
+	new_matrix->values[0][2] = sin(radians);
 	new_matrix->values[2][0] = (-1) * sin(radians);
 	new_matrix->values[2][2] = cos(radians);
 	return (new_matrix);

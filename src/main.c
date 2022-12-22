@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/22 11:13:34 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:17:59 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main()
 
 	generate_sample_img(&mlx_data);
 
-
+	/*
 	///////////// create light //////////////
 	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
 	light->type = LIGHT;
@@ -111,6 +111,26 @@ int	main()
 	free(light);
 	free(elements);
 	free(world);
+	*/
+	t_camera *my_camera = create_camera(201, 101, PI / 2);
+	t_matrix	*rotation = get_y_rotation_matrix(PI / 4);
+	display_matrix(rotation);
+	t_matrix	*translation = get_translation_matrix(0, -2, 5);
+	destroy_matrix(my_camera->transform);
+	my_camera->transform = multiply_matrices(rotation, translation);
+
+
+	
+	compute_pixel_size(my_camera);
+	t_ray *r = ray_for_pixel(my_camera, 100, 50);
+	printf("r->origin = (%f, %f, %f)\n", r->origin->x, r->origin->y, r->origin->z);
+	printf("r->direction = (%f, %f, %f)\n", r->direction->x, r->direction->y, r->direction->z);
+	
+	destroy_matrix(rotation);
+	destroy_matrix(translation);
+	destroy_camera(my_camera);
+	destroy_ray(r);
+	
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);

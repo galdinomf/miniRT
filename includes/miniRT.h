@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/21 11:40:43 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/22 13:15:01 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@
 #define PLANE 5
 #define CYLINDER 6
 
+
+typedef struct s_camera
+{
+	int			hsize;
+	int			vsize;
+	float		field_of_view;
+	t_matrix	*transform;
+	float		half_width;
+	float		half_height;
+	float		pixel_size;
+}	t_camera;
 
 typedef struct s_material
 {
@@ -151,6 +162,13 @@ t_tuple	*get_reflected_vector(t_tuple *vector, t_tuple *normal);
 t_color	*get_lighting_color(t_elements	*light, t_comps *args);
 void	render_sphere(t_elements *sphere, t_elements *light, \
 						t_tuple *origin, t_mlx_data mlx_data);
+
+t_matrix	*view_transform(t_tuple *from, t_tuple *to, t_tuple *up);
+
+t_camera	*create_camera(int hsize, int vsize, float field_of_view);
+void	destroy_camera(t_camera *camera);
+void	compute_pixel_size(t_camera *camera);
+t_ray	*ray_for_pixel(t_camera *camera, float px, float py);
 
 int	round_float(float f);
 #endif
