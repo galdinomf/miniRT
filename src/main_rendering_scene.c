@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/23 14:57:39 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/23 15:24:29 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,64 @@ int	main()
 	destroy_matrix(rot2);
 	destroy_matrix(sca1);
 
+	t_material *m2 = (t_material *) malloc(sizeof(t_material));
+	m2->color = create_color(0.1, 1, 0.5);
+	m2->ambient = 0.1;
+	m2->diffuse = 0.7;
+	m2->specular = 0.3;
+	m2->shininess = 200;
+
+	t_elements *s4 = (t_elements *) malloc(sizeof(t_elements));
+	s4->type = SPHERE;
+	s4->point = create_point(0,0,0);
+	s4->material = m2;
+	s4->transformation = get_translation_matrix(-0.5, 1, 0.5);
+
+	t_material *m3 = (t_material *) malloc(sizeof(t_material));
+	m3->color = create_color(0.5, 1, 0.1);
+	m3->ambient = 0.1;
+	m3->diffuse = 0.7;
+	m3->specular = 0.3;
+	m3->shininess = 200;
+
+	t_elements *s5 = (t_elements *) malloc(sizeof(t_elements));
+	s5->type = SPHERE;
+	s5->point = create_point(0,0,0);
+	s5->material = m3;
+	t_matrix *trans2 = get_translation_matrix(1.5,0.5,-0.5);
+	t_matrix *sca2 = get_scaling_matrix(0.5, 0.5, 0.5);
+	s5->transformation = multiply_matrices(trans2, sca2);
+	destroy_matrix(trans2);
+	destroy_matrix(sca2);
+
+	t_material *m4 = (t_material *) malloc(sizeof(t_material));
+	m4->color = create_color(1, 0.8, 1);
+	m4->ambient = 0.1;
+	m4->diffuse = 0.7;
+	m4->specular = 0.3;
+	m4->shininess = 200;
+
+	t_elements *s6 = (t_elements *) malloc(sizeof(t_elements));
+	s6->type = SPHERE;
+	s6->point = create_point(0,0,0);
+	s6->material = m4;
+	trans2 = get_translation_matrix(-1.5,0.33,-0.75);
+	sca2 = get_scaling_matrix(0.33, 0.33, 0.33);
+	s6->transformation = multiply_matrices(trans2, sca2);
+	destroy_matrix(trans2);
+	destroy_matrix(sca2);
 	///////////// create spheres //////////////
 	///////////// create data //////////////
 	t_data	*world = (t_data *) malloc(sizeof(t_data));
-	world->n_elem = 4;
+	world->n_elem = 7;
 	t_elements **elements = (t_elements **) malloc(world->n_elem * sizeof(t_elements *));
 	elements[0] = s1;
 	elements[1] = s2;
 	elements[2] = light;
 	elements[3] = s3;
+	elements[4] = s4;
+	elements[5] = s5;
+	elements[6] = s6;
 	world->elem = elements;
 	/*
 	t_tuple *ray_origin = create_point(0, 0, 0);
@@ -154,6 +203,12 @@ int	main()
 	//destroy_matrix(translation);
 	free(m1->color);
 	free(m1);
+	free(m2->color);
+	free(m2);
+	free(m3->color);
+	free(m3);
+	free(m4->color);
+	free(m4);
 	//free(m2->color);
 	//free(m2);
 	free(s1->point);
@@ -165,12 +220,24 @@ int	main()
 	free(s3->point);
 	destroy_matrix(s3->transformation);
 	free(s3);
+	free(s4->point);
+	destroy_matrix(s4->transformation);
+	free(s4);
+	free(s5->point);
+	destroy_matrix(s5->transformation);
+	free(s5);
+	free(s6->point);
+	destroy_matrix(s6->transformation);
+	free(s6);
 	free(light->point);
 	free(light->color);
 	free(light);
 	free(elements);
 	free(world);
 	destroy_camera(camera);
+	free(from);
+	free(to);
+	free(up);
 	//destroy_ray(r);
 	
 	
