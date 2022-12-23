@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 09:38:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/22 11:12:32 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/23 14:32:43 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	result = sum_colors(aux, contributions[2]);
 	free(aux);
 	aux = result;
-	result = multiply_color_by_scalar(aux, 1); //MULTIPLICAR POR 255!!!
+	result = multiply_color_by_scalar(aux, 255); //MULTIPLICAR POR 255!!!
 	free(aux);
 
 	free(contributions[0]);

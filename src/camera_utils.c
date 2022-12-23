@@ -6,32 +6,11 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 12:15:48 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/22 14:16:58 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/23 09:58:01 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
-
-t_camera	*create_camera(int hsize, int vsize, float field_of_view)
-{
-	t_camera	*new_camera;
-
-	new_camera = (t_camera *) malloc(sizeof(t_camera));
-	new_camera->hsize = hsize;
-	new_camera->vsize = vsize;
-	new_camera->field_of_view = field_of_view;
-	new_camera->transform = get_identity_matrix(4);
-	new_camera->half_height = 0;
-	new_camera->half_width = 0;
-	new_camera->pixel_size = 0;
-	return (new_camera);
-}
-
-void	destroy_camera(t_camera *camera)
-{
-	destroy_matrix(camera->transform);
-	free(camera);
-}
 
 void	compute_pixel_size(t_camera *camera)
 {
@@ -51,6 +30,28 @@ void	compute_pixel_size(t_camera *camera)
 		camera->half_height = half_view;
 	}
 	camera->pixel_size = (camera->half_width * 2) / (float) camera->hsize;
+}
+
+t_camera	*create_camera(int hsize, int vsize, float field_of_view)
+{
+	t_camera	*new_camera;
+
+	new_camera = (t_camera *) malloc(sizeof(t_camera));
+	new_camera->hsize = hsize;
+	new_camera->vsize = vsize;
+	new_camera->field_of_view = field_of_view;
+	new_camera->transform = get_identity_matrix(4);
+	new_camera->half_height = 0;
+	new_camera->half_width = 0;
+	new_camera->pixel_size = 0;
+	compute_pixel_size(new_camera);
+	return (new_camera);
+}
+
+void	destroy_camera(t_camera *camera)
+{
+	destroy_matrix(camera->transform);
+	free(camera);
 }
 
 t_ray	*get_resulting_ray(t_camera *camera, float world_x, float world_y)

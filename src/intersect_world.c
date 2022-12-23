@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/22 11:24:08 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/23 14:51:30 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	intersect_world(t_data *world, t_ray *ray)
 
 	i = -1;
 	while ((++i < world->n_elem) && (world->elem[i]))
+	{
 			intersect_object(ray, world->elem[i]);
+	}
 }
 
 t_comps	*prepare_computations(t_intersection *i, t_ray *r)

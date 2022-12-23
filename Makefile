@@ -1,4 +1,4 @@
-SRCS	= main.c\
+SRCS	= main_rendering_scene.c\
 		  tuples_utils.c\
 		  tuples_utils2.c\
 		  tuples_utils3.c\
@@ -34,6 +34,7 @@ SRCS	= main.c\
 		  intersect_world.c\
 		  view_transform.c\
 		  camera_utils.c\
+		  render.c\
 
 SRCS_B	= 
 

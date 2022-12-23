@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/22 13:15:01 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/23 09:56:44 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ t_camera	*create_camera(int hsize, int vsize, float field_of_view);
 void	destroy_camera(t_camera *camera);
 void	compute_pixel_size(t_camera *camera);
 t_ray	*ray_for_pixel(t_camera *camera, float px, float py);
+
+void	render(t_camera *camera, t_data *world, t_mlx_data *mlx_data);
 
 int	round_float(float f);
 #endif
