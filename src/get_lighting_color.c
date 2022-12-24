@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 09:38:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/23 14:32:43 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/24 13:55:01 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_tuple	*get_direction_to_light_source(t_elements *light, t_comps *args)
 	t_tuple	*unnorm_lightv;
 	t_tuple	*lightv;
 
-	unnorm_lightv = subtract_tuples(light->point, args->ilum_point);
+	unnorm_lightv = subtract_tuples(light->point, args->over_point);
 	lightv = normalize_tuple(unnorm_lightv);
 	free(unnorm_lightv);
 	return (lightv);
@@ -59,6 +59,12 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	aux = result;
 	result = multiply_color_by_scalar(aux, 255); //MULTIPLICAR POR 255!!!
 	free(aux);
+	if (result->red > 255)
+		result->red = 255;
+	if (result->green > 255)
+		result->green = 255;
+	if (result->blue > 255)
+		result->blue = 255;
 
 	free(contributions[0]);
 	free(contributions[1]);
@@ -66,7 +72,7 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	return (result);
 }
 
-t_color	*get_lighting_color(t_elements *light, t_comps *args)
+t_color	*get_lighting_color(t_elements *light, t_comps *args, int in_shadow)
 {
 	t_color	*effective_color;
 	t_tuple	*lightv;
@@ -77,7 +83,7 @@ t_color	*get_lighting_color(t_elements *light, t_comps *args)
 	lightv = get_direction_to_light_source(light, args);
 	contributions[0] = multiply_color_by_scalar(effective_color, args->object->material->ambient);
 	light_dot_normal = dot_product(lightv, args->normalv);
-	if (light_dot_normal < 0)
+	if ((in_shadow) || (light_dot_normal < 0))
 	{
 		contributions[1] = create_color(0, 0, 0);
 		contributions[2] = create_color(0, 0, 0);

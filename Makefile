@@ -26,7 +26,6 @@ SRCS	= main_rendering_scene.c\
 		  get_normal_at_sphere.c\
 		  get_reflected_vector.c\
 		  get_lighting_color.c\
-		  render_sphere.c\
 		  free.c\
 		  file_to_data.c\
 		  file_to_data2.c\
@@ -35,6 +34,8 @@ SRCS	= main_rendering_scene.c\
 		  view_transform.c\
 		  camera_utils.c\
 		  render.c\
+		  is_shadowed.c\
+		  #render_sphere.c\
 
 SRCS_B	= 
 
@@ -93,8 +94,9 @@ clean:
 	@make clean -C $(LFT_PATH)
 	@printf "$(GR)Libft objects removed!$(RC)\n\n"
 	$(RM) libft/libft.a
-	$(RM) $(OBJS)
-	$(RM) $(OBJS_B)
+#	$(RM) $(OBJS)
+#   $(RM) $(OBJS_B)
+	$(RM) $(OBJ_DIR)*
 	rmdir $(OBJ_DIR)
 
 fclean: clean

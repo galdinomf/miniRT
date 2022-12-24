@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_equal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 13:28:34 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/07 16:50:27 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2022/12/24 14:09:43 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-
-#define EPSILON 0.001
+#include <miniRT.h>
 
 int	f_equal(float f1, float f2)
 {

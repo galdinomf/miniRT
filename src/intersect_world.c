@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/23 14:51:30 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/24 13:48:28 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ t_comps	*prepare_computations(t_intersection *i, t_ray *r)
 		comps->normalv = neg_tuple(comps->normalv);
 		free(aux_tuple);
 	}
+	aux_tuple = multiply_tuple_by_scalar(comps->normalv, EPSILON);
+	comps->over_point = sum_tuples(comps->ilum_point, aux_tuple);
+	free(aux_tuple);
 	return (comps);
 }
 
 t_color	*shade_hit(t_data *world, t_comps *comps)
 {
-	t_elements *light;
+	t_elements	*light;
+	int			in_shadow;
 
 	// ISTO TERÁ QUE SER MUDADO! A FUNÇÃO CONSIDERA QUE EXISTE
 	// UMA LUZ PERTENCENTE À CLASSE WORLD! (LUZ AMBIENTE?)
@@ -60,7 +64,8 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 		if ((world->elem[i]) && (world->elem[i]->type == LIGHT))
 			light = world->elem[i];
 	}
-	return (get_lighting_color(light, comps));
+	in_shadow = is_shadowed(world, comps->over_point);
+	return (get_lighting_color(light, comps, in_shadow));
 }
 
 t_color	*color_at(t_data *world, t_ray *ray)

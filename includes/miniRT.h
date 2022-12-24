@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/23 09:56:44 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/24 14:09:26 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@
 //-----STRUCTURES
 
 
-#define AMB_LIGHTNING 1
-#define CAMERA 2
-#define LIGHT 3
-#define SPHERE 4
-#define PLANE 5
-#define CYLINDER 6
+# define EPSILON 0.01
+# define AMB_LIGHTNING 1
+# define CAMERA 2
+# define LIGHT 3
+# define SPHERE 4
+# define PLANE 5
+# define CYLINDER 6
 
 
 typedef struct s_camera
@@ -75,6 +76,7 @@ typedef struct s_comps
 	t_tuple		*ilum_point;
 	t_tuple		*eyev;
 	t_tuple		*normalv;
+	t_tuple		*over_point;
 }	t_comps;
 
 typedef struct s_ray
@@ -149,7 +151,7 @@ t_tuple	*ray_position(t_ray *ray, float t);
 void	intersect_sphere(t_ray *ray, t_elements *sphere); 
 t_intersection	*find_hit(t_ray *ray);
 void	intersect_object(t_ray *ray, t_elements *object);
-//void	intersect_world(t_data *world, t_ray *ray);
+void	intersect_world(t_data *world, t_ray *ray);
 
 t_color	*color_at(t_data *world, t_ray *ray);
 
@@ -159,7 +161,7 @@ t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix);
 t_tuple	*get_normal_at_sphere(t_elements *sphere, t_tuple *world_point);
 t_tuple	*get_reflected_vector(t_tuple *vector, t_tuple *normal);
 
-t_color	*get_lighting_color(t_elements	*light, t_comps *args);
+t_color	*get_lighting_color(t_elements	*light, t_comps *args, int in_shadow);
 void	render_sphere(t_elements *sphere, t_elements *light, \
 						t_tuple *origin, t_mlx_data mlx_data);
 
@@ -171,6 +173,7 @@ void	compute_pixel_size(t_camera *camera);
 t_ray	*ray_for_pixel(t_camera *camera, float px, float py);
 
 void	render(t_camera *camera, t_data *world, t_mlx_data *mlx_data);
+int	is_shadowed(t_data *world, t_tuple *point);
 
 int	round_float(float f);
 #endif

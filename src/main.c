@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/23 09:58:40 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/24 13:34:09 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,20 @@ int	main()
 	destroy_ray(ray);
 	*/
 	
-	t_camera *camera = create_camera(11, 11, PI / 2);
+	//t_camera *camera = create_camera(11, 11, PI / 2);
 	//t_matrix	*rotation = get_y_rotation_matrix(PI / 4);
 	//display_matrix(rotation);
 	//t_matrix	*translation = get_translation_matrix(0, -2, 5);
-	destroy_matrix(camera->transform);
+	//destroy_matrix(camera->transform);
 	//my_camera->transform = multiply_matrices(rotation, translation);
 
 
-	t_tuple	*from = create_point(0,0,-5);
-	t_tuple	*to = create_point(0,0,0);
-	t_tuple *up = create_vector(0,1,0);
-	camera->transform = view_transform(from, to , up);
+	//t_tuple	*from = create_point(0,0,-5);
+	//t_tuple	*to = create_point(0,0,0);
+	//t_tuple *up = create_vector(0,1,0);
+	//camera->transform = view_transform(from, to , up);
 	
-	render(camera, world, &mlx_data);
+	//render(camera, world, &mlx_data);
 	
 	//t_ray *r = ray_for_pixel(my_camera, 100, 50);
 	//printf("r->origin = (%f, %f, %f)\n", r->origin->x, r->origin->y, r->origin->z);
@@ -118,6 +118,11 @@ int	main()
 	
 	//destroy_matrix(rotation);
 	//destroy_matrix(translation);
+	t_tuple *point = create_point(10, -10, 10);
+	printf("%d\n", is_shadowed(world, point));
+	free(point);
+
+	
 	free(m1->color);
 	free(m1);
 	free(m2->color);
@@ -133,7 +138,7 @@ int	main()
 	free(light);
 	free(elements);
 	free(world);
-	destroy_camera(camera);
+	//destroy_camera(camera);
 	//destroy_ray(r);
 	
 	
