@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/24 13:48:28 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/24 14:31:02 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_color	*color_at(t_data *world, t_ray *ray)
 	free(comps->ilum_point);
 	free(comps->eyev);
 	free(comps->normalv);
+	free(comps->over_point);
 	free(comps);
 	return (result);
 }
