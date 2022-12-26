@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/23 15:24:29 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/26 13:34:08 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ int	main()
 	m1->shininess = 200;
 
 	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
+	s1->type = PLANE;
+	s1->point = create_point(0,0,0);
+	s1->material = m1;
+	s1->transformation = get_identity_matrix(4);
+	
+/*
+	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
 	s1->type = SPHERE;
 	s1->point = create_point(0,0,0);
 	s1->material = m1;
@@ -107,7 +114,7 @@ int	main()
 	destroy_matrix(rot1);
 	destroy_matrix(rot2);
 	destroy_matrix(sca1);
-
+*/
 	t_material *m2 = (t_material *) malloc(sizeof(t_material));
 	m2->color = create_color(0.1, 1, 0.5);
 	m2->ambient = 0.1;
@@ -157,15 +164,15 @@ int	main()
 	///////////// create spheres //////////////
 	///////////// create data //////////////
 	t_data	*world = (t_data *) malloc(sizeof(t_data));
-	world->n_elem = 7;
+	world->n_elem = 5;
 	t_elements **elements = (t_elements **) malloc(world->n_elem * sizeof(t_elements *));
 	elements[0] = s1;
-	elements[1] = s2;
-	elements[2] = light;
-	elements[3] = s3;
-	elements[4] = s4;
-	elements[5] = s5;
-	elements[6] = s6;
+	//elements[1] = s2;
+	elements[1] = light;
+	//elements[3] = s3;
+	elements[2] = s4;
+	elements[3] = s5;
+	elements[4] = s6;
 	world->elem = elements;
 	/*
 	t_tuple *ray_origin = create_point(0, 0, 0);
@@ -214,12 +221,14 @@ int	main()
 	free(s1->point);
 	destroy_matrix(s1->transformation);
 	free(s1);
+	/*
 	free(s2->point);
 	destroy_matrix(s2->transformation);
 	free(s2);
 	free(s3->point);
 	destroy_matrix(s3->transformation);
 	free(s3);
+	*/
 	free(s4->point);
 	destroy_matrix(s4->transformation);
 	free(s4);

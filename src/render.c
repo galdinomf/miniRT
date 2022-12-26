@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 09:34:43 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/24 14:51:24 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/26 12:56:06 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	render(t_camera *camera, t_data *world, t_mlx_data *mlx_data)
 		while (++i < camera->hsize)
 		{
 			printf("\r");
-			printf("%.0f%%", (((float) (WINDOW_WIDTH * j + i) / (float) (2 * WINDOW_HEIGHT * WINDOW_HEIGHT)) * 100));
+			printf("%.0f%%", (((float) (WINDOW_WIDTH * j + i) / (float) (WINDOW_WIDTH * WINDOW_HEIGHT)) * 100));
 			ray = ray_for_pixel(camera, i, j);
 			color = color_at(world, ray);
 			mlx_data->image.data[WINDOW_WIDTH * j + i] = get_trgb_from_color(color);

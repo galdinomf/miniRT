@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/23 14:52:34 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/26 13:17:19 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ void	intersect_sphere(t_ray *ray, t_elements *sphere)
 	free(sphere_to_ray);
 }
 
+void	intersect_plane(t_ray *ray, t_elements *plane)
+{
+	t_intersection	*intersection;
+
+	if (ray->direction->y < EPSILON)
+		ray->intersections = NULL;
+	intersection = (t_intersection *) malloc(sizeof(t_intersection));
+	intersection->t = (-1 * ray->origin->y) / ray->direction->y;
+	intersection->elem = plane;
+	ray->intersections = ft_lstnew(intersection);
+}
+
 t_intersection	*find_hit(t_ray *ray)
 {
 	t_list	*aux;
@@ -100,6 +112,8 @@ t_intersection	*find_hit(t_ray *ray)
 
 void	intersect_object(t_ray *ray, t_elements *object)
 {
-	if (object->type == 4)
+	if (object->type == SPHERE)
 		intersect_sphere(ray, object);
+	if (object->type == PLANE)
+		intersect_plane(ray, object);
 }

@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:37:08 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/14 11:51:51 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/26 12:58:25 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,34 @@ t_tuple	*get_normalized_world_normal(t_matrix *inverse_matrix, t_tuple *object_n
 	return (normalized_world_normal);
 }
 
+t_tuple	*get_object_normal(t_tuple *object_point, t_elements *shape)
+{
+	t_tuple		*object_normal;
+	t_tuple		*origin_coord;
+
+	if (shape->type == SPHERE)
+	{
+		origin_coord = create_point(0, 0, 0);
+		object_normal = subtract_tuples(object_point, origin_coord);
+		free(origin_coord);
+	}
+	if (shape->type == PLANE)
+		object_normal = create_vector(0, 1, 0);
+	return (object_normal);
+}
 
 t_tuple	*get_normal_at_sphere(t_elements *sphere, t_tuple *world_point)
 {
 	t_tuple		*object_point;
 	t_matrix	*inverse_matrix;
 	t_tuple		*object_normal;
-	t_tuple		*origin_coord;
 	t_tuple		*normal;
 
 	inverse_matrix = get_inverse_matrix(sphere->transformation);
 	object_point = multiply_matrix_by_tuple(inverse_matrix, world_point);
-	origin_coord = create_point(0, 0, 0);
-	object_normal = subtract_tuples(object_point, origin_coord);
+	object_normal = get_object_normal(object_point, sphere);
 	normal = get_normalized_world_normal(inverse_matrix, object_normal);
 	free(object_point);
-	free(origin_coord);
 	free(object_normal);
 	destroy_matrix(inverse_matrix);
 	return (normal);
