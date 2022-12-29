@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/26 13:34:08 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/28 21:32:29 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,13 @@ int	main()
 	s1->type = PLANE;
 	s1->point = create_point(0,0,0);
 	s1->material = m1;
-	s1->transformation = get_identity_matrix(4);
+	s1->transformation = get_translation_matrix(0,0,0);
+
+	t_elements *s2 = (t_elements *) malloc(sizeof(t_elements));
+	s2->type = PLANE;
+	s2->point = create_point(0,0,0);
+	s2->material = m1;
+	s2->transformation = get_translation_matrix(0,12,0);
 	
 /*
 	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
@@ -164,15 +170,17 @@ int	main()
 	///////////// create spheres //////////////
 	///////////// create data //////////////
 	t_data	*world = (t_data *) malloc(sizeof(t_data));
-	world->n_elem = 5;
+	world->n_elem = 6;
 	t_elements **elements = (t_elements **) malloc(world->n_elem * sizeof(t_elements *));
-	elements[0] = s1;
+	elements[0] = s2;
 	//elements[1] = s2;
 	elements[1] = light;
 	//elements[3] = s3;
 	elements[2] = s4;
 	elements[3] = s5;
 	elements[4] = s6;
+	elements[5] = s1;
+	//elements[5] = s2;
 	world->elem = elements;
 	/*
 	t_tuple *ray_origin = create_point(0, 0, 0);
@@ -221,10 +229,10 @@ int	main()
 	free(s1->point);
 	destroy_matrix(s1->transformation);
 	free(s1);
-	/*
 	free(s2->point);
 	destroy_matrix(s2->transformation);
 	free(s2);
+	/*
 	free(s3->point);
 	destroy_matrix(s3->transformation);
 	free(s3);

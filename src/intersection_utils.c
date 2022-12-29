@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/26 13:17:19 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/26 21:24:25 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	intersect_sphere(t_ray *ray, t_elements *sphere)
 	b = 2 * dot_product(transf_ray->direction, sphere_to_ray);
 	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;
 	ft_lstadd_back(&ray->intersections, get_intersections(a, b, c, sphere));
-	//ray->intersections = get_intersections(a, b, c, sphere);
 	destroy_ray(transf_ray);
 	free(sphere_to_ray);
 }
@@ -72,13 +71,19 @@ void	intersect_sphere(t_ray *ray, t_elements *sphere)
 void	intersect_plane(t_ray *ray, t_elements *plane)
 {
 	t_intersection	*intersection;
+	t_ray		*transf_ray;
 
-	if (ray->direction->y < EPSILON)
-		ray->intersections = NULL;
+	transf_ray = transform_element(ray, plane);
+	if (fabs(transf_ray->direction->y) < EPSILON)
+	{
+		destroy_ray(transf_ray);
+		return ;
+	}
 	intersection = (t_intersection *) malloc(sizeof(t_intersection));
-	intersection->t = (-1 * ray->origin->y) / ray->direction->y;
+	intersection->t = (-1 * transf_ray->origin->y) / transf_ray->direction->y;
 	intersection->elem = plane;
-	ray->intersections = ft_lstnew(intersection);
+	ft_lstadd_back(&ray->intersections, ft_lstnew(intersection));
+	destroy_ray(transf_ray);
 }
 
 t_intersection	*find_hit(t_ray *ray)
