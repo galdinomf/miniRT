@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/24 13:34:09 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/02 15:24:48 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,104 +43,33 @@ int	main()
 	t_mlx_data mlx_data;
 	minilibx_initialize(&mlx_data);
 
-	//generate_sample_img(&mlx_data);
+	generate_sample_img(&mlx_data);
 
-	///////////// create light //////////////
-	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
-	light->type = LIGHT;
-	light->point = create_point(-10, 10, -10);
-	light->color = create_color(1, 1, 1);
-	///////////// create material //////////////	
-	t_material *m1 = (t_material *) malloc(sizeof(t_material));
-	m1->color = create_color(0.8, 1, 0.6);
-	m1->ambient = 0.1;
-	m1->diffuse = 0.7;
-	m1->specular = 0.2;
-	m1->shininess = 200;
-	
-	t_material *m2 = (t_material *) malloc(sizeof(t_material));
-	m2->color = create_color(1, 1, 1);
-	m2->ambient = 0.1;
-	m2->diffuse = 0.9;
-	m2->specular = 0.9;
-	m2->shininess = 200;
-	///////////// create spheres //////////////
-	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
-	s1->type = SPHERE;
-	s1->point = create_point(0,0,0);
-	s1->material = m1;
-	s1->transformation = get_identity_matrix(4);
-	t_elements *s2 = (t_elements *) malloc(sizeof(t_elements));
-	s2->type = SPHERE;
-	s2->point = create_point(0,0,0);
-	s2->material = m2;
-	s2->transformation = get_scaling_matrix(0.5,0.5,0.5);
-	///////////// create data //////////////
-	t_data	*world = (t_data *) malloc(sizeof(t_data));
-	world->n_elem = 3;
-	t_elements **elements = (t_elements **) malloc(3 * sizeof(t_elements *));
-	elements[0] = s1;
-	elements[1] = s2;
-	elements[2] = light;
-	world->elem = elements;
+	t_elements *cylinder = (t_elements *) malloc(sizeof(t_elements));
+	cylinder->type = CYLINDER;
+	cylinder->transformation = get_identity_matrix(4);
+	t_tuple *origin = create_point(-1, 1, 0);
+	t_tuple *unnorm_direction = create_vector(1, 0, 0);
+	t_tuple *direction = normalize_tuple(unnorm_direction);
+	free(unnorm_direction);
+	t_ray *ray = create_ray(origin, direction);
 	/*
-	t_tuple *ray_origin = create_point(0, 0, 0);
-	t_tuple *ray_direction = create_vector(0, 0, 1);
-	t_ray	*ray = create_ray(ray_origin, ray_direction);
-
-	t_color *my_color = color_at(world, ray);
-	printf("my_color = %p\n", my_color);
-	printf("my_color = (%f, %f, %f)\n", my_color->red, my_color->green, my_color->blue);
-
-	free(my_color);
-
-	destroy_ray(ray);
+	intersect_cylinder(ray, cylinder);
+	
+	t_list	*aux = ray->intersections;
+	while (aux)
+	{
+		printf("t = %f\n", ((t_intersection *) aux->content)->t);
+		aux = aux->next;
+	}
 	*/
 	
-	//t_camera *camera = create_camera(11, 11, PI / 2);
-	//t_matrix	*rotation = get_y_rotation_matrix(PI / 4);
-	//display_matrix(rotation);
-	//t_matrix	*translation = get_translation_matrix(0, -2, 5);
-	//destroy_matrix(camera->transform);
-	//my_camera->transform = multiply_matrices(rotation, translation);
-
-
-	//t_tuple	*from = create_point(0,0,-5);
-	//t_tuple	*to = create_point(0,0,0);
-	//t_tuple *up = create_vector(0,1,0);
-	//camera->transform = view_transform(from, to , up);
+	t_tuple *normal = get_normal_at_sphere(cylinder, origin);
+	printf("normal = (%f, %f, %f)\n", normal->x, normal->y, normal->z);
 	
-	//render(camera, world, &mlx_data);
-	
-	//t_ray *r = ray_for_pixel(my_camera, 100, 50);
-	//printf("r->origin = (%f, %f, %f)\n", r->origin->x, r->origin->y, r->origin->z);
-	//printf("r->direction = (%f, %f, %f)\n", r->direction->x, r->direction->y, r->direction->z);
-	
-	//destroy_matrix(rotation);
-	//destroy_matrix(translation);
-	t_tuple *point = create_point(10, -10, 10);
-	printf("%d\n", is_shadowed(world, point));
-	free(point);
-
-	
-	free(m1->color);
-	free(m1);
-	free(m2->color);
-	free(m2);
-	free(s1->point);
-	destroy_matrix(s1->transformation);
-	free(s1);
-	free(s2->point);
-	destroy_matrix(s2->transformation);
-	free(s2);
-	free(light->point);
-	free(light->color);
-	free(light);
-	free(elements);
-	free(world);
-	//destroy_camera(camera);
-	//destroy_ray(r);
-	
+	destroy_ray(ray);
+	destroy_matrix(cylinder->transformation);
+	free(cylinder);
 	
 	hook(&mlx_data);
 	minilibx_end(&mlx_data);

@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:37:08 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/26 12:58:25 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/02 15:19:48 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ t_tuple	*get_object_normal(t_tuple *object_point, t_elements *shape)
 	}
 	if (shape->type == PLANE)
 		object_normal = create_vector(0, 1, 0);
+	if (shape->type == CYLINDER)
+		object_normal = create_vector(object_point->x, 0, object_point->z);
 	return (object_normal);
 }
 

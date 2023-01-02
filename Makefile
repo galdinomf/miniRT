@@ -1,4 +1,4 @@
-SRCS	= main_rendering_scene.c\
+SRCS	= main.c\
 		  tuples_utils.c\
 		  tuples_utils2.c\
 		  tuples_utils3.c\

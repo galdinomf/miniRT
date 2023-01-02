@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/28 21:32:29 by mgaldino         ###   ########.fr       */
+/*   Updated: 2022/12/31 11:28:51 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main()
 	s2->type = PLANE;
 	s2->point = create_point(0,0,0);
 	s2->material = m1;
-	s2->transformation = get_translation_matrix(0,12,0);
+	s2->transformation = get_x_rotation_matrix(PI / 2);
 	
 /*
 	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));

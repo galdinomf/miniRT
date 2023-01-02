@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/26 21:24:25 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/02 15:04:47 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,24 @@ t_list	*get_intersections(float a, float b, float c, t_elements *sphere)
 	intersections = ft_lstnew(new_intersection1);
 	ft_lstadd_back(&intersections, ft_lstnew(new_intersection2));
 	return (intersections);
+}
+
+void	intersect_cylinder(t_ray *ray, t_elements *cylinder)
+{
+	t_ray		*transf_ray;
+	float		a;
+	float		b;
+	float		c;
+
+	transf_ray = transform_element(ray, cylinder);
+	a = pow(transf_ray->direction->x, 2) + pow(transf_ray->direction->z, 2);
+	if	(f_equal(a, 0))
+		return ;
+	b = 2 * transf_ray->origin->x * transf_ray->direction->x +\
+		2 * transf_ray->origin->z * transf_ray->direction->z;
+	c = pow(transf_ray->origin->x, 2) + pow(transf_ray->origin->z, 2) - 1;
+	ft_lstadd_back(&ray->intersections, get_intersections(a, b, c, cylinder));
+	destroy_ray(transf_ray);	
 }
 
 void	intersect_sphere(t_ray *ray, t_elements *sphere)
