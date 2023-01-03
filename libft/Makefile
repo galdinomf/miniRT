@@ -44,6 +44,7 @@ SRCS	= ft_putnbr_fd.c\
 	  ft_lstclear.c\
 	  ft_lstadd_back.c\
 	  ft_lstlast.c\
+	  ft_lstdelone.c\
 
 CFLAGS	= -Wall -Wextra -Werror
 

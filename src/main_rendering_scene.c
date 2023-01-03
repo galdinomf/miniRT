@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/03 15:56:42 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/03 19:23:35 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main()
 	///////////// create light //////////////
 	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
 	light->type = LIGHT;
-	light->point = create_point(-10, 10, -10);
+	light->point = create_point(0, 5, -15);
 	light->color = create_color(1, 1, 1);
 
 /*	DEFAULT MATERIAL
@@ -78,13 +78,21 @@ int	main()
 	s2->material = m1;
 	s2->transformation = get_x_rotation_matrix(PI / 2);
 
+	t_material *m5 = (t_material *) malloc(sizeof(t_material));
+	m5->color = create_color(1, 0.1, 0.1);
+	m5->ambient = 0.1;
+	m5->diffuse = 0.9;
+	m5->specular = 0;
+	m5->shininess = 200;
+
+
 	t_elements *c1 = (t_elements *) malloc(sizeof(t_elements));
 	c1->type = CYLINDER;
-	c1->point = create_point(0,2,0);
+	c1->point = create_point(0,1,0);
 	c1->prop2 = (float *) malloc (sizeof(float));
 	*c1->prop2 = 1.5;
-	c1->material = m1;
-	c1->transformation = get_translation_matrix(-1,1,0);
+	c1->material = m5;
+	c1->transformation = get_translation_matrix(2, 0, 0);
 	
 /*
 	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
@@ -233,6 +241,8 @@ int	main()
 	free(m3);
 	free(m4->color);
 	free(m4);
+	free(m5->color);
+	free(m5);
 	//free(m2->color);
 	//free(m2);
 	free(c1->point);

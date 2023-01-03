@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:37:08 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/02 15:19:48 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/03 19:20:09 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ t_tuple	*get_normalized_world_normal(t_matrix *inverse_matrix, t_tuple *object_n
 	return (normalized_world_normal);
 }
 
+t_tuple	*get_cylinder_normal(t_tuple *object_point, t_elements *cylinder)
+{
+	float	dist;
+	float	y_max;
+	float	y_min;
+
+	y_max = cylinder->point->y + (*cylinder->prop2 / 2);
+	y_min = cylinder->point->y - (*cylinder->prop2 / 2);
+	dist = pow(object_point->x, 2) + pow(object_point->z, 2);
+	if ((!f_equal(dist, 1)) && (dist < 1) && ((object_point->y > y_max - EPSILON) || \
+						(f_equal(object_point->y, y_max - EPSILON))))
+		return (create_vector(0, 1, 0));
+	if ((!f_equal(dist, 1)) && (dist < 1) && ((object_point->y > y_min + EPSILON) || \
+						(f_equal(object_point->y, y_min + EPSILON))))
+		return (create_vector(0, -1, 0));
+	return (create_vector(object_point->x, 0, object_point->z));
+}
+
 t_tuple	*get_object_normal(t_tuple *object_point, t_elements *shape)
 {
 	t_tuple		*object_normal;
@@ -43,7 +61,7 @@ t_tuple	*get_object_normal(t_tuple *object_point, t_elements *shape)
 	if (shape->type == PLANE)
 		object_normal = create_vector(0, 1, 0);
 	if (shape->type == CYLINDER)
-		object_normal = create_vector(object_point->x, 0, object_point->z);
+		object_normal = get_cylinder_normal(object_point, shape);
 	return (object_normal);
 }
 
