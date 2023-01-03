@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/02 15:04:47 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:44:01 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,51 @@ t_list	*get_intersections(float a, float b, float c, t_elements *sphere)
 	return (intersections);
 }
 
+int		is_off_limits(t_ray *ray, t_elements *cylinder, t_list *aux)
+{
+	float	y_max;
+	float	y_min;
+	float	y_p;
+	float	t;
+	
+	y_max = cylinder->point->y + (*cylinder->prop2 / 2);
+	y_min = cylinder->point->y - (*cylinder->prop2 / 2);
+	t = ((t_intersection *) aux->content)->t;
+	y_p = ray->origin->y + t * ray->direction->y;
+	if ((y_p >= y_max) || (y_p <= y_min))
+		return (1);
+	return (0);
+}
+
+void	cut_intersections_out_of_bounds(t_ray *ray, t_elements *cylinder, \
+										t_list **intersections)
+{
+	t_list	*aux;
+	t_list	*aux2;
+
+	aux = *intersections;
+	if (!aux)
+		return ;
+	aux2 = aux->next;
+	if (is_off_limits(ray, cylinder, aux2))
+	{
+		free(aux2);
+		aux->next = NULL;
+	}
+	if (is_off_limits(ray, cylinder, aux))
+	{
+		*intersections = aux->next;
+		free(aux);
+	}
+}
+
 void	intersect_cylinder(t_ray *ray, t_elements *cylinder)
 {
 	t_ray		*transf_ray;
 	float		a;
 	float		b;
 	float		c;
+	t_list		*intersections;
 
 	transf_ray = transform_element(ray, cylinder);
 	a = pow(transf_ray->direction->x, 2) + pow(transf_ray->direction->z, 2);
@@ -64,8 +103,10 @@ void	intersect_cylinder(t_ray *ray, t_elements *cylinder)
 	b = 2 * transf_ray->origin->x * transf_ray->direction->x +\
 		2 * transf_ray->origin->z * transf_ray->direction->z;
 	c = pow(transf_ray->origin->x, 2) + pow(transf_ray->origin->z, 2) - 1;
-	ft_lstadd_back(&ray->intersections, get_intersections(a, b, c, cylinder));
-	destroy_ray(transf_ray);	
+	intersections = get_intersections(a, b, c, cylinder);
+	cut_intersections_out_of_bounds(ray, cylinder, &intersections);
+	ft_lstadd_back(&ray->intersections, intersections);
+	destroy_ray(transf_ray);
 }
 
 void	intersect_sphere(t_ray *ray, t_elements *sphere)
@@ -139,4 +180,6 @@ void	intersect_object(t_ray *ray, t_elements *object)
 		intersect_sphere(ray, object);
 	if (object->type == PLANE)
 		intersect_plane(ray, object);
+	if (object->type == CYLINDER)
+		intersect_cylinder(ray, object);
 }

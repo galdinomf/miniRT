@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/31 11:28:51 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/03 15:56:42 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ int	main()
 	s2->point = create_point(0,0,0);
 	s2->material = m1;
 	s2->transformation = get_x_rotation_matrix(PI / 2);
+
+	t_elements *c1 = (t_elements *) malloc(sizeof(t_elements));
+	c1->type = CYLINDER;
+	c1->point = create_point(0,2,0);
+	c1->prop2 = (float *) malloc (sizeof(float));
+	*c1->prop2 = 1.5;
+	c1->material = m1;
+	c1->transformation = get_translation_matrix(-1,1,0);
 	
 /*
 	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
@@ -170,7 +178,7 @@ int	main()
 	///////////// create spheres //////////////
 	///////////// create data //////////////
 	t_data	*world = (t_data *) malloc(sizeof(t_data));
-	world->n_elem = 6;
+	world->n_elem = 7;
 	t_elements **elements = (t_elements **) malloc(world->n_elem * sizeof(t_elements *));
 	elements[0] = s2;
 	//elements[1] = s2;
@@ -180,6 +188,7 @@ int	main()
 	elements[3] = s5;
 	elements[4] = s6;
 	elements[5] = s1;
+	elements[6] = c1;
 	//elements[5] = s2;
 	world->elem = elements;
 	/*
@@ -226,6 +235,10 @@ int	main()
 	free(m4);
 	//free(m2->color);
 	//free(m2);
+	free(c1->point);
+	free(c1->prop2);
+	destroy_matrix(c1->transformation);
+	free(c1);
 	free(s1->point);
 	destroy_matrix(s1->transformation);
 	free(s1);

@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/02 15:24:48 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:49:35 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ int	main()
 	t_elements *cylinder = (t_elements *) malloc(sizeof(t_elements));
 	cylinder->type = CYLINDER;
 	cylinder->transformation = get_identity_matrix(4);
-	t_tuple *origin = create_point(-1, 1, 0);
-	t_tuple *unnorm_direction = create_vector(1, 0, 0);
+	cylinder->point = create_point(-1, 1.5, 3);
+	cylinder->prop2 = (float *) malloc(sizeof(float));
+	*cylinder->prop2 = 1;
+	t_tuple *origin = create_point(0, 1.5, -2);
+	t_tuple *unnorm_direction = create_vector(0, 0, 1);
 	t_tuple *direction = normalize_tuple(unnorm_direction);
 	free(unnorm_direction);
 	t_ray *ray = create_ray(origin, direction);
-	/*
 	intersect_cylinder(ray, cylinder);
 	
 	t_list	*aux = ray->intersections;
@@ -62,13 +64,15 @@ int	main()
 		printf("t = %f\n", ((t_intersection *) aux->content)->t);
 		aux = aux->next;
 	}
-	*/
+	
 	
 	t_tuple *normal = get_normal_at_sphere(cylinder, origin);
 	printf("normal = (%f, %f, %f)\n", normal->x, normal->y, normal->z);
 	
 	destroy_ray(ray);
 	destroy_matrix(cylinder->transformation);
+	free(cylinder->point);
+	free(cylinder->prop2);
 	free(cylinder);
 	
 	hook(&mlx_data);
