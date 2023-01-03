@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/03 19:23:35 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/03 20:41:22 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main()
 	///////////// create light //////////////
 	t_elements *light = (t_elements *) malloc(sizeof(t_elements));
 	light->type = LIGHT;
-	light->point = create_point(0, 5, -15);
+	light->point = create_point(-10, 10, -10);
 	light->color = create_color(1, 1, 1);
 
 /*	DEFAULT MATERIAL
@@ -92,7 +92,15 @@ int	main()
 	c1->prop2 = (float *) malloc (sizeof(float));
 	*c1->prop2 = 1.5;
 	c1->material = m5;
-	c1->transformation = get_translation_matrix(2, 0, 0);
+	t_matrix *trans = get_translation_matrix(2.5,1.2,0);
+	t_matrix *z_rot = get_z_rotation_matrix(-1 * PI / 4);
+	t_matrix *x_rot = get_x_rotation_matrix(-1 * PI / 4);
+	t_matrix *aux_matrix = multiply_matrices(trans, z_rot);
+	c1->transformation = multiply_matrices(aux_matrix, x_rot);
+	destroy_matrix(trans);
+	destroy_matrix(z_rot);
+	destroy_matrix(x_rot);
+	destroy_matrix(aux_matrix);
 	
 /*
 	t_elements *s1 = (t_elements *) malloc(sizeof(t_elements));
@@ -221,8 +229,8 @@ int	main()
 	//my_camera->transform = multiply_matrices(rotation, translation);
 
 
-	t_tuple	*from = create_point(0,1.5,-5);
-	t_tuple	*to = create_point(0,1,0);
+	t_tuple	*from = create_point(1.5,1.5,-8);
+	t_tuple	*to = create_point(1.5,1,0);
 	t_tuple *up = create_vector(0,1,0);
 	camera->transform = view_transform(from, to , up);
 	render(camera, world, &mlx_data);
