@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file3.c                                      :+:      :+:    :+:   */
+/*   transform_camera.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 19:34:42 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/07 11:50:26 by daeidi-h         ###   ########.fr       */
+/*   Created: 2023/01/07 12:26:27 by daeidi-h          #+#    #+#             */
+/*   Updated: 2023/01/07 12:28:22 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <miniRT.h>
 
-static float	magnitude(float x, float y, float z)
+void	transform_camera(t_camera *camera, t_data *data)
 {
-	float	mag_sqr;
-
-	mag_sqr = pow(x, 2) + pow(y, 2) + pow(z, 2) ;
-	return (sqrtf(mag_sqr));
-}
-
-int isnormalized(float x, float y, float z)
-{
-	float	mag;
-
-	mag = magnitude(x, y, z);
-	//printf("mag = %.2f\n", mag);
-	if (mag != 1)
-	{
-		printf("Vetor not normalized.\n");
-		return (0);
-	}
-	return (1);
+	destroy_matrix(camera->transform);
+	t_tuple *up = create_vector(0,1,0);
+	t_tuple *to = sum_tuples(data->cam->point, data->cam->vector);
+	camera->transform = view_transform(data->cam->point, to, up);
+	free(up);
+	free(to);
 }

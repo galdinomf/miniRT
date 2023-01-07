@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:12:04 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/14 23:07:25 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/05 12:18:14 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static void	free_elem(t_elements *elem)
 		free_ptr((void *)&elem->prop2);
 	if (elem->color)	
 		free_ptr((void *)&elem->color);
+	if (elem->material)	
+		free_ptr((void *)&elem->material);
+	if (elem->transformation)
+		destroy_matrix(elem->transformation);
 	free_ptr((void *) &elem);
 }
 

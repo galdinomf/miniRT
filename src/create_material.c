@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file3.c                                      :+:      :+:    :+:   */
+/*   create_material.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 19:34:42 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/07 11:50:26 by daeidi-h         ###   ########.fr       */
+/*   Created: 2023/01/05 09:34:04 by daeidi-h          #+#    #+#             */
+/*   Updated: 2023/01/05 11:49:48 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <miniRT.h>
 
-static float	magnitude(float x, float y, float z)
+void	create_material(t_data *data)
 {
-	float	mag_sqr;
+	int	i;
 
-	mag_sqr = pow(x, 2) + pow(y, 2) + pow(z, 2) ;
-	return (sqrtf(mag_sqr));
-}
-
-int isnormalized(float x, float y, float z)
-{
-	float	mag;
-
-	mag = magnitude(x, y, z);
-	//printf("mag = %.2f\n", mag);
-	if (mag != 1)
+	i = 0;
+	while (data->elem && data->elem[i])
 	{
-		printf("Vetor not normalized.\n");
-		return (0);
+		t_material *m = (t_material *) malloc(sizeof(t_material));
+		m->color =  data->elem[i]->color;
+		m->ambient = data->amb_light->ratio;
+		m->diffuse = 0.9;
+		m->specular = 0.9;
+		m->shininess = 200;
+		data->elem[i]->material = m;
+		i++;
 	}
-	return (1);
 }

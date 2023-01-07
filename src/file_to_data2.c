@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:24:46 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/14 22:57:39 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/06 12:07:52 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ ft_atof(split[2]));
 	element->prop2 = NULL;
 	element->color = NULL;
 	data->elem[data->n_elem] = element;
+	data->cam = element;
 	data->n_elem++;
 }
 

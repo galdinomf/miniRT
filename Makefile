@@ -1,4 +1,4 @@
-SRCS	= main_rendering_scene.c\
+SRCS	= main.c\
 		  tuples_utils.c\
 		  tuples_utils2.c\
 		  tuples_utils3.c\
@@ -29,12 +29,15 @@ SRCS	= main_rendering_scene.c\
 		  free.c\
 		  file_to_data.c\
 		  file_to_data2.c\
+		  transform_elements.c\
+		  transform_camera.c\
 		  free_data.c\
 		  intersect_world.c\
 		  view_transform.c\
 		  camera_utils.c\
 		  render.c\
 		  is_shadowed.c\
+		  create_material.c\
 		  #render_sphere.c\
 
 SRCS_B	= 

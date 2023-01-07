@@ -35,7 +35,7 @@ static int	check_line(char *line)
 
 	len = ft_strlen(line);
 	line[len - 1] = '\0';
-	printf("%s\n", line);
+	//printf("%s\n", line);
 	result = 0;
 	split = ft_split(line, ' ');
 	if (!ft_strcmp(split[0], "A"))

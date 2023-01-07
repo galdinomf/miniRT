@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:59:10 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/14 23:04:50 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/05 11:56:03 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,12 @@ void	print_data(t_data *data)
 	data->amb_light->color->red, \
 	data->amb_light->color->green, \
 	data->amb_light->color->blue);
-	i = -1;
-	while(data->elem[++i])
-		printf("%d\n",	data->elem[i]->type);
+	i = 0;
+	while(data->elem[i])
+	{
+			if(data->elem[i]->material->color)
+				printf("elemento ->%d, com a cor red = %p, com a cor red = %.3f\n",	data->elem[i]->type, data->elem[i]->color, data->elem[i]->material->color->red);
+			//printf("elemento ->%d\n",	data->elem[i]->type, data->elem[i]->material->color->red);
+			i++;
+	}
 }

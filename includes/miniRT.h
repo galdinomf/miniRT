@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/02 14:54:48 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/07 12:30:18 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_data
 {
 	int				n_elem;
 	t_amb_lightning	*amb_light;
+	t_elements		*cam;
 	t_elements		**elem;
 }	t_data;
 
@@ -132,6 +133,12 @@ void		light_to_data(char **str, t_data *data);
 void		sphere_to_data(char **str, t_data *data);
 void		plane_to_data(char **str, t_data *data);
 void		cylinder_to_data(char **str, t_data *data);
+void		create_material(t_data *data);
+
+//////TRANSFORMATIONS///
+
+void		trasnform_elements(t_data *data);
+void		transform_camera(t_camera *camera, t_data *data);
 
 ///////FREE////
 void		free_split(void **ptr);
@@ -178,4 +185,5 @@ int	is_shadowed(t_data *world, t_tuple *point);
 void	intersect_cylinder(t_ray *ray, t_elements *cylinder);
 
 int	round_float(float f);
+
 #endif

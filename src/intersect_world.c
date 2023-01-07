@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_world.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/03 14:03:10 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:04:22 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	intersect_world(t_data *world, t_ray *ray)
 	i = -1;
 	while ((++i < world->n_elem) && (world->elem[i]))
 	{
+		if ( world->elem[i]->type > 2)
 			intersect_object(ray, world->elem[i]);
 	}
 }
