@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/06 14:04:22 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/10 12:17:52 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,23 @@ t_comps	*prepare_computations(t_intersection *i, t_ray *r)
 	return (comps);
 }
 
+static t_elements	*light_off(t_data *data)
+{
+	t_elements	*element;
+
+	element = (t_elements *) malloc(sizeof(t_elements));
+	element->type = 3;
+	element->point = create_point(0, 0, 0);
+	element->vector = NULL;
+	element->prop1 = (float *) malloc(sizeof(float));
+	*element->prop1 = 0;
+	element->prop2 = NULL;
+	element->color = create_color(0, 0, 0);
+	data->elem[data->n_elem] = element;
+	data->n_elem++;
+	return (element);
+}
+
 t_color	*shade_hit(t_data *world, t_comps *comps)
 {
 	t_elements	*light;
@@ -60,11 +77,14 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 	// UMA LUZ PERTENCENTE À CLASSE WORLD! (LUZ AMBIENTE?)
 	// FOI FEITO ASSIM PARA MANTER O FORMATO SUGERIDO NO LIVRO
 	int	i = -1;
+	light = NULL;
 	while (++i < world->n_elem)
 	{
 		if ((world->elem[i]) && (world->elem[i]->type == LIGHT))
 			light = world->elem[i];
 	}
+	if (!light)
+		light = light_off(world);
 	in_shadow = is_shadowed(world, comps->over_point);
 	return (get_lighting_color(light, comps, in_shadow));
 }
