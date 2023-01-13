@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:30:38 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/06 16:45:21 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:32:13 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ elem->point->y, elem->point->z);
 		destroy_matrix(aux2);
 	}
 	if (elem->vector)
-		rotations(elem);
+	 	rotations(elem);
 }
 
 static void	rotations(t_elements	*elem)
@@ -63,7 +63,7 @@ static void	rotations(t_elements	*elem)
 	t_matrix *aux2;
 	
 	aux1 = elem->transformation;
-	aux2 = get_x_rotation_matrix(atan2(elem->vector->y, elem->vector->z));
+	aux2 = get_x_rotation_matrix(atan2(elem->vector->z, elem->vector->y));
 	elem->transformation = multiply_matrices(aux1, aux2);
 	destroy_matrix(aux1);
 	destroy_matrix(aux2);

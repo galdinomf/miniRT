@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnrcmp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 00:46:54 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/09 20:00:15 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/12 14:27:10 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_strnrcmp(const char *s1, const char *s2, size_t n)
+int	ft_strnrcmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 	size_t	j;
@@ -21,7 +21,7 @@ int		ft_strnrcmp(const char *s1, const char *s2, size_t n)
 		return (0);
 	i = ft_strlen((char *)s1);
 	j = ft_strlen((char *)s2);
-	while (s1[--i] == s2[--j] && i != (size_t) -1 && j != (size_t) -1)
+	while (s1[--i] == s2[--j] && i != (size_t) - 1 && j != (size_t) - 1)
 	{
 		n--;
 		if (n == 0)

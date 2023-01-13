@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:16:29 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/10 12:20:13 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:33:00 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define MLX_ERROR 		1
 # define WINDOW_WIDTH 	300
-# define WINDOW_HEIGHT 	200
+# define WINDOW_HEIGHT 	150
 # include <stddef.h>
 # include <stdlib.h>
 # include <mlx.h>
