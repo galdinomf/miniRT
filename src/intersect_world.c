@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect_world.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/10 12:17:52 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/16 12:13:25 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ static t_elements	*light_off(t_data *data)
 	t_elements	*element;
 
 	element = (t_elements *) malloc(sizeof(t_elements));
-	element->type = 3;
+	element->type = LIGHT;
 	element->point = create_point(0, 0, 0);
 	element->vector = NULL;
 	element->prop1 = (float *) malloc(sizeof(float));
-	*element->prop1 = 0;
+	*element->prop1 = data->amb_light->ratio;
 	element->prop2 = NULL;
-	element->color = create_color(0, 0, 0);
+	element->color = create_color(*element->prop1, *element->prop1, *element->prop1);
 	data->elem[data->n_elem] = element;
 	data->n_elem++;
 	return (element);
@@ -72,10 +72,13 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 {
 	t_elements	*light;
 	int			in_shadow;
+	int			no_light;
 
 	// ISTO TERÁ QUE SER MUDADO! A FUNÇÃO CONSIDERA QUE EXISTE
 	// UMA LUZ PERTENCENTE À CLASSE WORLD! (LUZ AMBIENTE?)
 	// FOI FEITO ASSIM PARA MANTER O FORMATO SUGERIDO NO LIVRO
+	
+	no_light = 0;
 	int	i = -1;
 	light = NULL;
 	while (++i < world->n_elem)
@@ -84,9 +87,12 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 			light = world->elem[i];
 	}
 	if (!light)
+	{
+		no_light = 1;
 		light = light_off(world);
+	}
 	in_shadow = is_shadowed(world, comps->over_point);
-	return (get_lighting_color(light, comps, in_shadow));
+	return (get_lighting_color(light, comps, in_shadow, no_light));
 }
 
 t_color	*color_at(t_data *world, t_ray *ray)

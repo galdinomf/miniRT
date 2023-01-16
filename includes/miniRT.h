@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/07 12:30:18 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/16 12:02:02 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix);
 t_tuple	*get_normal_at_sphere(t_elements *sphere, t_tuple *world_point);
 t_tuple	*get_reflected_vector(t_tuple *vector, t_tuple *normal);
 
-t_color	*get_lighting_color(t_elements	*light, t_comps *args, int in_shadow);
+t_color	*get_lighting_color(t_elements	*light, t_comps *args, int in_shadow, int no_light);
 void	render_sphere(t_elements *sphere, t_elements *light, \
 						t_tuple *origin, t_mlx_data mlx_data);
 
