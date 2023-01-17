@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/16 12:02:02 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 12:26:03 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void	compute_pixel_size(t_camera *camera);
 t_ray	*ray_for_pixel(t_camera *camera, float px, float py);
 
 void	render(t_camera *camera, t_data *world, t_mlx_data *mlx_data);
-int	is_shadowed(t_data *world, t_tuple *point);
+int	is_shadowed(t_data *world, t_tuple *point, t_elements *light);
 
 void	intersect_cylinder(t_ray *ray, t_elements *cylinder);
 
