@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 13:15:05 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/19 09:11:22 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:36:36 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ t_matrix	*get_submatrix(t_matrix *matrix, int rmved_row, int rmved_column)
 		j = -1;
 		while (++j < new_matrix->n_columns)
 		{
-			new_matrix->values[i][j] = matrix->values[i + (i >= rmved_row)][j + (j >= rmved_column)];
+			new_matrix->values[i][j] = \
+				matrix->values[i + (i >= rmved_row)][j + (j >= rmved_column)];
 		}
 	}
 	return (new_matrix);

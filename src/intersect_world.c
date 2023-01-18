@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/17 12:26:35 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:26:29 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	intersect_world(t_data *world, t_ray *ray)
 	i = -1;
 	while ((++i < world->n_elem) && (world->elem[i]))
 	{
-		if ( world->elem[i]->type > 2)
+		if (world->elem[i]->type > 2)
 			intersect_object(ray, world->elem[i]);
 	}
 }
@@ -72,17 +72,11 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 {
 	t_elements	*light;
 	int			in_shadow;
-	int			no_light;
 	t_color		*color1;
 	t_color		*color2;
 	t_color		*color3;
-
-	// ISTO TERÁ QUE SER MUDADO! A FUNÇÃO CONSIDERA QUE EXISTE
-	// UMA LUZ PERTENCENTE À CLASSE WORLD! (LUZ AMBIENTE?)
-	// FOI FEITO ASSIM PARA MANTER O FORMATO SUGERIDO NO LIVRO
 	
 	color1 = create_color(0, 0, 0);
-	no_light = 0;
 	int	i = -1;
 	light = NULL;
 	while (++i < world->n_elem)
@@ -91,7 +85,7 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 		{
 			light = world->elem[i];
 			in_shadow = is_shadowed(world, comps->over_point, light);
-			color2 = get_lighting_color(light, comps, in_shadow, no_light);
+			color2 = get_lighting_color(light, comps, in_shadow, 0);
 			color3 = sum_colors(color1, color2);
 			free(color1);
 			free(color2);
@@ -100,19 +94,16 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 	}
 	if (!light)
 	{
-		no_light = 1;
 		light = light_off(world);
 		in_shadow = is_shadowed(world, comps->over_point, light);
-		color1 = get_lighting_color(light, comps, in_shadow, no_light);
+		color1 = get_lighting_color(light, comps, in_shadow, 1);
 	}
-
 	if (color1->red > 255)
 		color1->red = 255;
 	if (color1->green > 255)
 		color1->green = 255;
 	if (color1->blue > 255)
 		color1->blue = 255;
-		
 	return (color1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:32:33 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/05 13:33:31 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:37:07 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ float	determinant_2d_matrix(t_matrix *matrix)
 
 float	cofactor(t_matrix *matrix, int row, int col)
 {
-	float	minor;
+	float		minor;
 	t_matrix	*aux;
 
 	aux = get_submatrix(matrix, row, col);
@@ -29,6 +29,7 @@ float	cofactor(t_matrix *matrix, int row, int col)
 	destroy_matrix(aux);
 	return (pow(-1, (row + col)) * minor);
 }
+
 float	determinant_nd_matrix(t_matrix *matrix)
 {
 	float	det;

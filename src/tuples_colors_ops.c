@@ -6,13 +6,13 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:13:31 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/01 15:55:22 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:15:05 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tuples.h>
 
-t_color *create_color(float r, float g, float b)
+t_color	*create_color(float r, float g, float b)
 {
 	t_color	*new_color;
 

@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_material.c                                  :+:      :+:    :+:   */
+/*   create_material_and_set_transformation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:34:04 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/05 11:49:48 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:43:56 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-void	create_material(t_data *data)
+void	create_material_and_set_transformation(t_data *data)
 {
-	int	i;
+	int			i;
+	t_material	*m;
 
 	i = 0;
 	while (data->elem && data->elem[i])
 	{
-		t_material *m = (t_material *) malloc(sizeof(t_material));
-		m->color =  data->elem[i]->color;
+		m = (t_material *) malloc(sizeof(t_material));
+		m->color = data->elem[i]->color;
 		m->ambient = data->amb_light->ratio;
 		m->diffuse = 0.9;
 		m->specular = 0.9;
 		m->shininess = 200;
 		data->elem[i]->material = m;
+		data->elem[i]->transformation = NULL;
 		i++;
 	}
 }

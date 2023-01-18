@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:29:11 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/06 19:31:43 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:24:10 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <math.h>
-
 
 typedef struct s_tuple
 {
@@ -40,7 +39,7 @@ t_tuple	*normalize_tuple(t_tuple *tuple);
 float	dot_product(t_tuple *t1, t_tuple *t2);
 t_tuple	*cross_product(t_tuple *t1, t_tuple *t2);
 
-int	f_equal(float f1, float f2);
+int		f_equal(float f1, float f2);
 
 /////////////////////// COLORS ///////////////////////
 typedef struct s_color
@@ -50,7 +49,7 @@ typedef struct s_color
 	float	blue;
 }	t_color;
 
-t_color *create_color(float r, float g, float b);
+t_color	*create_color(float r, float g, float b);
 t_color	*sum_colors(t_color *c1, t_color *c2);
 t_color	*subtract_colors(t_color *c1, t_color *c2);
 t_color	*multiply_colors(t_color *c1, t_color *c2);

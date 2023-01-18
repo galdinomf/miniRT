@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   transform_elements.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:30:38 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/13 10:32:13 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:14:23 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-
 static void	rotations(t_elements	*elem);
-static void transform_elem(t_elements *elem);
+static void	transform_elem(t_elements *elem);
 
-void trasnform_elements(t_data *data)
+void	trasnform_elements(t_data *data)
 {
 	int	i;
 
@@ -30,18 +29,18 @@ void trasnform_elements(t_data *data)
 	}
 }
 
-static void transform_elem(t_elements *elem)
+static void	transform_elem(t_elements *elem)
 {
-	t_matrix *aux1;
-	t_matrix *aux2;
+	t_matrix	*aux1;
+	t_matrix	*aux2;
 
 	aux1 = NULL;
 	aux2 = NULL;
 	elem->transformation = get_translation_matrix(elem->point->x, \
-elem->point->y, elem->point->z);	
+												elem->point->y, elem->point->z);
 	if (elem->prop1)
 	{
-		if(elem->type == CYLINDER)
+		if (elem->type == CYLINDER)
 			aux1 = get_scaling_matrix(*elem->prop1, 1, 1);
 		else
 			aux1 = get_scaling_matrix(*elem->prop1, *elem->prop1, *elem->prop1);
@@ -54,14 +53,14 @@ elem->point->y, elem->point->z);
 		destroy_matrix(aux2);
 	}
 	if (elem->vector)
-	 	rotations(elem);
+		rotations(elem);
 }
 
 static void	rotations(t_elements	*elem)
 {
-	t_matrix *aux1;
-	t_matrix *aux2;
-	
+	t_matrix	*aux1;
+	t_matrix	*aux2;
+
 	aux1 = elem->transformation;
 	aux2 = get_x_rotation_matrix(atan2(elem->vector->z, elem->vector->y));
 	elem->transformation = multiply_matrices(aux1, aux2);

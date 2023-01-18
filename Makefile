@@ -37,7 +37,7 @@ SRCS	= main.c\
 		  camera_utils.c\
 		  render.c\
 		  is_shadowed.c\
-		  create_material.c\
+		  create_material_and_set_transformation.c\
 		  #render_sphere.c\
 
 SRCS_B	= 

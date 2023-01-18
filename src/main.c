@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/13 09:49:34 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:19:27 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,20 @@ int	main(int argc, char **argv)
 	t_camera	*camera;
 	t_mlx_data	mlx_data;
 
-	printf("valor de arctan (0,1) = %.3f\n" , atan2(0,1));
-	printf("valor de arctan (1,0) = %.3f\n" , atan2(1,0));
-	printf("valor de arctan (0,0) = %.3f\n" , atan2(0,0));
 	if (argc != 2)
 		error_exit("Error\nArgs invalid\n", 1);
 	check_file(argv[1]);
 	data = file_to_data(argv[1]);
-	create_material(data);
+	create_material_and_set_transformation(data);
 	trasnform_elements(data);
 	print_data(data);
 	minilibx_initialize(&mlx_data);
 	camera = create_camera(WINDOW_WIDTH, WINDOW_HEIGHT, \
-*data->cam->prop1 * PI / 180);
+		*data->cam->prop1 * PI / 180);
 	transform_camera(camera, data);
+	printf("Rendering...\n");
 	render(camera, data, &mlx_data);
+	printf("\nDone!\n");
 	free_data(data);
 	destroy_camera(camera);
 	hook(&mlx_data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:28:42 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/06 14:14:33 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:39:40 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ t_tuple	*ray_position(t_ray *ray, float t)
 t_ray	*transform_ray(t_ray *ray, t_matrix *transf_matrix)
 {
 	t_ray		*resulting_ray;
-	t_tuple	*aux1;
-	t_tuple	*aux2;
+	t_tuple		*aux1;
+	t_tuple		*aux2;
 
 	aux1 = multiply_matrix_by_tuple(transf_matrix, ray->origin);
 	aux2 = multiply_matrix_by_tuple(transf_matrix, ray->direction);

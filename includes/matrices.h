@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:57:51 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/05 15:31:35 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:23:08 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ t_matrix	*get_identity_matrix(int n);
 float		determinant_2d_matrix(t_matrix *matrix);
 t_matrix	*get_submatrix(t_matrix *matrix, int rmved_row, int rmved_column);
 //float		minor_of_3d_square_matrix(t_matrix *matrix, int row, int col);
-float	cofactor(t_matrix *matrix, int row, int col);
+float		cofactor(t_matrix *matrix, int row, int col);
 //float	determinant_3d_square_matrix(t_matrix *matrix);
-float	determinant_nd_matrix(t_matrix *matrix);
-int	matrix_is_invertible(t_matrix *matrix);
+float		determinant_nd_matrix(t_matrix *matrix);
+int			matrix_is_invertible(t_matrix *matrix);
 t_matrix	*get_inverse_matrix(t_matrix *matrix);
 
 //////////////////// MATRIX TRANSFORMATIONS ////////////////////
@@ -53,7 +53,6 @@ t_matrix	*get_x_rotation_matrix(float radians);
 t_matrix	*get_y_rotation_matrix(float radians);
 t_matrix	*get_z_rotation_matrix(float radians);
 t_matrix	*get_shearing_matrix(float x_y, float x_z, float y_x, float y_z, \
-								float z_x, float z_y);
-								
+								float z_x, float z_y);				
 int			f_equal(float f1, float f2);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:16:28 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/14 22:30:50 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:39:23 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ float	ft_atof(char *str)
 	i = -1;
 	while (split[1] && split[1][++i])
 		nb += ((split[1][i] - '0') * pow(10, (i + 1) * -1));
-	free_split((void *)split); 
+	free_split((void *)split);
 	return (nb);
 }
 
-int ft_isfloat(char *str)
+int	ft_isfloat(char *str)
 {
 	int	i;
 
@@ -40,18 +40,18 @@ int ft_isfloat(char *str)
 	if (!str[i])
 		return (1);
 	if (str[i] != '.')
-		return (0);	
+		return (0);
 	while (str[++i])
 	{
 		if (!ft_isdigit(str[i]))
-		 	return (0);
+			return (0);
 	}
 	return (1);
 }
 
-int ft_isfloat_range(char *str, float min, float max)
+int	ft_isfloat_range(char *str, float min, float max)
 {
 	if (ft_isfloat(str) && ft_atof(str) <= max && ft_atof(str) >= min)
 		return (1);
-	return (0);	
+	return (0);
 }

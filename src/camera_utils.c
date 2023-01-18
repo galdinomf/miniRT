@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 12:15:48 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/23 09:58:01 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:05:06 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	destroy_camera(t_camera *camera)
 
 t_ray	*get_resulting_ray(t_camera *camera, float world_x, float world_y)
 {
-	t_tuple	*pixel;
-	t_tuple	*origin;
-	t_tuple	*direction;
-	t_tuple	*aux_tuple;
+	t_tuple		*pixel;
+	t_tuple		*origin;
+	t_tuple		*direction;
+	t_tuple		*aux_tuple;
 	t_matrix	*aux_matrix;
 
 	aux_matrix = get_inverse_matrix(camera->transform);
@@ -79,10 +79,10 @@ t_ray	*get_resulting_ray(t_camera *camera, float world_x, float world_y)
 
 t_ray	*ray_for_pixel(t_camera *camera, float px, float py)
 {
-	float world_x;
-	float world_y;
+	float	world_x;
+	float	world_y;
 
-	world_x = camera->half_width  - ((px + 0.5) * camera->pixel_size);
+	world_x = camera->half_width - ((px + 0.5) * camera->pixel_size);
 	world_y = camera->half_height - ((py + 0.5) * camera->pixel_size);
 	return (get_resulting_ray(camera, world_x, world_y));
 }

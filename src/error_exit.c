@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 00:55:19 by daeidi-h          #+#    #+#             */
-/*   Updated: 2022/12/06 20:12:41 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:20:52 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	error_exit(const char *s, int i)
 {
 	write(2, s, ft_strlen((char *)s));
-	// free every thing
 	if (i)
 		exit(i);
 	exit(0);

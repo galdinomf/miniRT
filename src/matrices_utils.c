@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:59:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/03 21:35:34 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:34:10 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	destroy_matrix(t_matrix *matrix)
 
 	i = -1;
 	while (++i < matrix->n_rows)
-			free(matrix->values[i]);
+		free(matrix->values[i]);
 	free(matrix->values);
 	free(matrix);
 }

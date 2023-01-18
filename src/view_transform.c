@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 11:14:18 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/22 12:15:39 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:16:58 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_tuple	*get_forward(t_tuple *from, t_tuple *to)
 	return (forward);
 }
 
-t_matrix	*get_orientation_matrix(t_tuple *left, t_tuple *true_up, t_tuple *forward)
+t_matrix	*get_orientation_matrix(t_tuple *left, t_tuple *true_up, \
+									t_tuple *forward)
 {
 	t_matrix	*orientation;
 
@@ -46,9 +47,10 @@ t_matrix	*final_orientation_matrix(t_tuple *from, t_tuple *true_up, \
 	t_matrix	*orientation;
 	t_matrix	*translation;
 	t_matrix	*orientation_with_translation;
-		
+
 	orientation = get_orientation_matrix(left, true_up, forward);
-	translation = get_translation_matrix(from->x * -1, from->y * -1, from->z * -1);
+	translation = get_translation_matrix(from->x * -1, from->y * -1, \
+											from->z * -1);
 	orientation_with_translation = multiply_matrices(orientation, translation);
 	destroy_matrix(orientation);
 	destroy_matrix(translation);
@@ -57,10 +59,10 @@ t_matrix	*final_orientation_matrix(t_tuple *from, t_tuple *true_up, \
 
 t_matrix	*view_transform(t_tuple *from, t_tuple *to, t_tuple *up)
 {
-	t_tuple	*forward;
-	t_tuple	*norm_up;
-	t_tuple	*left;
-	t_tuple	*true_up;
+	t_tuple		*forward;
+	t_tuple		*norm_up;
+	t_tuple		*left;
+	t_tuple		*true_up;
 	t_matrix	*result;
 
 	forward = get_forward(from, to);
@@ -68,7 +70,6 @@ t_matrix	*view_transform(t_tuple *from, t_tuple *to, t_tuple *up)
 	left = cross_product(forward, norm_up);
 	true_up = cross_product(left, forward);
 	result = final_orientation_matrix(from, true_up, forward, left);
-	
 	free(forward);
 	free(norm_up);
 	free(left);

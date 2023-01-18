@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 09:38:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/16 12:02:15 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:12:33 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_color	*get_specular_contribution(t_elements *light, t_tuple *lightv, \
 	float	reflect_dot_eye;
 	float	factor;
 	t_color	*specular;
-	
+
 	neg_lightv = neg_tuple(lightv);
 	reflectv = get_reflected_vector(neg_lightv, args->normalv);
 	reflect_dot_eye = dot_product(reflectv, args->eyev);
@@ -30,11 +30,12 @@ t_color	*get_specular_contribution(t_elements *light, t_tuple *lightv, \
 	else
 	{
 		factor = pow(reflect_dot_eye, args->object->material->shininess);
-		specular = multiply_color_by_scalar(light->color, (args->object->material->specular * factor));
+		specular = multiply_color_by_scalar(light->color, \
+								(args->object->material->specular * factor));
 	}
 	free(neg_lightv);
 	free(reflectv);
-	return(specular);
+	return (specular);
 }
 
 t_tuple	*get_direction_to_light_source(t_elements *light, t_comps *args)
@@ -57,7 +58,7 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	result = sum_colors(aux, contributions[2]);
 	free(aux);
 	aux = result;
-	result = multiply_color_by_scalar(aux, 255); //MULTIPLICAR POR 255!!!
+	result = multiply_color_by_scalar(aux, 255);
 	free(aux);
 	if (result->red > 255)
 		result->red = 255;
@@ -65,23 +66,25 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 		result->green = 255;
 	if (result->blue > 255)
 		result->blue = 255;
-
 	free(contributions[0]);
 	free(contributions[1]);
 	free(contributions[2]);
 	return (result);
 }
 
-t_color	*get_lighting_color(t_elements *light, t_comps *args, int in_shadow, int no_light)
+t_color	*get_lighting_color(t_elements *light, t_comps *args, \
+							int in_shadow, int no_light)
 {
 	t_color	*effective_color;
 	t_tuple	*lightv;
 	float	light_dot_normal;
-	t_color	*contributions[3]; // 0 - ambient; 1 - diffuse; 2 - specular; 3 - aux
+	t_color	*contributions[3];
 
-	effective_color = multiply_colors(args->object->material->color, light->color);
+	effective_color = multiply_colors(args->object->material->color, \
+										light->color);
 	lightv = get_direction_to_light_source(light, args);
-	contributions[0] = multiply_color_by_scalar(effective_color, args->object->material->ambient);
+	contributions[0] = multiply_color_by_scalar(effective_color, \
+											args->object->material->ambient);
 	light_dot_normal = dot_product(lightv, args->normalv);
 	if ((in_shadow) || (light_dot_normal < 0) || (no_light))
 	{
@@ -90,7 +93,8 @@ t_color	*get_lighting_color(t_elements *light, t_comps *args, int in_shadow, int
 	}
 	else
 	{
-		contributions[1] = multiply_color_by_scalar(effective_color, (args->object->material->diffuse * light_dot_normal));
+		contributions[1] = multiply_color_by_scalar(effective_color, \
+						(args->object->material->diffuse * light_dot_normal));
 		contributions[2] = get_specular_contribution(light, lightv, args);
 	}
 	free(effective_color);

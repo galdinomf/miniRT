@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/17 19:32:44 by mgaldino          #+#    #+#             */
+/*   Updated: 2023/01/17 19:36:28 by mgaldino         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <miniRT.h>
 
 static int	check_line(char *line);
@@ -6,7 +18,7 @@ void	check_file(char *file_name)
 {
 	char	*line;
 	int		fd;
-	int error;
+	int		error;
 
 	if (ft_strnrcmp(file_name, ".rt", 3))
 		error_exit("Error\nWrong file type\n", 1);
@@ -29,26 +41,25 @@ void	check_file(char *file_name)
 
 static int	check_line(char *line)
 {
-	char 	**split;
+	char	**split;
 	int		len;
 	int		result;
 
 	len = ft_strlen(line);
 	line[len - 1] = '\0';
-	//printf("%s\n", line);
 	result = 0;
 	split = ft_split(line, ' ');
 	if (!ft_strcmp(split[0], "A"))
 		result = check_amb_light(split);
-	else if(!ft_strcmp(split[0], "C"))
+	else if (!ft_strcmp(split[0], "C"))
 		result = check_camera(split);
-	else if(!ft_strcmp(split[0], "L"))
+	else if (!ft_strcmp(split[0], "L"))
 		result = check_light(split);
-	else if(!ft_strcmp(split[0], "sp"))
+	else if (!ft_strcmp(split[0], "sp"))
 		result = check_sphere(split);
-	else if(!ft_strcmp(split[0], "pl"))
+	else if (!ft_strcmp(split[0], "pl"))
 		result = check_plane(split);
-	else if(!ft_strcmp(split[0], "cy"))
+	else if (!ft_strcmp(split[0], "cy"))
 		result = check_cylinder(split);
 	else
 		result = 7;
@@ -90,7 +101,7 @@ int	ft_iscoords(char *str)
 	i = -1;
 	while (split[++i])
 	{
-		if(!ft_isfloat(split[i]))
+		if (!ft_isfloat(split[i]))
 		{
 			free_split((void *)split);
 			return (0);
@@ -111,16 +122,18 @@ int	ft_isndvector(char *str)
 	i = -1;
 	while (split[++i])
 	{
-		if(!(ft_isfloat(split[i]) || ft_atof(split[i]) < 1 || ft_atof(split[i]) > -1))
+		if (!(ft_isfloat(split[i]) || \
+				ft_atof(split[i]) < 1 || ft_atof(split[i]) > -1))
 		{
 			free_split((void *)split);
 			return (0);
 		}
 	}
-	if (i != 3 || !isnormalized(ft_atof(split[0]), ft_atof(split[1]), ft_atof(split[2])))
+	if (i != 3 || \
+		!isnormalized(ft_atof(split[0]), ft_atof(split[1]), ft_atof(split[2])))
 	{
-			free_split((void *)split);
-			return (0);
+		free_split((void *)split);
+		return (0);
 	}
 	free_split((void *)split);
 	return (1);
@@ -135,7 +148,8 @@ int	ft_isfov(char *str)
 	i = -1;
 	while (split[++i])
 	{
-		if(!ft_isfloat(split[i]) || ft_atof(split[i]) > 1 || ft_atof(split[i]) < -1)
+		if (!ft_isfloat(split[i]) || \
+			ft_atof(split[i]) > 1 || ft_atof(split[i]) < -1)
 		{
 			free_split((void *)split);
 			return (0);
@@ -147,9 +161,10 @@ int	ft_isfov(char *str)
 	return (1);
 }
 
-int check_cylinder(char **str)
+int	check_cylinder(char **str)
 {
-	if (!(ft_iscoords(str[1]) && ft_isndvector(str[2]) && ft_isfloat(str[3]) && ft_isfloat(str[4]) &&ft_isrgb(str[5]) &&!str[6]))
+	if (!(ft_iscoords(str[1]) && ft_isndvector(str[2]) && ft_isfloat(str[3]) \
+			&& ft_isfloat(str[4]) && ft_isrgb(str[5]) && !str[6]))
 		return (6);
 	return (0);
 }

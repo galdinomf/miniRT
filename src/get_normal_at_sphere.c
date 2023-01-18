@@ -6,24 +6,23 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 10:37:08 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/03 19:20:09 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:21:36 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-t_tuple	*get_normalized_world_normal(t_matrix *inverse_matrix, t_tuple *object_normal)
+t_tuple	*get_normalized_world_normal(t_matrix *inverse_matrix, \
+										t_tuple *object_normal)
 {
-
 	t_matrix	*transp_matrix;
 	t_tuple		*world_normal;
 	t_tuple		*normalized_world_normal;
-	
+
 	transp_matrix = get_transposed_matrix(inverse_matrix);
 	world_normal = multiply_matrix_by_tuple(transp_matrix, object_normal);
 	world_normal->w = 0;
 	normalized_world_normal = normalize_tuple(world_normal);
-	
 	free(world_normal);
 	destroy_matrix(transp_matrix);
 	return (normalized_world_normal);
@@ -34,15 +33,17 @@ t_tuple	*get_cylinder_normal(t_tuple *object_point, t_elements *cylinder)
 	float	dist;
 	float	y_max;
 	float	y_min;
+	int		p;
 
 	y_max = cylinder->point->y + (*cylinder->prop2 / 2);
 	y_min = cylinder->point->y - (*cylinder->prop2 / 2);
 	dist = pow(object_point->x, 2) + pow(object_point->z, 2);
-	if ((!f_equal(dist, 1)) && (dist < 1) && ((object_point->y > y_max - EPSILON) || \
-						(f_equal(object_point->y, y_max - EPSILON))))
+	p = ((!f_equal(dist, 1)) && (dist < 1));
+	if (p && ((object_point->y > y_max - EPSILON) || \
+		(f_equal(object_point->y, y_max - EPSILON))))
 		return (create_vector(0, 1, 0));
-	if ((!f_equal(dist, 1)) && (dist < 1) && ((object_point->y > y_min + EPSILON) || \
-						(f_equal(object_point->y, y_min + EPSILON))))
+	if (p && ((object_point->y > y_min + EPSILON) || \
+		(f_equal(object_point->y, y_min + EPSILON))))
 		return (create_vector(0, -1, 0));
 	return (create_vector(object_point->x, 0, object_point->z));
 }

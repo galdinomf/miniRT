@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_to_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:59:10 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/05 11:56:03 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:42:48 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ static int	count_elem(char *file_name)
 	}
 	close(fd);
 	free(line);
-	return(count);
+	return (count);
 }
 
-static t_data	*init_file_data (int qtt_elem)
+static t_data	*init_file_data(int qtt_elem)
 {
 	t_data	*file_data;
+
 	file_data = (t_data *) malloc(sizeof(t_data));
 	if (!file_data)
 		return (NULL);
@@ -51,23 +52,23 @@ static t_data	*init_file_data (int qtt_elem)
 
 static void	create_elements(char *line, t_data *data)
 {
-	char **split;
-	int	len;
+	char	**split;
+	int		len;
 
 	len = ft_strlen(line);
 	line[len - 1] = '\0';
 	split = ft_split(line, ' ');
 	if (!ft_strcmp(split[0], "A"))
 		amb_light_to_data(split, data);
-	else if(!ft_strcmp(split[0], "C"))
+	else if (!ft_strcmp(split[0], "C"))
 		camera_to_data(split, data);
-	else if(!ft_strcmp(split[0], "L"))
+	else if (!ft_strcmp(split[0], "L"))
 		light_to_data(split, data);
-	else if(!ft_strcmp(split[0], "sp"))
+	else if (!ft_strcmp(split[0], "sp"))
 		sphere_to_data(split, data);
-	else if(!ft_strcmp(split[0], "pl"))
+	else if (!ft_strcmp(split[0], "pl"))
 		plane_to_data(split, data);
-	else if(!ft_strcmp(split[0], "cy"))
+	else if (!ft_strcmp(split[0], "cy"))
 		cylinder_to_data(split, data);
 	else
 		error_exit("Error\nWrong data in rt file\n", 1);
@@ -107,15 +108,16 @@ void	amb_light_to_data(char **str, t_data *data)
 	amb_light = (t_amb_lightning *)malloc(sizeof(t_amb_lightning));
 	amb_light->ratio = ft_atof(str[1]);
 	split = ft_split(str[2], ',');
-	amb_light->color = create_color(ft_atof(split[0])/255, \
-ft_atof(split[1])/255, ft_atof(split[2])/255);
+	amb_light->color = create_color(ft_atof(split[0]) / 255, \
+		ft_atof(split[1]) / 255, ft_atof(split[2]) / 255);
 	free_split((void *)split);
 	data->amb_light = amb_light;
 }
 
 void	print_data(t_data *data)
 {
-	int i;
+	int	i;
+
 	printf("A	%.2f	%.3f, %.3f, %.3f\n",\
 	data->amb_light->ratio,\
 	data->amb_light->color->red, \
