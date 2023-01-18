@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   round_float.c                                      :+:      :+:    :+:   */
+/*   adjust_color_overflow.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 10:22:04 by mgaldino          #+#    #+#             */
-/*   Updated: 2022/12/12 10:28:18 by mgaldino         ###   ########.fr       */
+/*   Created: 2023/01/18 11:02:53 by mgaldino          #+#    #+#             */
+/*   Updated: 2023/01/18 11:30:58 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-int	round_float(float f)
+void	adjust_color_overflow(t_color *color)
 {
-	double	int_part;
-	float	frac_part;
-
-	frac_part = modf(f, &int_part);
-	if (frac_part >= 0.5)
-		return (ceil(int_part));
-	else
-		return (floor(int_part));
+	if (color->red > 255)
+		color->red = 255;
+	if (color->green > 255)
+		color->green = 255;
+	if (color->blue > 255)
+		color->blue = 255;
 }

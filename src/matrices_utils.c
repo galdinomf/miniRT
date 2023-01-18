@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:59:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/17 18:34:10 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/18 10:26:18 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	destroy_matrix(t_matrix *matrix)
 	free(matrix);
 }
 
-void	display_matrix(t_matrix *matrix) //APAGAR!
+void	display_matrix(t_matrix *matrix)
 {
 	int	i;
 	int	j;

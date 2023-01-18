@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:19:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/17 22:19:27 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:32:28 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	main(int argc, char **argv)
 	data = file_to_data(argv[1]);
 	create_material_and_set_transformation(data);
 	trasnform_elements(data);
-	print_data(data);
 	minilibx_initialize(&mlx_data);
 	camera = create_camera(WINDOW_WIDTH, WINDOW_HEIGHT, \
 		*data->cam->prop1 * PI / 180);

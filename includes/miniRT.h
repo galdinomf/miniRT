@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/17 22:17:32 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:04:37 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <fcntl.h>				// open()
 # include "../libft/libft.h"
 
-//-----STRUCTURES
+//-----CONSTANTS
 
 # define EPSILON 0.01
 # define AMB_LIGHTNING 1
@@ -31,6 +31,8 @@
 # define SPHERE 4
 # define PLANE 5
 # define CYLINDER 6
+
+//-----STRUCTURES
 
 typedef struct s_camera
 {
@@ -141,7 +143,6 @@ void			transform_camera(t_camera *camera, t_data *data);
 void			free_split(void **ptr);
 void			free_ptr(void **ptr);
 void			free_data(t_data *data);
-//------MACROS
 
 void			hook(t_mlx_data *mlx_data);
 int				keypress(int keysym, t_mlx_data *mlx_data);
@@ -151,7 +152,9 @@ t_ray			*create_ray(t_tuple *origin, t_tuple *direction);
 void			destroy_ray(t_ray *ray);
 void			destroy_ray_keeping_origin(t_ray *ray);
 t_tuple			*ray_position(t_ray *ray, float t);
-
+t_ray			*transform_element(t_ray *ray, t_elements *element);
+t_list			*get_intersections(float a, float b, float c, \
+									t_elements *sphere);
 void			intersect_sphere(t_ray *ray, t_elements *sphere);
 t_intersection	*find_hit(t_ray *ray);
 void			intersect_object(t_ray *ray, t_elements *object);
@@ -159,10 +162,9 @@ void			intersect_world(t_data *world, t_ray *ray);
 
 t_color			*color_at(t_data *world, t_ray *ray);
 
-//t_tuple	*convert_matrix_to_tuple(t_matrix *matrix);
 t_ray			*transform_ray(t_ray *ray, t_matrix *transf_matrix);
 
-t_tuple			*get_normal_at_sphere(t_elements *sphere, t_tuple *world_point);
+t_tuple			*get_normal(t_elements *sphere, t_tuple *world_point);
 t_tuple			*get_reflected_vector(t_tuple *vector, t_tuple *normal);
 
 t_color			*get_lighting_color(t_elements	*light, t_comps *args, \
@@ -181,7 +183,5 @@ void			render(t_camera *camera, t_data *world, t_mlx_data *mlx_data);
 int				is_shadowed(t_data *world, t_tuple *point, t_elements *light);
 
 void			intersect_cylinder(t_ray *ray, t_elements *cylinder);
-
-int				round_float(float f);
-
+void			adjust_color_overflow(t_color *color);
 #endif

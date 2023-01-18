@@ -17,13 +17,14 @@ SRCS	= main.c\
 		  multiply_matrix_by_tuple.c\
 		  ray_utils.c\
 		  intersection_utils.c\
+		  intersection_utils2.c\
+		  intersection_utils3.c\
 		  ft_atof.c\
 		  check_file.c\
 		  check_file2.c\
 		  check_file3.c\
 		  error_exit.c\
-		  round_float.c\
-		  get_normal_at_sphere.c\
+		  get_normal.c\
 		  get_reflected_vector.c\
 		  get_lighting_color.c\
 		  free.c\
@@ -38,6 +39,8 @@ SRCS	= main.c\
 		  render.c\
 		  is_shadowed.c\
 		  create_material_and_set_transformation.c\
+		  adjust_color_overflow.c\
+		  color_at.c\
 		  #render_sphere.c\
 
 SRCS_B	= 

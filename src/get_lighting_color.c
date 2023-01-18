@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 09:38:58 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/17 13:12:33 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:06:07 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,7 @@ t_color	*get_final_color_and_destroy_contributions(t_color **contributions)
 	aux = result;
 	result = multiply_color_by_scalar(aux, 255);
 	free(aux);
-	if (result->red > 255)
-		result->red = 255;
-	if (result->green > 255)
-		result->green = 255;
-	if (result->blue > 255)
-		result->blue = 255;
+	adjust_color_overflow(result);
 	free(contributions[0]);
 	free(contributions[1]);
 	free(contributions[2]);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_normal_at_sphere.c                             :+:      :+:    :+:   */
+/*   get_normal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 10:37:08 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/17 13:21:36 by mgaldino         ###   ########.fr       */
+/*   Created: 2023/01/18 10:43:25 by mgaldino          #+#    #+#             */
+/*   Updated: 2023/01/18 10:43:27 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_tuple	*get_object_normal(t_tuple *object_point, t_elements *shape)
 	return (object_normal);
 }
 
-t_tuple	*get_normal_at_sphere(t_elements *sphere, t_tuple *world_point)
+t_tuple	*get_normal(t_elements *sphere, t_tuple *world_point)
 {
 	t_tuple		*object_point;
 	t_matrix	*inverse_matrix;

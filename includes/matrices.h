@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:57:51 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/17 19:23:08 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/18 10:25:21 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ t_matrix	*get_translation_matrix(float x, float y, float z);
 t_matrix	*get_scaling_matrix(float x, float y, float z);
 t_matrix	*get_x_rotation_matrix(float radians);
 t_matrix	*get_y_rotation_matrix(float radians);
-t_matrix	*get_z_rotation_matrix(float radians);
-t_matrix	*get_shearing_matrix(float x_y, float x_z, float y_x, float y_z, \
-								float z_x, float z_y);				
+t_matrix	*get_z_rotation_matrix(float radians);			
 int			f_equal(float f1, float f2);
 #endif

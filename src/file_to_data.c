@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:59:10 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/17 19:42:48 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:31:04 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,23 +112,4 @@ void	amb_light_to_data(char **str, t_data *data)
 		ft_atof(split[1]) / 255, ft_atof(split[2]) / 255);
 	free_split((void *)split);
 	data->amb_light = amb_light;
-}
-
-void	print_data(t_data *data)
-{
-	int	i;
-
-	printf("A	%.2f	%.3f, %.3f, %.3f\n",\
-	data->amb_light->ratio,\
-	data->amb_light->color->red, \
-	data->amb_light->color->green, \
-	data->amb_light->color->blue);
-	i = 0;
-	while(data->elem[i])
-	{
-			if(data->elem[i]->material->color)
-				printf("elemento ->%d, com a cor red = %p, com a cor red = %.3f\n",	data->elem[i]->type, data->elem[i]->color, data->elem[i]->material->color->red);
-			//printf("elemento ->%d\n",	data->elem[i]->type, data->elem[i]->material->color->red);
-			i++;
-	}
 }
