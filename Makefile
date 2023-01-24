@@ -57,14 +57,15 @@ LFT_PATH 	= ./libft/
 OBJS	= $(addprefix $(OBJ_DIR), $(notdir $(SRCS:.c=.o)))
 OBJS_B	= $(SRCS_B:.c=.o)
 
-LIBFT 		= libft.a
+LIBFT 		= $(LFT_PATH)libft.a
 
 PROG_NAME= miniRT
 
 NAME	= $(PROG_NAME).a
 NAME_B	= $(PROG_NAME)_bonus.a
 
-HDR	= $(PROG_NAME).h
+#HDR	= $(PROG_NAME).h
+HDR	= *.h
 
 RM	= rm -f
 
