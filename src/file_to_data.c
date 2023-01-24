@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:59:10 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/24 12:13:56 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:58:39 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static t_data	*init_file_data(int qtt_elem)
 	file_data->elem = malloc(sizeof(t_elements) * (qtt_elem + 1));
 	file_data->elem[qtt_elem] = NULL;
 	file_data->n_elem = 0;
+	file_data->dark = 0;
 	return (file_data);
 }
 

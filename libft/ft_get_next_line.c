@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:20:44 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/24 12:21:41 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:30:34 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ char	*get_next_line(int fd, int exit_now)
 	static char	*last_line = NULL;
 	char		*current_line;
 
+	current_line = NULL;
 	buf = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

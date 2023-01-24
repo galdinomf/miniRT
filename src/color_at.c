@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/18 11:08:55 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:33:15 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 		light = light_off(world);
 		in_shadow = is_shadowed(world, comps->over_point, light);
 		color1 = get_lighting_color(light, comps, in_shadow, 1);
+		free_elem(light);
+		world->n_elem--;
 	}
 	adjust_color_overflow(color1);
 	return (color1);

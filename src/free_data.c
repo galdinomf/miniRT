@@ -6,13 +6,13 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 16:12:04 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/17 19:21:59 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:31:35 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-static void	free_elem(t_elements *elem)
+void	free_elem(t_elements *elem)
 {
 	if (elem->point)
 		free_ptr((void *)&elem->point);
@@ -41,7 +41,7 @@ void	free_data(t_data *data)
 		free_ptr((void *)&data->amb_light);
 	}
 	i = -1;
-	while (data->elem && data->elem[++i])
+	while (++i < data->n_elem)
 		free_elem(data->elem[i]);
 	free_ptr((void *)&data->elem);
 	free_ptr((void *)&data);

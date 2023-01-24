@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 12:18:54 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/18 11:04:37 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 17:08:44 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_data
 	t_amb_lightning	*amb_light;
 	t_elements		*cam;
 	t_elements		**elem;
+	int				dark;
 }	t_data;
 
 //////////////////// CHECK FILE RT ////////////////////
@@ -184,4 +185,5 @@ int				is_shadowed(t_data *world, t_tuple *point, t_elements *light);
 
 void			intersect_cylinder(t_ray *ray, t_elements *cylinder);
 void			adjust_color_overflow(t_color *color);
+void			free_elem(t_elements *elem);
 #endif
