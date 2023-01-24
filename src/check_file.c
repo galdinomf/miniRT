@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 19:32:44 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/18 12:28:18 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:10:01 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ void	check_file(char *file_name)
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
 		error_exit("Error\nCould not open .rt file\n", 1);
-	line = get_next_line(fd);
+	line = get_next_line(fd, 0);
 	while (line)
 	{
 		if (ft_strncmp(line, "\n", 2))
 			error = check_line(line);
 		free(line);
 		if (error)
+		{
+			line = get_next_line(fd, 1);
 			error_exit("Error\nWrong structure in file\n", error);
-		line = get_next_line(fd);
+		}
+		line = get_next_line(fd, 0);
 	}
 	close(fd);
 	free(line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:20:44 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/12 14:38:30 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:21:41 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*load(char **last_line, char **buf, int fd, char **current_line)
 	return (save_line(r, last_line, current_line));
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int exit_now)
 {
 	char		*buf;
 	static char	*last_line = NULL;
@@ -84,6 +84,12 @@ char	*get_next_line(int fd)
 		free_ptr(&buf);
 		return (NULL);
 	}
-	current_line = load(&last_line, &buf, fd, &current_line);
+	if (exit_now)
+	{
+		free_ptr(&buf);
+		free(last_line);
+	}
+	else
+		current_line = load(&last_line, &buf, fd, &current_line);
 	return (current_line);
 }

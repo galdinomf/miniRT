@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 17:06:47 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/12 14:31:09 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:12:10 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-char	*get_next_line(int fd);
+char	*get_next_line(int fd, int exit_now);
 int		ft_initialize_and_get_line(int fd, char *buf, char **acc);
 int		ft_char_in_buffer(char c, char *acc);
 char	*ft_accumulate_buffer(char *acc, char *buf, int bytes_read);

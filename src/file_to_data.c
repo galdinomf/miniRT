@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:59:10 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/18 12:31:04 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:13:56 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static int	count_elem(char *file_name)
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
 		error_exit("Error\nCould not open .rt file\n", 1);
-	line = get_next_line(fd);
+	line = get_next_line(fd, 0);
 	count = -1;
 	while (line)
 	{
 		if (ft_strncmp(line, "\n", 2))
 			count++;
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 	}
 	close(fd);
 	free(line);
@@ -86,14 +86,14 @@ t_data	*file_to_data(char *file_name)
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd < 0)
 		error_exit("Error\nCould not open .rt file\n", 1);
-	line = get_next_line(fd);
+	line = get_next_line(fd, 0);
 	data = init_file_data(qtt_elem);
 	while (line)
 	{
 		if (ft_strncmp(line, "\n", 2))
 			create_elements(line, data);
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd, 0);
 	}
 	close(fd);
 	free(line);
