@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/25 06:02:35 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/25 11:25:40 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static t_color	*light_off(t_data *data, t_comps *comps)
 	element->prop1 = (float *) malloc(sizeof(float));
 	*element->prop1 = data->amb_light->ratio;
 	element->prop2 = NULL;
+	element->transformation = NULL;
+	element->material = NULL;
 	element->color = create_color(1, 1, 1);
 	data->elem[data->n_elem] = element;
 	in_shadow = is_shadowed(data, comps->over_point, element);
@@ -94,6 +96,7 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 	}
 	if (!light)
 	{
+		free(color1);
 		color1 = light_off(world, comps);
 	}
 	adjust_color_overflow(color1);
