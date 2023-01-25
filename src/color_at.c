@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_at.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 09:12:40 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/24 13:33:15 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/25 06:02:35 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ t_comps	*prepare_computations(t_intersection *i, t_ray *r)
 	return (comps);
 }
 
-static t_elements	*light_off(t_data *data)
+static t_color	*light_off(t_data *data, t_comps *comps)
 {
 	t_elements	*element;
+	int			in_shadow;
+	t_color		*color1;
 
 	element = (t_elements *) malloc(sizeof(t_elements));
 	element->type = LIGHT;
@@ -52,8 +54,10 @@ static t_elements	*light_off(t_data *data)
 	element->prop2 = NULL;
 	element->color = create_color(1, 1, 1);
 	data->elem[data->n_elem] = element;
-	data->n_elem++;
-	return (element);
+	in_shadow = is_shadowed(data, comps->over_point, element);
+	color1 = get_lighting_color(element, comps, in_shadow, 1);
+	free_elem(element);
+	return (color1);
 }
 
 t_color	*accumulate_color(t_data *world, t_comps *comps, \
@@ -74,7 +78,6 @@ t_color	*accumulate_color(t_data *world, t_comps *comps, \
 t_color	*shade_hit(t_data *world, t_comps *comps)
 {
 	t_elements	*light;
-	int			in_shadow;
 	t_color		*color1;
 	int			i;
 
@@ -91,11 +94,7 @@ t_color	*shade_hit(t_data *world, t_comps *comps)
 	}
 	if (!light)
 	{
-		light = light_off(world);
-		in_shadow = is_shadowed(world, comps->over_point, light);
-		color1 = get_lighting_color(light, comps, in_shadow, 1);
-		free_elem(light);
-		world->n_elem--;
+		color1 = light_off(world, comps);
 	}
 	adjust_color_overflow(color1);
 	return (color1);

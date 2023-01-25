@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:16:29 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/24 16:38:47 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:59:33 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINILIBX_H
 
 # define MLX_ERROR 		1
-# define WINDOW_WIDTH 	150
-# define WINDOW_HEIGHT 	75
+# define WINDOW_WIDTH 	300
+# define WINDOW_HEIGHT 	200
 # include <stddef.h>
 # include <stdlib.h>
 # include <mlx.h>
