@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 10:05:28 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/18 10:10:50 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:32:11 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_list	*intersect_caps(t_elements *cylinder, t_ray *ray)
 	i = -1;
 	while (++i < 2)
 	{
-		t = (y_limit[i] - ray->origin->y) / ray->direction->y;
+		t = (y_limit[i] / *cylinder->prop1 - ray->origin->y) / \
+				ray->direction->y;
 		if (check_cap(ray, t))
 		{
 			x = (t_intersection *) malloc(sizeof(t_intersection));
@@ -63,7 +64,7 @@ int	is_off_limits(t_ray *ray, t_elements *cylinder, t_list *aux)
 	y_min = cylinder->point->y - (*cylinder->prop2 / 2);
 	t = ((t_intersection *) aux->content)->t;
 	y_p = ray->origin->y + t * ray->direction->y;
-	if ((y_p >= y_max) || (y_p <= y_min))
+	if ((y_p >= y_max / *cylinder->prop1) || (y_p <= y_min / *cylinder->prop1))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:49:30 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/18 10:22:13 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:35:22 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	intersect_sphere(t_ray *ray, t_elements *sphere)
 	t_ray		*transf_ray;
 
 	transf_ray = transform_element(ray, sphere);
-	sphere_to_ray = subtract_tuples(transf_ray->origin, sphere->point);
+	sphere_to_ray = create_vector(transf_ray->origin->x, transf_ray->origin->y, \
+									transf_ray->origin->z);
 	a = dot_product(transf_ray->direction, transf_ray->direction);
 	b = 2 * dot_product(transf_ray->direction, sphere_to_ray);
 	c = dot_product(sphere_to_ray, sphere_to_ray) - 1;

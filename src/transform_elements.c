@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 15:30:38 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/17 19:14:23 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 22:37:20 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,7 @@ static void	transform_elem(t_elements *elem)
 	elem->transformation = get_translation_matrix(elem->point->x, \
 												elem->point->y, elem->point->z);
 	if (elem->prop1)
-	{
-		if (elem->type == CYLINDER)
-			aux1 = get_scaling_matrix(*elem->prop1, 1, 1);
-		else
-			aux1 = get_scaling_matrix(*elem->prop1, *elem->prop1, *elem->prop1);
-	}
+		aux1 = get_scaling_matrix(*elem->prop1, *elem->prop1, *elem->prop1);
 	if (aux1)
 	{
 		aux2 = elem->transformation;
