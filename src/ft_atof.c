@@ -6,7 +6,7 @@
 /*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:16:28 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/17 19:39:23 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:05:58 by mgaldino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ float	ft_atof(char *str)
 	i = -1;
 	while (split[1] && split[1][++i])
 		nb += ((split[1][i] - '0') * pow(10, (i + 1) * -1));
+	if ((split[0][0] == '-') && (nb > 0))
+		nb *= -1;
 	free_split((void *)split);
 	return (nb);
 }
