@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_to_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 10:59:10 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/24 16:58:39 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/26 20:29:01 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void	create_elements(char *line, t_data *data)
 	int		len;
 
 	len = ft_strlen(line);
-	line[len - 1] = '\0';
+	if (line[len - 1] == '\n')
+		line[len - 1] = '\0';
 	split = ft_split(line, ' ');
 	if (!ft_strcmp(split[0], "A"))
 		amb_light_to_data(split, data);

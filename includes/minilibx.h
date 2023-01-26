@@ -6,7 +6,7 @@
 /*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 10:16:29 by mgaldino          #+#    #+#             */
-/*   Updated: 2023/01/26 16:22:17 by daeidi-h         ###   ########.fr       */
+/*   Updated: 2023/01/26 20:29:36 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINILIBX_H
 
 # define MLX_ERROR 		1
-# define WINDOW_WIDTH 	250
-# define WINDOW_HEIGHT 	150
+# define WINDOW_WIDTH 	25
+# define WINDOW_HEIGHT 	15
 
 # include <stddef.h>
 # include <stdlib.h>
