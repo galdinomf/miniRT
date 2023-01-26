@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 19:34:42 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/18 12:28:23 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/26 18:42:55 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	isnormalized(float x, float y, float z)
 	float	mag;
 
 	mag = magnitude(x, y, z);
-	if (mag != 1)
+	if (fabs(mag - 1) >= EPSILON)
 	{
-		printf("Vetor not normalized.\n");
+		printf("Vetor not normalized, magnitude = %.3f\n", mag);
 		return (0);
 	}
 	return (1);

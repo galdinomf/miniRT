@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_to_data2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaldino <mgaldino@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daeidi-h <daeidi-h@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 14:24:46 by daeidi-h          #+#    #+#             */
-/*   Updated: 2023/01/17 19:47:39 by mgaldino         ###   ########.fr       */
+/*   Updated: 2023/01/26 16:57:30 by daeidi-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	sphere_to_data(char **str, t_data *data)
 	free_split((void *)split);
 	element->vector = NULL;
 	element->prop1 = (float *) malloc(sizeof(float));
-	*element->prop1 = ft_atof(str[2]);
+	*element->prop1 = ft_atof(str[2]) / 2;
 	element->prop2 = NULL;
 	split = ft_split(str[3], ',');
 	element->color = create_color(ft_atof(split[0]) / 255, \
@@ -123,7 +123,7 @@ void	cylinder_to_data(char **str, t_data *data)
 									ft_atof(split[2]));
 	free_split((void *)split);
 	element->prop1 = (float *) malloc(sizeof(float));
-	*element->prop1 = ft_atof(str[3]);
+	*element->prop1 = ft_atof(str[3]) / 2;
 	element->prop2 = (float *) malloc(sizeof(float));
 	*element->prop2 = ft_atof(str[4]);
 	split = ft_split(str[5], ',');
